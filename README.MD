@@ -1,4 +1,4 @@
-# English Validation
+# English Validation:
 Questo progetto nasce con l'idea di snellire il processo burocratico legato alla convalida dell'esame di lingua inglese.
 Il dipartimento di Informatica dell'Università di Salerno vuole migliorare quelle che sono le modalità di convalida
 di tale esame.
