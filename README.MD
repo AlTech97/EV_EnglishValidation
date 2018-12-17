@@ -8,7 +8,7 @@ L'obiettivo che ci poniamo è quello di creare una piattaforma web per automatiz
 
 
 ## Autori: 
-Alessandro Bacco, Ivan Buccella, Giuseppe Cirino, Alfonso Ingenito, Angelomaria Macellaro, Luigi Melchionno.
+Alessandro Bacco, Ivan Buccella, Giuseppe Cirino, Alfonso Ingenito, Angelomaria Macellaro, Luigi Melchionno, Vincenzo Passariello.
 
 ## PM:
 Giammaria Giordano, Valeria Pontillo.
