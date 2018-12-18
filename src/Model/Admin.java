@@ -37,7 +37,6 @@ public class Admin implements UserInterface {
 		}
 	
 		public int getUserType() {
-			
 			return u;
 		}
 	
