@@ -10,7 +10,7 @@ public class Admin implements UserInterface {
 	private char s; //Sesso 
 	private String p;//Password
 	private int u;//UserType
-	//Inizio costruttore
+
 	public Admin(String email, String name, String surname, char sex, String password, int userType) {
 		this.e=email;
 		this.n=name;
@@ -20,7 +20,7 @@ public class Admin implements UserInterface {
 		this.u=userType;
 		
 	}
-	//Fine costruttore
+
 	
 		//Get
 		public String getEmail() {
