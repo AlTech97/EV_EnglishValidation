@@ -1,0 +1,14 @@
+@import 'vendor/_include-media.scss';
+@import 'partials/header';
+@import 'partials/footer';
+@import 'pages/blank';
+
+@include media(">=desktop") {
+
+}
+@include media(">tablet", "<=desktop") {
+
+}
+@include media(">=phone", "<=tablet") {
+
+}		
