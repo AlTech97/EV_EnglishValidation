@@ -1,7 +1,7 @@
 package Interface;
 
 public interface UserInterface {
-		//GET
+		//get
 		public String getEmail();
 		public String getName();
 		public String getSurname();
@@ -9,7 +9,7 @@ public interface UserInterface {
 		public String getPassword();
 		public int getUserType();
 		
-		//SET
+		//set
 		public void setEmail(String e);
 		public void setName(String n);
 		public void setSurname(String s);
