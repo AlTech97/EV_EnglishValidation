@@ -3,7 +3,14 @@ package Model;
 import Interface.UserInterface;
 
 public class Admin implements UserInterface {
-	//Inizio costruttore
+	
+	private String e; //Email
+	private String n; //Name
+	private String su;//Surname
+	private char s; //Sesso 
+	private String p;//Password
+	private int u;//UserType
+
 	public Admin(String email, String name, String surname, char sex, String password, int userType) {
 		this.e=email;
 		this.n=name;
@@ -13,7 +20,7 @@ public class Admin implements UserInterface {
 		this.u=userType;
 		
 	}
-	//Fine costruttore
+
 	
 		//Get
 		public String getEmail() {
@@ -75,14 +82,5 @@ public class Admin implements UserInterface {
 			
 			return false;
 		}
-		
-		
-		private String e; //Email
-		private String n; //Name
-		private String su;//Surname
-		private char s; //Sesso 
-		private String p;//Password
-		private int u;//UserType
-		
-	
+
 	}
