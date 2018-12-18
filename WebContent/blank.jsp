@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Quebec HTML Template | Home Style Two</title>
+<title>English Validation - Universit&agrave; degli Studi di Salerno</title>
 <!-- Stylesheets -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
@@ -29,12 +29,11 @@
     <div class="preloader"></div>
  	
     <!-- Main Header -->
-    <header class="main-header">
-    	<!--Header Top-->
+    <header class="main-header">    	
+    	<!--
     	<div class="header-top">
             <div class="auto-container">
                 <div class="clearfix">
-                    <!--Top Left-->
                     <div class="top-left col-md-4 col-sm-12 col-xs-12">
                     	<div class="trend">Trending: </div>
                         <div class="single-item-carousel owl-carousel owl-theme">
@@ -49,7 +48,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--Top Right-->
                     <div class="top-right pull-right col-md-8 col-sm-12 col-xs-12">
                         <ul class="top-nav">
                         	<li><a href="#">About</a></li>
@@ -72,11 +70,21 @@
                 </div>
             </div>
         </div>
+        -->
     	<!--Header-Upper-->
         <div class="header-upper">
         	<div class="auto-container">
             	<div class="clearfix">
                 	
+                	<div class="logo-outer">
+                    	<div class="logo">
+                    		<a href="blank.html">
+                    			<img src="imagesEV/logo_unisa.png" />
+                    		</a>
+                    	</div>
+                    </div>
+                	
+                	<!-- 
                 	<div class="pull-left logo-outer">
                     	<div class="logo"><a href="index-1.html"></a></div>
                     </div>
@@ -86,6 +94,7 @@
                         	<a href="#"><img src="images/resource/header-add.jpg" alt="" /></a>
                         </div>
                     </div>
+                    -->
                     
                 </div>
             </div>

@@ -1,0 +1,7 @@
+.page-wrapper .main-header .header-upper {
+  background-color: #FF9900; }
+  .page-wrapper .main-header .header-upper .auto-container .logo-outer {
+    padding: 5px 0 5px 0; }
+    .page-wrapper .main-header .header-upper .auto-container .logo-outer .logo {
+      width: auto;
+      height: auto; }
