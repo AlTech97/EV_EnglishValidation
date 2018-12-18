@@ -24,27 +24,22 @@ public class Admin implements UserInterface {
 	
 		//Get
 		public String getEmail() {
-			
 			return e;
 		}
 	
 		public String getName() {
-			
 			return n;
 		}
 	
 		public String getSurname() {
-			
 			return su;
 		}
 	
 		public char getSex() {
-			
 			return s;
 		}
 	
 		public String getPassword() {
-			
 			return p;
 		}
 	
