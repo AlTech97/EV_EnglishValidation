@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class Ente {
 	//INIZIO COSTRUTTORE
@@ -12,7 +12,6 @@ public class Ente {
 	
 	//GET
 	public int getIdEnte() {
-		
 		return id;
 	}
 	
