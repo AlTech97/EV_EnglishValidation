@@ -95,11 +95,9 @@ public class Secretary implements UserInterface {
   @Override
   public boolean validate() {
     Stub stub = new Stub();
-    for (int i = 0; i < stub.database.size(); i++) {
-      if (getEmail().equals((stub.database.get(i).getEmail()))) {
-        return true;
-      }
-    }
+    if (stub.database.containsKey(getEmail()) == true) {
+      return true;
+    } 
     return false;
   }
 }

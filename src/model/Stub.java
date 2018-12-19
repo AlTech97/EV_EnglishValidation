@@ -1,9 +1,9 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Stub {
-  ArrayList<Student> database;
+  HashMap<String, String> database;
   Student st = new Student("aaa@sss.it", "","",'x',"",0);
   Student st2 = new Student("xxx", "","",'t',"",1);
   
@@ -14,8 +14,9 @@ public class Stub {
    */
   
   public Stub() {
-    database = new ArrayList<Student>();
-    database.add(st);
-    database.add(st2);
+    database = new HashMap<>();
+    database.put("aaa@sss.it", "pass");
+    database.put("xxx", "pwd");
+    
   }
 }
