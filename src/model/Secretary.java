@@ -3,89 +3,101 @@ package model;
 import Interface.UserInterface;
 
 public class Secretary implements UserInterface {
-  private String e;
-  private String n;
-  private String su;
-  private char s;
-  private String p;
-  private int u;
 
+  public String email;
+  private String name;
+  private String surname;
+  private char sex;
+  private String password;
+  private int userType;
+  
   public Secretary() {}
-
-  public Secretary(String email, String name, String surname, char sex, String password,
-      int userType) {
-    this.e = email;
-    this.n = name;
-    this.su = surname;
-    this.s = sex;
-    this.p = password;
-    this.u = userType;
+  /**
+   * email
+   * name
+   * surname
+   * sex
+   * password
+   * userType
+   * Return object Secretary.
+   */
+  
+  public Secretary(String email, String name, String surname,
+                  char sex, String password, int userType) {
+    this.email = email;
+    this.name = name;
+    this.surname = surname;
+    this.sex = sex;
+    this.password = password;
+    this.userType = userType;
   }
 
   @Override
   public String getEmail() {
-    return e;
+    return email;
   }
 
   @Override
   public String getName() {
-    return n;
+    return name;
   }
 
   @Override
   public String getSurname() {
-    return su;
+    return surname;
   }
 
   @Override
   public char getSex() {
-    return s;
+    return sex;
   }
 
   @Override
   public String getPassword() {
-    return p;
+    return password;
   }
 
   @Override
   public int getUserType() {
-    return u;
+    return userType;
   }
 
   @Override
   public void setEmail(String email) {
-    this.e = email;
+    this.email = email;
   }
 
   @Override
   public void setName(String name) {
-    this.n = name;
+    this.name = name;
   }
 
   @Override
   public void setSurname(String surname) {
-    this.su = surname;
+    this.surname = surname;
   }
 
   @Override
   public void setSex(char sex) {
-    this.s = sex;
+    this.sex = sex;
   }
 
   @Override
   public void setPassword(String password) {
-    this.p = password;
+    this.password = password;
   }
 
   @Override
   public void setUserType(int userType) {
-    this.u = userType;
+    this.userType = userType;
   }
 
   @Override
   public boolean validate() {
-    // TODO Auto-generated method stub
+    Stub stub = new Stub();
+    if (stub.database.containsKey(getEmail()) == true) {
+      return true;
+    } 
     return false;
   }
-
 }
