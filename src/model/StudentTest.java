@@ -86,7 +86,7 @@ class StudentTest {
 
   @Test
   void testValidate() {
-    Student st = new Student("aaa@sss.it", "", "", 'r', "", 0);
+    Student st = new Student("aaa@sss.it", "", "", 'r', "hhh", 0);
     Stub stub = new Stub();
     assertTrue(st.validate());
   }

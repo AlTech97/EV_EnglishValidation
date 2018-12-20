@@ -87,8 +87,8 @@ class SecretaryTest {
   
   @Test
   void testValidate() {
-    Student st = new Student("aaa@sss.it", "", "", 'r', "", 0);
+    Secretary sc = new Secretary("zzz@lif.it", "","",'f', "qqq", 1);
     Stub stub = new Stub();
-    assertTrue(st.validate());
+    assertTrue(sc.validate());
   }
 }

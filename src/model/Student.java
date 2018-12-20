@@ -89,10 +89,7 @@ public class Student implements UserInterface {
 
   @Override
   public boolean validate() {
-    Stub stub = new Stub();
-    if (stub.database.containsKey(getEmail()) == true) {
-      return true;
-    } 
-    return false;
+    return new Stub().database.containsKey(getEmail()) 
+        && new Stub().database.containsValue(getPassword());    
   }
 }
