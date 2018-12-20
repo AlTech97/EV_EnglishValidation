@@ -1,5 +1,7 @@
 package Model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import Interface.UserInterface;
 
 public class Admin implements UserInterface {
@@ -79,8 +81,11 @@ public class Admin implements UserInterface {
 		}
 	
 		public boolean validate() {
+			String EmailDB="aaa@sss.it";
+			String PassDB="Ciao123";
+			//da modificare con il metodo che recupera i dati dal DB
+			return EmailDB.equals(e) && PassDB.equals(p);
 			
-			return false;
 		}
 
 	}
