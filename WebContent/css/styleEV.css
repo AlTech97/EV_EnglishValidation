@@ -1,7 +1,119 @@
-.page-wrapper .main-header .header-upper {
-  background-color: #FF9900; }
-  .page-wrapper .main-header .header-upper .auto-container .logo-outer {
-    padding: 5px 0 5px 0; }
-    .page-wrapper .main-header .header-upper .auto-container .logo-outer .logo {
-      width: auto;
-      height: auto; }
+.page-wrapper .hidden-bar .logo, .page-wrapper .main-header .logo {
+  background: url("/Progetto_IS/imagesEV/logo_unisa.png") left center no-repeat;
+  background-size: contain; }
+
+@media (max-width: 767px) {
+  .page-wrapper .hidden-bar {
+    background: #FF9900; } }
+
+.page-wrapper .hidden-bar .mCustomScrollBox .mCSB_container .side-menu .navigation li a:hover {
+  color: #656565; }
+
+.page-wrapper .main-header {
+  position: fixed;
+  z-index: 1000; }
+  @media (max-width: 767px) {
+    .page-wrapper .main-header .nav-toggler {
+      right: 10px;
+      top: -65px; } }
+  .page-wrapper .main-header .header-upper {
+    background-color: #FF9900;
+    overflow: hidden;
+    border: 1px solid #fff; }
+    @media (max-width: 767px) {
+      .page-wrapper .main-header .header-upper .auto-container {
+        padding: 0; } }
+    .page-wrapper .main-header .header-upper .auto-container .logo-outer {
+      padding: 5px 0 5px 0; }
+      @media (max-width: 767px) {
+        .page-wrapper .main-header .header-upper .auto-container .logo-outer {
+          width: calc(100% - 60px); } }
+      @media (max-width: 767px) {
+        .page-wrapper .main-header .header-upper .auto-container .logo-outer .logo {
+          top: 0; } }
+      @media (max-width: 767px) {
+        .page-wrapper .main-header .header-upper .auto-container .logo-outer .logo img {
+          max-height: 70px; } }
+  .page-wrapper .main-header .header-lower {
+    background-color: #666666;
+    color: #fff;
+    border: 0;
+    margin: 0; }
+    .page-wrapper .main-header .header-lower .auto-container {
+      padding: 0;
+      max-width: 100%; }
+      .page-wrapper .main-header .header-lower .auto-container .nav-outer .nav-toggler .hidden-bar-opener {
+        color: #fff;
+        border: 1px solid #fff; }
+      .page-wrapper .main-header .header-lower .auto-container .nav-outer .main-menu .navbar-collapse .navigation li {
+        border: 0;
+        border-right: 1px solid #e0e0e0; }
+        .page-wrapper .main-header .header-lower .auto-container .nav-outer .main-menu .navbar-collapse .navigation li:hover {
+          background-color: #444444; }
+          .page-wrapper .main-header .header-lower .auto-container .nav-outer .main-menu .navbar-collapse .navigation li:hover a {
+            text-decoration: underline; }
+        .page-wrapper .main-header .header-lower .auto-container .nav-outer .main-menu .navbar-collapse .navigation li a {
+          padding: 4px 24px;
+          color: #fff; }
+
+.page-wrapper .main-footer {
+  position: fixed;
+  bottom: 0;
+  z-index: 1000;
+  width: 100%;
+  background-color: #666666; }
+  .page-wrapper .main-footer .footer-bottom {
+    background-color: #666666;
+    padding: 0; }
+    .page-wrapper .main-footer .footer-bottom .copyright-section {
+      padding: 5px 0px;
+      margin-top: 0; }
+      @media (max-width: 767px) {
+        .page-wrapper .main-footer .footer-bottom .copyright-section .copyright {
+          font-size: 12px;
+          margin-top: 0; } }
+
+.page-wrapper .sidebar-page-container {
+  padding: 140px 0px 80px; }
+  @media (max-width: 767px) {
+    .page-wrapper .sidebar-page-container {
+      padding: 102px 0px 80px; } }
+  .page-wrapper .sidebar-page-container .auto-container .row .content-side .content .sec-title h2 {
+    background-color: #FF9900; }
+
+body .scroll-to-top {
+  bottom: 50px;
+  background: #FF9900; }
+  body .scroll-to-top:hover {
+    background: #666666; }
+
+.dataTables_wrapper .dataTables_length {
+  width: 50%;
+  float: left;
+  text-align: left; }
+  @media (max-width: 767px) {
+    .dataTables_wrapper .dataTables_length {
+      width: 100%;
+      text-align: left; } }
+
+.dataTables_wrapper .dataTables_filter {
+  width: 50%;
+  float: left;
+  text-align: right; }
+  @media (max-width: 767px) {
+    .dataTables_wrapper .dataTables_filter {
+      width: 100%;
+      text-align: left; } }
+  .dataTables_wrapper .dataTables_filter label input {
+    background-color: #f3f3f3; }
+
+.dataTables_wrapper .dataTable {
+  width: 100%;
+  border: 1px solid #FF9900;
+  color: #fff; }
+  .dataTables_wrapper .dataTable thead {
+    background: #FF9900; }
+    .dataTables_wrapper .dataTable thead tr th {
+      padding: 5px; }
+  .dataTables_wrapper .dataTable tbody tr th {
+    padding: 5px; }
