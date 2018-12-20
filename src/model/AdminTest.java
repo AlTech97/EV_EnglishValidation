@@ -1,5 +1,6 @@
 package model;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
@@ -90,6 +91,13 @@ class AdminTest {
   }
 
   // FINE TEST SET
+
+  @Test
+  void testValidate() {
+    Student st = new Student("aaa@sss.it", "", "", 'r', "", 0);
+    Stub stub = new Stub();
+    assertTrue(st.validate());
+  }
 
 
 }
