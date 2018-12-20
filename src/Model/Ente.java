@@ -33,7 +33,7 @@ public class Ente {
 	
 	
 	//SET
-	public void setIdEmail(int idEnte) {
+	public void setIdEnte(int idEnte) {
 		this.id=idEnte;
 		
 	}
