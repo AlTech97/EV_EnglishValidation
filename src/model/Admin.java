@@ -79,12 +79,12 @@ public class Admin implements UserInterface {
 
   }
 
-    public boolean validate() {
-      Stub stub = new Stub();
-      if (stub.database.containsKey(getEmail()) == true) {
-        return true;
-      } 
-      return false;
+  public boolean validate() {
+    Stub stub = new Stub();
+    if (stub.database.containsKey(getEmail()) == true) {
+      return true;
     }
+    return false;
+  }
 
 }
