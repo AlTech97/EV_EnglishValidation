@@ -1,15 +1,28 @@
 package model;
 
 public class Ente {
+  private int id;//idEnte
+  private String email;//email
+  private String name;//name
+  private String site;//site
+  
+  /**
+   * idEnte
+   * email
+   * name
+   * site
+   * return Ente.
+   */
   // INIZIO COSTRUTTORE
   public Ente(int idEnte, String email, String name, String site) {
     this.id = idEnte;
-    this.e = email;
-    this.n = name;
-    this.s = site;
+    this.email = email;
+    this.name = name;
+    this.site = site;
   }
   // FINE COSTRUTTORE
-
+  
+  
   // GET
   public int getIdEnte() {
     return id;
@@ -17,17 +30,17 @@ public class Ente {
 
   public String getEmail() {
 
-    return e;
+    return email;
   }
 
   public String getName() {
 
-    return n;
+    return name;
   }
 
   public String getSite() {
 
-    return s;
+    return site;
   }
 
 
@@ -38,23 +51,20 @@ public class Ente {
   }
 
   public void setEmail(String email) {
-    this.e = email;
+    this.email = email;
 
   }
 
   public void setName(String name) {
-    this.n = name;
+    this.name = name;
 
   }
 
   public void setSite(String site) {
-    this.s = site;
+    this.site = site;
 
   }
 
-  private int id; // idEnte
-  private String e; // email
-  private String n; // name
-  private String s; // site
+
 
 }

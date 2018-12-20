@@ -4,81 +4,91 @@ import Interface.UserInterface;
 
 public class Admin implements UserInterface {
 
-  private String e; // Email
-  private String n; // Name
-  private String su;// Surname
-  private char s; // Sesso
-  private String p;// Password
-  private int u;// UserType
-
+  private String email; //Email
+  private String name; //Name
+  private String surname;//Surname
+  private char sex; //Sex
+  private String password;//Password
+  private int userType;//UserType
+  /** 
+   *  email
+   *  name
+   *  surname
+   *  sex
+   *  password
+   *  userType
+   *  return Admin.
+   */
+  
   public Admin(String email, String name, String surname, char sex, String password, int userType) {
-    this.e = email;
-    this.n = name;
-    this.su = surname;
-    this.s = sex;
-    this.p = password;
-    this.u = userType;
+    this.email = email;
+    this.name = name;
+    this.surname = surname;
+    this.sex = sex;
+    this.password = password;
+    this.userType = userType;
 
   }
 
 
   // Get
   public String getEmail() {
-    return e;
+    return email;
   }
 
   public String getName() {
-    return n;
+    return name;
   }
 
   public String getSurname() {
-    return su;
+    return surname;
   }
 
   public char getSex() {
-    return s;
+    return sex;
   }
 
   public String getPassword() {
-    return p;
+    return password;
   }
 
   public int getUserType() {
 
-    return u;
+    return userType;
   }
 
 
   // Set
   public void setEmail(String email) {
-    this.e = email;
+    this.email = email;
 
   }
 
   public void setName(String name) {
-    this.n = name;
+    this.name = name;
 
   }
 
   public void setSurname(String surname) {
-    this.su = surname;
+    this.surname = surname;
   }
 
   public void setSex(char sex) {
-    this.s = sex;
+    this.sex = sex;
 
   }
 
   public void setPassword(String password) {
-    this.p = password;
+    this.password = password;
 
   }
 
   public void setUserType(int userType) {
-    this.u = userType;
+    this.userType = userType;
 
   }
-
+  
+  @Override
   public boolean validate() {
     Stub stub = new Stub();
     if (stub.database.containsKey(getEmail()) == true) {
