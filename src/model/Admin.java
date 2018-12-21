@@ -4,22 +4,17 @@ import interfacce.UserInterface;
 
 public class Admin implements UserInterface {
 
-  private String email; //Email
-  private String name; //Name
-  private String surname;//Surname
-  private char sex; //Sex
-  private String password;//Password
-  private int userType;//UserType
-  /** 
-   *  email
-   *  name
-   *  surname
-   *  sex
-   *  password
-   *  userType
-   *  return Admin.
+  private String email; // Email
+  private String name; // Name
+  private String surname;// Surname
+  private char sex; // Sex
+  private String password;// Password
+  private int userType;// UserType
+
+  /**
+   * email name surname sex password userType return Admin.
    */
-  
+
   public Admin(String email, String name, String surname, char sex, String password, int userType) {
     this.email = email;
     this.name = name;
@@ -87,14 +82,11 @@ public class Admin implements UserInterface {
     this.userType = userType;
 
   }
-  
+
   @Override
   public boolean validate() {
-    Stub stub = new Stub();
-    if (stub.database.containsKey(getEmail()) == true) {
-      return true;
-    }
-    return false;
+    return new Stub().database.containsKey(getEmail())
+        && new Stub().database.containsValue(getPassword());
   }
 
 }
