@@ -1,14 +1,15 @@
-package Model;
+package model;
 
 public class Attached {
 
   private int idAttached;
   private String filename;
-  
+
   public Attached() {}
-  
-  public Attached(int idAttached,String filename) {
-    
+
+  public Attached(int idAttached, String filename) {
+
+
     this.idAttached = idAttached;
     this.filename = filename;
   }
@@ -28,6 +29,6 @@ public class Attached {
   public void setFilename(String filename) {
     this.filename = filename;
   }
-  
-  
+
+
 }

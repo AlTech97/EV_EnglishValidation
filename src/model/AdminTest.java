@@ -97,7 +97,6 @@ class AdminTest {
   @Test
   void testValidate() {
     Student st = new Student("aaa@sss.it", "", "", 'r', "", 0);
-    Stub stub = new Stub();
     assertTrue(st.validate());
   }
 

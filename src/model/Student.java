@@ -1,6 +1,6 @@
 package model;
 
-import Interface.UserInterface;
+import interfacce.UserInterface;
 
 public class Student implements UserInterface {
   private String email;

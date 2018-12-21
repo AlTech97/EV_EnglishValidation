@@ -1,7 +1,6 @@
 
-$breakpoints: (phone: 468px, tablet: 768px, desktop: 1366);
-
 @import 'vendor/_include-media.scss';
+$breakpoints: (phone: 468px, tablet: 768px, desktop: 1366);
 @import 'partials/header';
 @import 'partials/footer';
 @import 'pages/blank';
