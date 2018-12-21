@@ -15,6 +15,11 @@
             .mCSB_container {
                 .side-menu{
                     .navigation {
+                        li.current{
+                            a {
+                                color: #656565;
+                            }                            
+                        }
                         li{
                             a{
                                 &:hover{
@@ -83,6 +88,13 @@
                         }
                         .navbar-collapse{
                             .navigation {
+                                li.current{
+                                    background-color: #444444;
+                                    text-decoration: none;
+                                    &:hover{
+                                        text-decoration: none;
+                                    }
+                                }
                                 li{
                                     border: 0;
                                     border-right: 1px solid #e0e0e0;

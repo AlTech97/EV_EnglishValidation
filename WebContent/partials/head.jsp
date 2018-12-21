@@ -6,6 +6,7 @@
 		<link href="/EnglishValidation/css/style.css" rel="stylesheet">
 		<link href="/EnglishValidation/css/responsive.css" rel="stylesheet">
 		<link href="/EnglishValidation/css/jquery.dataTables.min.css.css" rel="stylesheet">		
+		<link href="/EnglishValidation/css/font-awesome.css" rel="stylesheet">		
 		<link href="/EnglishValidation/css/styleEV.css" rel="stylesheet">
 		
 		<!--Color Themes-->

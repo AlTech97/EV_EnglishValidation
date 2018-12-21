@@ -8,7 +8,16 @@
 		            <div class="side-menu">
 		            	<!--navigation-->
 		                <ul class="navigation clearfix">
-		                    <li><a href="#">Blank</a></li>
+		                	<li><a href="#">Blank</a></li>
+							<%
+								String pageName = request.getParameter("pageName");
+								String pageFolder = request.getParameter("pageFolder");
+								if(pageName.equals("blank.jsp")){
+								  %>
+									<li class="current"><a href="/EnglishValidation/blank.jsp">Blank</a></li>											  
+								  <%
+								}
+							%>
 		                 </ul>
 		            </div>
 		            <!-- /.Side-menu -->
