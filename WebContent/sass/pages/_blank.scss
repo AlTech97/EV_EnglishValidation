@@ -1,0 +1,24 @@
+.page-wrapper{
+    .sidebar-page-container{
+        padding: 140px 0px 80px;
+        @include media("<tablet") {
+            padding: 102px 0px 80px;
+        }
+
+        .auto-container{
+            .row {
+                .content-side{
+                    .content{
+                        .sec-title{
+                            h2{
+                                background-color: #FF9900;
+                            }
+                            .news-block-seven{
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }    
+}
