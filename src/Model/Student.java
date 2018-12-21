@@ -1,89 +1,95 @@
-package Model;
+package model;
 
 import Interface.UserInterface;
 
 public class Student implements UserInterface {
-	private String e;
-	private String n;
-	private String su;
-	private char s;
-	private String p;
-	private int u;
-	
-	public Student() {
-	}
-	
-	public Student(String email, String name, String surname, char sex, String password, int userType) {
-		this.e = email;
-		this.n = name;
-		this.su = surname;
-		this.s = sex;
-		this.p = password;
-		this.u = userType;
-	}
+  private String email;
+  private String name;
+  private String surname;
+  private char sex;
+  private String password;
+  private int userType;
 
-	@Override
-public String getEmail() {
-		return e;
-	}
+  public Student() {}
 
-	@Override
-	public String getName() {
-		return n;
-	}
+  /**
+   * email name surname sex password userType 
+   * Return object Student.
+   */
 
-	@Override
-	public String getSurname() {
-		return su;
-	}
+  public Student(String email, String name, String surname, char sex, String password,
+      int userType) {
+    this.email = email;
+    this.name = name;
+    this.surname = surname;
+    this.sex = sex;
+    this.password = password;
+    this.userType = userType;
+  }
 
-	@Override
-	public char getSex() {
-		return s;
-	}
+  @Override
+  public String getEmail() {
+    return email;
+  }
 
-	@Override
-	public String getPassword() {
-		return p;
-	}
+  @Override
+  public String getName() {
+    return name;
+  }
 
-	@Override
-	public int getUserType() {
-		return u;
-	}
+  @Override
+  public String getSurname() {
+    return surname;
+  }
 
-	@Override
-	public void setEmail(String email) {
-		this.e = email;
-	}
+  @Override
+  public char getSex() {
+    return sex;
+  }
 
-	@Override
-	public void setName(String name) {
-		this.n= name;
-	}
+  @Override
+  public String getPassword() {
+    return password;
+  }
 
-	@Override
-	public void setSurname(String surname) {
-		this.su = surname;
-	}
+  @Override
+  public int getUserType() {
+    return userType;
+  }
 
-	@Override
-	public void setSex(char sex) {
-		this.s = sex;
-	}
+  @Override
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-	@Override
-	public void setPassword(String password) {
-		this.p = password;
-	}
+  @Override
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	@Override
-	public void setUserType(int userType) {
-		this.u = userType;
-	}
+  @Override
+  public void setSurname(String surname) {
+    this.surname = surname;
+  }
 
-	@Override
-	public boolean validate() {
-		return false;
-	}
+  @Override
+  public void setSex(char sex) {
+    this.sex = sex;
+  }
+
+  @Override
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  @Override
+  public void setUserType(int userType) {
+    this.userType = userType;
+  }
+
+  @Override
+  public boolean validate() {
+    return new Stub().database.containsKey(getEmail()) 
+        && new Stub().database.containsValue(getPassword());    
+  }
 }
