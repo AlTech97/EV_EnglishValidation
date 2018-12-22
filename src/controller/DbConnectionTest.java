@@ -1,105 +1,96 @@
 package controller;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Driver;
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-import java.sql.DriverManager;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-class DbConnectionTest {
-/*
- // @Test
-  void testgetDatabaseName() {
-    DbConnection db = new DbConnection(null,"English Validation","","", 3306,"");
-    assertEquals("English Validation",db.getDatabaseName());  
-  }
- 
-  //@Test
-  void testgetUserName() {
-    DbConnection db = new DbConnection(null,"","Luigi","", 3306,"");
-    assertEquals("Luigi",db.getUserName());  
-  }
-  
- // @Test
-  void testgetPassword() {
-    DbConnection db = new DbConnection(null,"","","pass1", 3306,"");
-    assertEquals("pass1",db.getPassword());  
-  }
-  
- // @Test
-  void testgetHostPort() {
-    DbConnection db = new DbConnection(null,"","","", 3306,"");
-    assertEquals(3306,db.getHostPort());  
-  }
-  
-  //@Test
-  void testgetHostName() {
-    DbConnection db = new DbConnection(null,"","","", 3306,"localhost");
-    assertEquals("localhost",db.getHostName());  
-  }
-  
-  //@Test
-  void testgetConn() {
-    DbConnection db = new DbConnection(null,"","","", 3306,"");
-    assertEquals(null,db.getConn());  
-  }
-  
-  //@Test
-  void testgetInstance() {
-    
-  }
-  
+public class DbConnectionTest {
 
-  //@Test
+  //Test Metodi GET
+  
+  @Test
+  void testgetDatabaseName() {
+    DbConnection db = new DbConnection();
+    assertEquals("englishvalidation", db.getDatabaseName());
+  }
+
+  @Test
+  void testgetUserName() {
+    DbConnection db = new DbConnection();
+    assertEquals("root", db.getUserName());
+  }
+
+  @Test
+  void testgetPassword() {
+    DbConnection db = new DbConnection();
+    assertEquals("", db.getPassword());
+  }
+
+  @Test
+  void testgetHostPort() {
+    DbConnection db = new DbConnection();
+    assertEquals(3306, db.getHostPort());
+  }
+
+  @Test
+  void testgetHostName() {
+    DbConnection db = new DbConnection();
+    assertEquals("localhost", db.getHostName());
+  }
+
+  @Test
+  void testgetConn() {
+    DbConnection db = new DbConnection();
+    assertNotEquals(null, db.getConn());
+  }
+
+  @Test
+  void testgetInstance() {
+    DbConnection db = DbConnection.getIstance();
+    DbConnection db1 = DbConnection.getIstance();
+    assertEquals(db, db1);
+  }
+
+  //Test Metodi SET
+  
+  @Test
   void testsetDatabaseName() {
-    DbConnection db = new DbConnection(null,"aaa","","", 3306,"");
+    DbConnection db = new DbConnection();
     db.setDatabaseName("English Validation");
     assertEquals("English Validation", db.getDatabaseName());
   }
-  
-  //@Test
+
+  @Test
   void testsetUserName() {
-    DbConnection db = new DbConnection(null,"","aaa","", 3306,"");
+    DbConnection db = new DbConnection();
     db.setUserName("Luigi");
     assertEquals("Luigi", db.getUserName());
   }
-  
-  //@Test
+
+  @Test
   void testsetPassword() {
-    DbConnection db = new DbConnection(null,"","","pass1", 3306,"");
+    DbConnection db = new DbConnection();
     db.setPassword("password123");
     assertEquals("password123", db.getPassword());
   }
-  
-  //@Test
+
+  @Test
   void testsetHostPort() {
-    DbConnection db = new DbConnection(null,"","","", 33060,"");
+    DbConnection db = new DbConnection();
     db.setHostPort(3306);
     assertEquals(3306, db.getHostPort());
   }
-  
-  //@Test
+
+  @Test
   void testsetHostName() {
-    DbConnection db = new DbConnection(null,"","","", 3306,"localhosto");
+    DbConnection db = new DbConnection();
     db.setHostName("localhost");
     assertEquals("localhost", db.getHostName());
   }
-  */
-  
+
   @Test
   void testsetConn() throws Exception {
     DbConnection db = new DbConnection().getIstance();
-    /*
-    DbConnection db = new DbConnection();
-    db.setConn(nect);
-    assertEquals(nect, db.getConn()); */
   }
 }
