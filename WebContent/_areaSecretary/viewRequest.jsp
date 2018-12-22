@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1" import="controller.CheckSession" %>
 
 <%
-	String pageName = "blank.jsp";
-	String pageFolder = "";
+	String pageName = "viewRequest.jsp";
+	String pageFolder = "_areaSecretary";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if(!ck.isAllowed()){
 	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
@@ -28,7 +28,7 @@
 			</jsp:include>
 	    
             
-            <div class="sidebar-page-container basePage viewRequestBlank"> <!-- viewRequestBlank da sostituire con quello giusto -->
+            <div class="sidebar-page-container basePage viewRequestSecretary">
                 <div class="auto-container">
                     <div class="row clearfix">
                         <div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
