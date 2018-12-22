@@ -14,6 +14,7 @@
 		<script src="<%= request.getContextPath() %>/js/script.js"></script>
 		<script src="<%= request.getContextPath() %>/js/color-settings.js"></script>
 		<script src="<%= request.getContextPath() %>/js/jquery.dataTables.min.js"></script>
+		<script src="<%= request.getContextPath() %>/js/toastr.min.js"></script>
 		<script src="<%= request.getContextPath() %>/js/filesystem_dropzone.js"></script>
 		<script src="<%= request.getContextPath() %>/js/pages/scripts.js"></script>
 		

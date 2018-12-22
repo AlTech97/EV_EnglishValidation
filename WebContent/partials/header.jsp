@@ -11,20 +11,39 @@
 		if(pageName.equals("viewRequest.jsp")){
 		  menu += "<li class=\"current\"><a href=\""+request.getContextPath()+"/"+pageFolder+"/viewRequest.jsp\">Richieste</a></li>";											  
 		}
+		else{
+		  menu += "<li><a href=\""+request.getContextPath()+"/"+pageFolder+"/viewRequest.jsp\">Richieste</a></li>";
+		}
 	}
 	else if(pageFolder.equals("_areaSecretary")){
 		if(pageName.equals("viewRequest.jsp")){
 		  menu += "<li class=\"current\"><a href=\""+request.getContextPath()+"/"+pageFolder+"/viewRequest.jsp\">Richieste</a></li>";
+		}
+		else{
+		  menu += "<li><a href=\""+request.getContextPath()+"/"+pageFolder+"/viewRequest.jsp\">Richieste</a></li>";
 		}
 	}
 	else if(pageFolder.equals("_areaStudent")){
 		if(pageName.equals("viewRequest.jsp")){
 		  menu += "<li class=\"current\"><a href=\""+request.getContextPath()+"/"+pageFolder+"/viewRequest.jsp\">Richieste</a></li>";
 		}
+		else{
+		  menu += "<li><a href=\""+request.getContextPath()+"/"+pageFolder+"/viewRequest.jsp\">Richieste</a></li>";
+		}
 	}
 	else if(pageFolder.equals("")){
 		if(pageName.equals("blank.jsp")){
 		  menu += "<li class=\"current\"><a href=\""+request.getContextPath()+"/blank.jsp\">Blank</a></li>";
+		}
+		else{
+		  menu += "<li><a href=\""+request.getContextPath()+"/blank.jsp\">Blank</a></li>";
+		}
+		
+		if(pageName.equals("login.jsp")){
+		  menu += "<li class=\"current\"><a href=\""+request.getContextPath()+"/login.jsp\">Login</a></li>";		  
+		}
+		else{
+		  menu += "<li><a href=\""+request.getContextPath()+"/login.jsp\">Login</a></li>";
 		}
 	}
 	

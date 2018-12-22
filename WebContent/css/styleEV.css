@@ -81,6 +81,24 @@
           font-size: 12px;
           margin-top: 0; } }
 
+.loginPage .login-container {
+  border: 1px solid #FF9900;
+  padding: 10px;
+  max-width: 500px;
+  border-radius: 15px;
+  float: none;
+  margin: 0 auto;
+  margin-top: 70px; }
+  .loginPage .login-container .panel h2, .loginPage .login-container .panel p {
+    color: #666; }
+  .loginPage .login-container #login .form-group {
+    text-align: center; }
+    .loginPage .login-container #login .form-group .form-control {
+      color: #666; }
+    .loginPage .login-container #login .form-group .btn-submit {
+      background-color: #FF9900;
+      border-color: #FF9900; }
+
 body .scroll-to-top {
   bottom: 50px;
   background: #FF9900; }
