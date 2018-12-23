@@ -15,16 +15,15 @@ import java.sql.Statement;
 import java.io.PrintWriter;
 import org.json.simple.JSONObject;
 
-
-
 /**
- * Servlet implementation class ServletCommon
+ * Servlet implementation class ServletCommon.
  */
 @WebServlet("/ServletCommon")
 public class ServletCommon extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   /**
+   * Constructor.
    * @see HttpServlet#HttpServlet()
    */
   public ServletCommon() {
@@ -32,6 +31,7 @@ public class ServletCommon extends HttpServlet {
   }
 
   /**
+   * Method doGet().
    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,6 +40,7 @@ public class ServletCommon extends HttpServlet {
   }
 
   /**
+   * Method doPost().
    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -54,7 +55,8 @@ public class ServletCommon extends HttpServlet {
     int flag = Integer.parseInt(request.getParameter("flag"));
 
     if (flag == 1) { // login
-      Connection connDB = new DbConnection().getIstance().getConn();
+      new DbConnection();
+      Connection connDb = DbConnection.getIstance().getConn();
       String email = request.getParameter("email");
       String password = request.getParameter("password");
 
@@ -65,7 +67,7 @@ public class ServletCommon extends HttpServlet {
         String sql = "";
         sql = "" + "SELECT email, password " + "FROM user AS u "
             + "WHERE TRIM(u.email) = ? AND u.password = ?;";
-        PreparedStatement stmt = connDB.prepareStatement(sql);
+        PreparedStatement stmt = connDb.prepareStatement(sql);
         stmt.setString(1, email);
         stmt.setString(2, password);
         ResultSet result = stmt.executeQuery(sql);
@@ -100,9 +102,9 @@ public class ServletCommon extends HttpServlet {
         }
 
         if (risultato == 0) {
-          connDB.rollback();
+          connDb.rollback();
         } else {
-          connDB.commit();
+          connDb.commit();
         }
 
       } catch (Exception e) {

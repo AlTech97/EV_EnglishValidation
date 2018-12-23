@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 
 public class DbConnection {
 
+  /**
+   * Variables.
+   */
   private static DbConnection istance = null;
   private Connection conn;
   private String databaseName;
@@ -14,7 +17,7 @@ public class DbConnection {
   private String hostName;
 
   /**
-   * Costruttore.
+   * Constructor.
    */
   public DbConnection() {
     this.conn = null;

@@ -91,6 +91,7 @@ public class DbConnectionTest {
 
   @Test
   void testsetConn() throws Exception {
-    DbConnection db = new DbConnection().getIstance();
+    new DbConnection();
+    DbConnection.getIstance();
   }
 }
