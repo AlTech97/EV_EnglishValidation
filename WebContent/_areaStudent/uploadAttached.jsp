@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1" import="controller.CheckSession" %>
 
 <%
-	String pageName = "logout.jsp";
-	String pageFolder = "";
+	String pageName = "uploadAttached.jsp";
+	String pageFolder = "_areaStudent";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if(!ck.isAllowed()){
-	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());
+	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
 	}
-	
-	request.getSession().invalidate();
 %>
 
 <!DOCTYPE html>
@@ -30,18 +28,14 @@
 			</jsp:include>
 	    
             
-            <div class="sidebar-page-container basePage loginPage">
+            <div class="sidebar-page-container basePage uploadAttached">
                 <div class="auto-container">
                     <div class="row clearfix">
                         <div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="content">
-                                <div class="news-block-seven">
-
-									<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 logout-container">
-								    	<h2 class="text-center">Logout effettuato con successo.</h2>										   	
-									</div>
-
-                            	</div>
+	                           <div class="news-block-seven">
+	
+	                           </div>
                             </div>
                         </div>
                     </div>
@@ -52,6 +46,6 @@
 		<!--End pagewrapper-->		
 		
 		<jsp:include page="/partials/includes.jsp" />
-		
+			
 	</body>
 </html>
