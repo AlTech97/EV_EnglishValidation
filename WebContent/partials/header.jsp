@@ -45,6 +45,13 @@
 		else{
 		  menu += "<li><a href=\""+request.getContextPath()+"/login.jsp\">Login</a></li>";
 		}
+
+		if(pageName.equals("logout.jsp")){ //Da implementare il controllo che lo mostra solo se l'utente è loggato
+		  menu += "<li class=\"current\"><a href=\""+request.getContextPath()+"/logout.jsp\">Logout</a></li>";		  
+		}
+		else{
+		  menu += "<li><a href=\""+request.getContextPath()+"/logout.jsp\">Logout</a></li>";
+		}
 	}
 	
 	hiddenMenu = menu;
