@@ -35,7 +35,7 @@
                             <div class="content">
                                 <div class="news-block-seven">
 
-									<div class="login-container">
+									<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 login-container">
 									    <div class="panel">
 									    	<h2 class="text-center">Login</h2>
 										   	<p class="text-center">Compilare username e password per accedere</p>

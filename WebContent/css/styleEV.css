@@ -84,20 +84,12 @@
 .loginPage .login-container {
   border: 1px solid #FF9900;
   padding: 10px;
-  max-width: 500px;
   border-radius: 15px;
   float: none;
   margin: 0 auto;
   margin-top: 70px; }
   .loginPage .login-container .panel h2, .loginPage .login-container .panel p {
     color: #666; }
-  .loginPage .login-container #login .form-group {
-    text-align: center; }
-    .loginPage .login-container #login .form-group .form-control {
-      color: #666; }
-    .loginPage .login-container #login .form-group .btn-submit {
-      background-color: #FF9900;
-      border-color: #FF9900; }
 
 body .scroll-to-top {
   bottom: 50px;
@@ -112,6 +104,13 @@ body .scroll-to-top {
       padding: 102px 0px 80px; } }
   .page-wrapper .sidebar-page-container.basePage .auto-container .row .content-side .content .sec-title h2 {
     background-color: #FF9900; }
+  .page-wrapper .sidebar-page-container.basePage .auto-container .row .content-side .content .news-block-seven .form-group {
+    text-align: center; }
+    .page-wrapper .sidebar-page-container.basePage .auto-container .row .content-side .content .news-block-seven .form-group .form-control {
+      color: #666; }
+    .page-wrapper .sidebar-page-container.basePage .auto-container .row .content-side .content .news-block-seven .form-group .btn-submit {
+      background-color: #FF9900;
+      border-color: #FF9900; }
   .page-wrapper .sidebar-page-container.basePage .auto-container .row .content-side .content .news-block-seven .dataTables_wrapper {
     width: 100%; }
     .page-wrapper .sidebar-page-container.basePage .auto-container .row .content-side .content .news-block-seven .dataTables_wrapper .dataTables_length {

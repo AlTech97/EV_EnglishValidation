@@ -2,7 +2,6 @@
 	.login-container{
 		border: 1px solid #FF9900;
 		padding: 10px;
-		max-width: 500px;
 		border-radius: 15px;
 		float: none;
 		margin: 0 auto;
@@ -13,16 +12,7 @@
 			}
 		}
 		#login{
-			.form-group{
-				text-align: center;
-				.form-control{
-					color: #666;
-				}
-				.btn-submit{
-					background-color: #FF9900;
-					border-color: #FF9900;
-				}
-			}
+
 		}
 	}
 }
