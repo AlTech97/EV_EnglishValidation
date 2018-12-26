@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.io.PrintWriter;
 import org.json.simple.JSONObject;
 
@@ -24,6 +23,7 @@ public class ServletCommon extends HttpServlet {
 
   /**
    * Constructor.
+   * 
    * @see HttpServlet#HttpServlet()
    */
   public ServletCommon() {
@@ -32,6 +32,7 @@ public class ServletCommon extends HttpServlet {
 
   /**
    * Method doGet().
+   * 
    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,6 +42,7 @@ public class ServletCommon extends HttpServlet {
 
   /**
    * Method doPost().
+   * 
    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -65,8 +67,11 @@ public class ServletCommon extends HttpServlet {
       try {
 
         String sql = "";
-        sql = "" + "SELECT email, password " + "FROM user AS u "
-            + "WHERE TRIM(u.email) = ? AND u.password = ?;";
+        sql = ""
+            +"SELECT EMAIL,USER_TYPE, PASSWORD" + "FROM user AS us "
+            + "WHERE us.USER_TYPE = 1 AND TRIM(us.EMAIL) = TRIM('" + email
+            + "') AND TRIM(us.PASSWORD) = TRIM('" + password + "');";
+        
         PreparedStatement stmt = connDb.prepareStatement(sql);
         stmt.setString(1, email);
         stmt.setString(2, password);
@@ -114,7 +119,7 @@ public class ServletCommon extends HttpServlet {
 
 
     }
-    
+
     JSONObject res = new JSONObject();
     PrintWriter out = response.getWriter();
     res.put("risultato", risultato);
