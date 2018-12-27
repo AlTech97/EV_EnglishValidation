@@ -9,7 +9,7 @@ public class PasswordUtils {
     
   }
   
-  public String generatePwd (String passwordToHash) {
+  public String generatePwd(String passwordToHash) {
     String generatedPassword = null;
     String salt = "englishvalidation"; 
     try {     
@@ -22,7 +22,7 @@ public class PasswordUtils {
       }
       generatedPassword = sb.toString();
     } 
-    catch (NoSuchAlgorithmException e){
+    catch (NoSuchAlgorithmException e) {
       e.printStackTrace();
     }
     return generatedPassword;

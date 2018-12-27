@@ -1,5 +1,6 @@
 package controller;
 
+import interfacce.UserInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -10,11 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONObject;
-import interfacce.UserInterface;
 import model.Admin;
 import model.Secretary;
 import model.Student;
+import org.json.simple.JSONObject;
 
 /**
  * Servlet implementation class ServletCommon.
@@ -55,6 +55,7 @@ public class ServletCommon extends HttpServlet {
     String error = "";
     String content = "";
     String redirect = "";
+    PreparedStatement stmt = null;
 
     int flag = Integer.parseInt(request.getParameter("flag"));
     Connection conn = new DbConnection().getIstance().getConn();
@@ -67,7 +68,7 @@ public class ServletCommon extends HttpServlet {
         String password = new PasswordUtils().generatePwd(request.getParameter("password"));        
         try {  
           sql = " SELECT  name, surname, sex, user_type FROM user WHERE TRIM(email) = TRIM(?) AND TRIM(password) = TRIM(?)";
-          PreparedStatement stmt = conn.prepareStatement(sql);
+          stmt = conn.prepareStatement(sql);
           stmt.setString(1, email);
           stmt.setString(2, password);
           ResultSet r = stmt.executeQuery();
@@ -99,7 +100,7 @@ public class ServletCommon extends HttpServlet {
               request.getSession().setAttribute("user", user);
               
               result = 1;
-            }  
+            }
             else {
               error = "Username o Password errati.";
             }
@@ -112,11 +113,98 @@ public class ServletCommon extends HttpServlet {
             conn.commit();
           }
           
-        } 
+        }
         catch (Exception e) {
           error = e.getMessage();
         }      
       }
+      else if (flag == 2) { //Aggiornamento Nome
+        Integer idRequest = Integer.valueOf(request.getParameter("idRequest"));
+        String newName = request.getParameter("newName");
+        
+        try {  
+          sql = "SELECT fk_user FROM request WHERE id_request = ?";
+          stmt = conn.prepareStatement(sql);
+          stmt.setInt(1, idRequest);
+          ResultSet r = stmt.executeQuery();
+          if (r.wasNull()) {
+            error = "Errore nell'esecuzione della Query";
+          }
+          else {            
+            int count = r.last() ? r.getRow() : 0;
+            if (count == 1) {
+              sql = "UPDATE user SET name = ? WHERE email = ?";
+              stmt = conn.prepareStatement(sql);
+              stmt.setString(1, newName);
+              stmt.setString(1, r.getString("fk_user"));              
+              if (stmt.executeUpdate() > 0) {
+                content = "Nome Aggiornato";
+                result = 1;                
+              }
+              else {
+                error = "Errore aggiornamento Nome.";
+              }
+            }
+            else {
+              error = "Errore Prelevamento Richiesta";
+            }                                   
+          }
+          
+          if (result == 0) {
+            conn.rollback();
+          } else {
+            conn.commit();
+          }
+        
+        } 
+        catch (Exception e) {
+          error = e.getMessage();
+        }                  
+      }
+      else if (flag == 3) { //Aggiornamento Cognome
+        Integer idRequest = Integer.valueOf(request.getParameter("idRequest"));
+        String newSurname = request.getParameter("newSurname");
+        
+        try {  
+          sql = "SELECT fk_user FROM request WHERE id_request = ?";
+          stmt = conn.prepareStatement(sql);
+          stmt.setInt(1, idRequest);
+          ResultSet r = stmt.executeQuery();
+          if (r.wasNull()) {
+            error = "Errore nell'esecuzione della Query";
+          }
+          else {            
+            int count = r.last() ? r.getRow() : 0;
+            if (count == 1) {
+              sql = "UPDATE user SET surname = ? WHERE email = ?";
+              stmt = conn.prepareStatement(sql);
+              stmt.setString(1, newSurname);
+              stmt.setString(1, r.getString("fk_user"));              
+              if (stmt.executeUpdate() > 0) {
+                content = "Cognome Aggiornato";
+                result = 1;                
+              }
+              else {
+                error = "Errore aggiornamento Cognome.";
+              }
+            }
+            else {
+              error = "Errore Prelevamento Richiesta";
+            }                                   
+          }
+          
+          if (result == 0) {
+            conn.rollback();
+          } else {
+            conn.commit();
+          }
+        
+        }
+        catch (Exception e) {
+          error = e.getMessage();
+        }                  
+      }      
+      
             
     }
     else {
@@ -131,7 +219,5 @@ public class ServletCommon extends HttpServlet {
     res.put("redirect", redirect);
     PrintWriter out = response.getWriter();
     out.println(res);
-
-
   }
 }
