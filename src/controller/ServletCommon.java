@@ -57,7 +57,7 @@ public class ServletCommon extends HttpServlet {
     String redirect = "";
     PreparedStatement stmt = null;
 
-    int flag = Integer.parseInt(request.getParameter("flag"));
+    int flag = Integer.parseInt(request.getParameter("flag"));   
     Connection conn = new DbConnection().getIstance().getConn();
     String sql = "";
     
