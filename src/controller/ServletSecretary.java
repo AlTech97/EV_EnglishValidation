@@ -47,9 +47,9 @@ public class ServletSecretary extends HttpServlet {
       throws ServletException, IOException {
 
     Integer cfu = Integer.parseInt(request.getParameter("cfu"));
-    Integer risultato = 0;
-    String errore = "";
-    String contenuto = "";
+    Integer result = 0;
+    String error = "";
+    String content = "";
 
     new DbConnection();
     Connection connDb = DbConnection.getIstance().getConn();
@@ -59,22 +59,22 @@ public class ServletSecretary extends HttpServlet {
         PreparedStatement stmt = ((DbConnection) connDb).getConn().prepareStatement(sql);
         stmt.setInt(1, cfu);
         if (stmt.executeUpdate() == 1) {
-          contenuto = "CFU inseriti con successo.";
-          risultato = 1;
+          content = "CFU inseriti con successo.";
+          result = 1;
         } else {
-          errore = "Errore Inserimento CFU.";
-          risultato = 0;
+          error = "Errore Inserimento CFU.";
+          result = 0;
         }
 
-        if (risultato == 0) {
+        if (result == 0) {
           ((DbConnection) connDb).getConn().rollback();
         } else {
           ((DbConnection) connDb).getConn().commit();
         }
         ((DbConnection) connDb).getConn().close();
       } catch (Exception e) {
-        errore = "Errore esecuzione Query.";
-        risultato = 0;
+        error = "Errore esecuzione Query.";
+        result = 0;
       }
     } 
 
