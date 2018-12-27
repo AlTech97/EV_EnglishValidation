@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.HttpSession;
 import interfacce.UserInterface;
 import model.Admin;
@@ -117,5 +119,5 @@ public class CheckSession implements Serializable {
   public void setAllowed(boolean allowed) {
     this.allowed = allowed;
   }
-
+  
 }
