@@ -1,6 +1,10 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
@@ -8,10 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.io.PrintWriter;
 import org.json.simple.JSONObject;
 
 /**
@@ -67,11 +67,10 @@ public class ServletCommon extends HttpServlet {
       try {
 
         String sql = "";
-        sql = ""
-            +"SELECT EMAIL,USER_TYPE, PASSWORD" + "FROM user AS us "
-            + "WHERE us.USER_TYPE = 1 AND TRIM(us.EMAIL) = TRIM('" + email
+        sql = "" + "SELECT EMAIL,USER_TYPE, PASSWORD" + "FROM user AS us "
+            + "WHERE AND TRIM(us.EMAIL) = TRIM('" + email
             + "') AND TRIM(us.PASSWORD) = TRIM('" + password + "');";
-        
+
         PreparedStatement stmt = connDb.prepareStatement(sql);
         stmt.setString(1, email);
         stmt.setString(2, password);
@@ -121,11 +120,12 @@ public class ServletCommon extends HttpServlet {
     }
 
     JSONObject res = new JSONObject();
-    PrintWriter out = response.getWriter();
+    
     res.put("risultato", risultato);
     res.put("errore", errore);
     res.put("contenuto", contenuto);
     res.put("redirect", redirect);
+    PrintWriter out = response.getWriter();
     out.println(res);
 
 
