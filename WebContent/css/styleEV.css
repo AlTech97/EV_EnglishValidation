@@ -91,7 +91,7 @@
   .loginPage .login-container .panel h2, .loginPage .login-container .panel p {
     color: #666; }
 
-.loginPage .logout-container {
+.logoutPage .logout-container {
   float: none;
   margin: 0 auto;
   margin-top: 70px; }
