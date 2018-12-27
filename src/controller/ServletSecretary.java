@@ -29,7 +29,7 @@ public class ServletSecretary extends HttpServlet {
   public ServletSecretary() {
     super();
   }
-  
+
   /**
    * Method doGet().
    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,11 +40,44 @@ public class ServletSecretary extends HttpServlet {
   }
 
   /**
-   * Method doPost().
-   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   * * Method doPost().
+   * * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
+    Integer cfu = Integer.parseInt(request.getParameter("cfu"));
+    Integer risultato = 0;
+    String errore = "";
+    String contenuto = "";
+
+    new DbConnection();
+    Connection connDb = DbConnection.getIstance().getConn();
+    if (((DbConnection) connDb).getConn() != null) {
+      try {
+        String sql = "INSERT INTO REQUEST(validated_CFU) VALUES (NOW()) ;";
+        PreparedStatement stmt = ((DbConnection) connDb).getConn().prepareStatement(sql);
+        stmt.setInt(1, cfu);
+        if (stmt.executeUpdate() == 1) {
+          contenuto = "CFU inseriti con successo.";
+          risultato = 1;
+        } else {
+          errore = "Errore Inserimento CFU.";
+          risultato = 0;
+        }
+
+        if (risultato == 0) {
+          ((DbConnection) connDb).getConn().rollback();
+        } else {
+          ((DbConnection) connDb).getConn().commit();
+        }
+        ((DbConnection) connDb).getConn().close();
+      } catch (Exception e) {
+        errore = "Errore esecuzione Query.";
+        risultato = 0;
+      }
+    } 
+
   }
-  
+
 }
