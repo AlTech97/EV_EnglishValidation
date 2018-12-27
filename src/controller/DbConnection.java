@@ -41,7 +41,7 @@ public class DbConnection {
   /**
   * Get the instance of the database.
   */
-  public static DbConnection getIstance() {
+  public DbConnection getIstance() {
     if (istance == null) {
       istance = new DbConnection();
     }

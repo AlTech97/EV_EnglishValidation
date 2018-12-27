@@ -2,6 +2,10 @@ package controller;
 
 import java.io.Serializable;
 import javax.servlet.http.HttpSession;
+import interfacce.UserInterface;
+import model.Admin;
+import model.Secretary;
+import model.Student;
 
 public class CheckSession implements Serializable {
 
@@ -89,7 +93,20 @@ public class CheckSession implements Serializable {
    * Specifies if the user is allowed to see the page.
    */
   public boolean isAllowed() {
-    this.setAllowed(true);
+    this.setAllowed(false);
+    UserInterface u = (UserInterface) this.session.getAttribute("user");
+    if (u != null) {
+      int userType = u.getUserType();
+      if (userType == 0 && this.pageFolder.equals("_areaStudent")) { // Profilo Student
+        this.setAllowed(true);
+      }
+      else if (userType == 1 && this.pageFolder.equals("_areaSecretary")) { // Profilo Secretary
+        this.setAllowed(true);
+      }
+      else if (userType == 2 && this.pageFolder.equals("_areaAdmin")) { // Profilo Admin
+        this.setAllowed(true);
+      }      
+    }
     return allowed;
   }
 
