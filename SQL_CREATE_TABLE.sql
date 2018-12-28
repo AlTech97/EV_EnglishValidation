@@ -23,6 +23,7 @@ foreign key (FK_USER) references USER(EMAIL)
 
 CREATE TABLE REQUEST (
 ID_REQUEST int(20) not null AUTO_INCREMENT,
+CERTIFICATE_SERIAL VARCHAR(50) not null,
 LEVEL varchar(7) not null,
 RELEASE_DATE date not null, 
 EXPIRY_DATE date not null, 
