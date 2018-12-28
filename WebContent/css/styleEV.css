@@ -108,6 +108,16 @@
   .signUpPage .signUp-container .panel h2, .signUpPage .signUp-container .panel p {
     color: #666; }
 
+.firstFormPage .firstForm-container {
+  border: 1px solid #FF9900;
+  padding: 10px;
+  border-radius: 15px;
+  float: none;
+  margin: 0 auto;
+  margin-top: 70px; }
+  .firstFormPage .firstForm-container .panel h2, .firstFormPage .firstForm-container .panel p {
+    color: #666; }
+
 body .scroll-to-top {
   bottom: 50px;
   background: #FF9900; }
