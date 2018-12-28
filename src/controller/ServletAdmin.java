@@ -117,7 +117,7 @@ public class ServletAdmin extends HttpServlet {
     String sql = "SELECT * FROM REQUEST;";
     try {
       ArrayList list = new ArrayList();
-      connDb = DbConnection.getIstance().getConn();
+      connDb = DbConnection.getInstance().getConn();
       stmt = ((DbConnection) connDb).getConn().prepareStatement(sql);
       rs = stmt.executeQuery(sql);
       while (rs.next()) {
