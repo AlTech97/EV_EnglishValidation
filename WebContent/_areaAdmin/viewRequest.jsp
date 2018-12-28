@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1" import="controller.CheckSession" %>
+<%@ page import="java.util.*,model.Request" %>
 
 <%
 	String pageName = "viewRequest.jsp";
@@ -7,6 +8,22 @@
 	if(!ck.isAllowed()){
 	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
 	}
+%>
+<%    
+    Collection<?> requests = null;  
+    if((((String)session.getAttribute("currentSessionAdmin")) !=null)){
+        if(((session.getAttribute("currentSessionAdmin")).equals("Admin"))){
+          requests=(Collection<?>)request.getAttribute("requests");
+           //se i dati non esistono chiamo la servlet che riempie i campi
+           if(requests == null){
+        	  // response.sendRedirect("./ServletAdmin");
+        	  return;
+           }
+          }
+      
+     }else{    	
+     //	response.sendRedirect("viewRequest.jsp");
+     }     
 %>
 
 <!DOCTYPE html>
@@ -32,25 +49,44 @@
                 <div class="auto-container">
                     <div class="row clearfix">
                         <div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="content">
+                            <div class="content ">
                                     <div class="news-block-seven">
-                                        <table id="blankTable">
+                                        <table id="blankTable col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">ID</th>
-                                                    <th class="text-center">Campo</th>
-                                                    <th class="text-center">Campo</th>
-                                                    <th class="text-center">Azioni</th>
+                                                    <th class="text-center ">Nome e Cognome</th>
+                                                    <th class="text-center ">ID</th>
+                                                    <th class="text-center ">Matricola</th>
+                                                    <th class="text-center ">Codice Certificato</th>
+                                                    <th class="text-center ">Verifica Certificato</th>
+                                                    <th class="text-center ">CFU Convalidati</th>
+                                                    <th class="text-center ">Accetta</th>
+                                                    <th class="text-center ">Rifiuta</th>
                                                 </tr>	
                                             </thead>
                                             <tbody id="bodyBlankTable">
+                                            <%
+ 											 // products.clear();
+												if(requests!=null){
+   													if(requests.size()>0){
+														 Iterator<?> it=requests.iterator();
+	 													 	while(it.hasNext()){
+		   													Request bean = (Request)it.next();
+											%>
                                             	<tr>
-                                            		<td class="text-center">Ciao</td>
-                                            		<td class="text-center">Ciao</td>
-                                            		<td class="text-center">Ciao</td>
-                                            		<td class="text-center">Ciao</td>
+                                            		<td class="text-center2 "><%= bean.getUser().getName() + "" + bean.getUser().getSurname()%></td>
+                                            		<td class="text-center2 "><%= bean.getIdRequest()%></td>
+                                            		<td class="text-center2 "><%= bean.getSerial() %></td>
+                                            		<td class="text-center2 "><%= bean.getAttached().get(0) %></td> <!-- mettere il codice dell'attached -->
+                                            		<td class="text-center2 "><button type="button" class="btn-primary">Controlla Certificato</button></td>
+                                            		<td class="text-center2 "><input type="text" class="inputCFU" aria-label="CFU" aria-describedby="inputGroup-sizing-default"></td>
+                                            		<td class="text-center2 "><input class="radio" type="radio" name="radiobutton" value="accept" ></td>
+                                            		<td class="text-center2 "><input class="radio" type="radio" name="radiobutton" value="refuse" checked="checked"></td>
                                             	</tr>  
                                             </tbody>
+                                            <%				}  
+	 												}
+	   											}  %>
                                         </table>
 
                                     </div>
