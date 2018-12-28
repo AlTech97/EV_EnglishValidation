@@ -1,3 +1,5 @@
+USE englishvalidation;
+
 ALTER TABLE REQUEST 
 ADD foreign key(FK_USER) references USER(EMAIL);
 

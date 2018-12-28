@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS englishvalidation;
+CREATE DATABASE englishvalidation COLLATE 'utf8_general_ci';
+USE englishvalidation;
+
 CREATE TABLE USER (
 EMAIL varchar(50) not null,
 NAME varchar(50) not null,
@@ -18,7 +22,7 @@ foreign key (FK_USER) references USER(EMAIL)
 
 
 CREATE TABLE REQUEST (
-ID_REQUEST int(20) not null,
+ID_REQUEST int(20) not null AUTO_INCREMENT,
 LEVEL varchar(7) not null,
 RELEASE_DATE date not null, 
 EXPIRY_DATE date not null, 
@@ -33,7 +37,7 @@ primary key(ID_REQUEST)
 );
 
 CREATE TABLE ATTACHED (
-ID_ATTACHED int(20) not null,
+ID_ATTACHED int(20) not null AUTO_INCREMENT,
 FILENAME varchar(50) not null,
 FK_REQUEST int(20) not null,
 FK_USER varchar(50) not null,
@@ -42,7 +46,7 @@ primary key(ID_ATTACHED)
 
 
 CREATE TABLE ENTE (
-ID_ENTE int(20) not null,
+ID_ENTE int(20) not null AUTO_INCREMENT,
 EMAIL varchar(50) not null,
 NAME varchar(50) not null,
 SITE varchar(50) not null,
@@ -50,7 +54,7 @@ primary key (ID_ENTE)
 );
 
 CREATE TABLE STATE (
-ID_STATE int(20) not null, 
+ID_STATE int(20) not null AUTO_INCREMENT, 
 DESCRIPTION varchar(50) not null,
 primary key (ID_STATE)
 );
