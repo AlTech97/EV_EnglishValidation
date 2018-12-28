@@ -112,7 +112,7 @@ public class ServletCommon extends HttpServlet {
           }
 
         } catch (Exception e) {
-          error = e.getMessage();
+          error += e.getMessage();
         }
       } else if (flag == 2) { // Aggiornamento Nome
         Integer idRequest = Integer.valueOf(request.getParameter("idRequest"));
@@ -150,7 +150,7 @@ public class ServletCommon extends HttpServlet {
           }
 
         } catch (Exception e) {
-          error = e.getMessage();
+          error += e.getMessage();
         }
       } else if (flag == 3) { // Aggiornamento Cognome
         Integer idRequest = Integer.valueOf(request.getParameter("idRequest"));
@@ -188,7 +188,7 @@ public class ServletCommon extends HttpServlet {
           }
 
         } catch (Exception e) {
-          error = e.getMessage();
+          error += e.getMessage();
         }
       }
 

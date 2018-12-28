@@ -2,11 +2,7 @@
 
 <%
 	String pageName = "signUp.jsp";
-	String pageFolder = "";
-	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
-	if(!ck.isAllowed()){
-	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());
-	}
+	String pageFolder = "_areaStudent";
 %>
 
 <!DOCTYPE html>
@@ -41,29 +37,32 @@
 										   	<p class="text-center">Compila tutti i campi per registrarti</p>
 									   	</div>
 										<form id="signUp">	
-											<div class="form-group">	
-										        <input type="text" class="form-control" id="name" placeholder="Nome" minlength="3" required>	
+											<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">	
+										        <input type="text" class="form-control" id="name" placeholder="Nome" minlength="1" maxlength="20" required>	
 										    </div>
-										    <div class="form-group">	
-										        <input type="text" class="form-control" id="surname" placeholder="Cognome" minlength="3" required>	
+										    <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">	
+										        <input type="text" class="form-control" id="surname" placeholder="Cognome" minlength="1" maxlength="20" required>	
 										    </div>
-										    <div class="form-group">	
-										        <input type="email" class="form-control" id="email" placeholder="Email" minlength="6" required>	
+										    <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">	
+										        <input type="email" class="form-control" id="email" placeholder="Email" minlength="1" required>	
 										    </div>
-										    <fieldset>
-				        						<legend>Sesso</legend>
-				        						<input type='radio' class='sessoUtente' name='sessoUtente' value='male' checked />Maschio
-				        						<input type='radio' class='sessoUtente' name='sessoUtente' value='female' />Femmina
-				  							</fieldset>
-										    <div class="form-group">	
+										    
+				  							<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">				  							
+												<label class="radio-inline"><input type="radio" class="sex" name="sex" value="M" required>M</label>
+												<label class="radio-inline"><input type="radio" class="sex" name="sex" value="F" required>F</label>																  						
+										    </div>
+				  							
+										    <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">	
 										        <input type="password" class="form-control" id="password" placeholder="Password" minlength="8" required>
 										    </div>   
-										    <div class="form-group">	
+										    <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">	
 										        <input type="password" class="form-control" id="verifyPassword" placeholder="Verifica Password" minlength="8" required>
 										    </div>  
-										    <div class="form-group">	
+										    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 										    	<button type="submit" class="btn btn-primary btn-submit">Registrati</button>
 										    </div>    
+										    
+										    <div class="clearfix"></div>
 										</form>
 									</div>
 

@@ -103,6 +103,8 @@
   float: none;
   margin: 0 auto;
   margin-top: 70px; }
+  .signUpPage .signUp-container .form-group {
+    min-height: 34px; }
   .signUpPage .signUp-container .panel h2, .signUpPage .signUp-container .panel p {
     color: #666; }
 

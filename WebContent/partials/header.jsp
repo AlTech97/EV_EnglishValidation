@@ -67,7 +67,7 @@
 		                	
 		                	<div class="logo-outer">
 		                    	<div class="logo">
-		                    		<a href="#"></a>
+		                    		<a href="<%= request.getContextPath()%>/blank.jsp"></a>
 		                    	</div>
 		                    </div>                    
 		                </div>
