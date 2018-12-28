@@ -108,8 +108,9 @@ public class CheckSession implements Serializable {
       else if (userType == 2 && this.pageFolder.equals("_areaAdmin")) { // Profilo Admin
         this.setAllowed(true);
       }      
-    }
-    return allowed;
+    }    
+    return true;
+    //return allowed;
   }
 
   /**
