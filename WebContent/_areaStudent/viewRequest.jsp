@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1" import="controller.CheckSession" %>
-
+<%@ page import="java.util.*,model.Request" %>
 <%
 	String pageName = "viewRequest.jsp";
 	String pageFolder = "_areaStudent";
@@ -7,6 +7,22 @@
 	if(!ck.isAllowed()){
 	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
 	}
+%>
+<%    
+    Collection<?> requests = null;  
+    if((((String)session.getAttribute("currentSessionStudent")) !=null)){
+        if(((session.getAttribute("currentSessionStudent")).equals("Student"))){
+          requests=(Collection<?>)request.getAttribute("requests");
+           //se i dati non esistono chiamo la servlet che riempie i campi
+           if(requests == null){
+        	  	response.sendRedirect("./ServletStudent");
+        	  return;
+           }
+          }
+      
+     }else{    	
+     	//response.sendRedirect("viewRequest.jsp");
+     }     
 %>
 
 <!DOCTYPE html>
@@ -36,21 +52,33 @@
                                     <div class="news-block-seven">
                                         <table id="blankTable">
                                             <thead>
-                                                <tr>
-                                                    <th class="text-center">ID</th>
-                                                    <th class="text-center">Campo</th>
-                                                    <th class="text-center">Campo</th>
-                                                    <th class="text-center">Azioni</th>
+                                                <tr align="center">
+                                                    <th class="text-center" align="center">ID</th>
+                                                    <th class="text-center" align="center">Matricola</th>
+                                                    <th class="text-center" align="center">Allegati</th>
+                                                    <th class="text-center" align="center">Stato</th>
                                                 </tr>	
                                             </thead>
                                             <tbody id="bodyBlankTable">
-                                            	<tr>
-                                            		<td class="text-center">Ciao</td>
-                                            		<td class="text-center">Ciao</td>
-                                            		<td class="text-center">Ciao</td>
-                                            		<td class="text-center">Ciao</td>
+                                            <%
+ 											 // products.clear();
+												if(requests!=null){
+   													if(requests.size()>0){
+														 Iterator<?> it=requests.iterator();
+	 													 	while(it.hasNext()){
+		   													Request bean = (Request)it.next();
+											%>
+                                            	
+                                            	<tr align="center">
+                                            		<td class="text-center" align="center"><%= bean.getIdRequest()%></td>
+                                            		<td class="text-center" align="center"><%= bean.getSerial() %></td>
+                                            		<td class="text-center" align="center"><%= bean.getAttached() %></td>
+                                            		<td class="text-center" align="center"><%= bean.getState() %></td>
                                             	</tr>  
                                             </tbody>
+                                            <%				}  
+	 												}
+	   											}  %>
                                         </table>
 
                                     </div>
