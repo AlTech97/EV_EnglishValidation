@@ -58,7 +58,7 @@ public class ServletCommon extends HttpServlet {
     PreparedStatement stmt = null;
 
     int flag = Integer.parseInt(request.getParameter("flag"));
-    Connection conn = new DbConnection().getIstance().getConn();
+    Connection conn = new DbConnection().getInstance().getConn();
     String sql = "";
 
     if (conn != null) {
@@ -69,9 +69,9 @@ public class ServletCommon extends HttpServlet {
         try {
           sql =
               " SELECT  name, surname, sex, user_type FROM user "
-              + "WHERE TRIM(LOWER(email)) = TRIM(?) AND TRIM(password) = TRIM(?)";
+              + "WHERE TRIM(email) = TRIM(?) AND TRIM(password) = TRIM(?)";
           stmt = conn.prepareStatement(sql);
-          stmt.setString(1, email.toLowerCase());
+          stmt.setString(1, email);
           stmt.setString(2, password);
           ResultSet r = stmt.executeQuery();
           if (r.wasNull()) {
@@ -112,7 +112,7 @@ public class ServletCommon extends HttpServlet {
           }
 
         } catch (Exception e) {
-          error += e.getMessage();
+          error = e.getMessage();
         }
       } else if (flag == 2) { // Aggiornamento Nome
         Integer idRequest = Integer.valueOf(request.getParameter("idRequest"));
@@ -150,7 +150,7 @@ public class ServletCommon extends HttpServlet {
           }
 
         } catch (Exception e) {
-          error += e.getMessage();
+          error = e.getMessage();
         }
       } else if (flag == 3) { // Aggiornamento Cognome
         Integer idRequest = Integer.valueOf(request.getParameter("idRequest"));
@@ -188,7 +188,7 @@ public class ServletCommon extends HttpServlet {
           }
 
         } catch (Exception e) {
-          error += e.getMessage();
+          error = e.getMessage();
         }
       }
 

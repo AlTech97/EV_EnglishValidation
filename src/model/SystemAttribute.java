@@ -7,7 +7,10 @@ public class SystemAttribute {
   private HashMap<String, String> hashMap = new HashMap<String, String>();
   private static SystemAttribute instance;
 
-  private SystemAttribute() {
+  /**
+   * Constructor.
+   */
+  public SystemAttribute() {
     hashMap.put("http://localhost/Admin.jsp", "1");
     hashMap.put("http://localhost/Segretary.jsp", "2");
     hashMap.put("http://localhost/Student.jsp", "3");
@@ -21,10 +24,9 @@ public class SystemAttribute {
     this.hashMap = hashMap;
   }
 
-  /*
+  /**
    * Returns the value to which the specified key is mapped, or null if this map contains no mapping
-   * for the Key
-   * 
+   * for the Key.
    * @param slug is the key of the hashmap
    * @return value associated to the slug.
    */
@@ -32,7 +34,8 @@ public class SystemAttribute {
     return this.hashMap.get(slug);
   }
   
-  /**method static and synchronized.
+  /**
+   * Method static and synchronized.
    * @return the instance of the singleton.
    */ 
   public static synchronized SystemAttribute getInstance() {

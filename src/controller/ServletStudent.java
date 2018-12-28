@@ -56,7 +56,7 @@ public class ServletStudent extends HttpServlet {
     PreparedStatement stmt = null;
 
     int flag = Integer.parseInt(request.getParameter("flag"));
-    Connection conn = new DbConnection().getIstance().getConn();
+    Connection conn = new DbConnection().getInstance().getConn();
     String sql = "";
 
     if (conn != null) {

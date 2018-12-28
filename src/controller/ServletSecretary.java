@@ -52,7 +52,7 @@ public class ServletSecretary extends HttpServlet {
     String content = "";
 
     new DbConnection();
-    Connection connDb = DbConnection.getIstance().getConn();
+    Connection connDb = DbConnection.getInstance().getConn();
     if (((DbConnection) connDb).getConn() != null) {
       try {
         String sql = "INSERT INTO REQUEST(validated_CFU) VALUES (NOW()) ;";

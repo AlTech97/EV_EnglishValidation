@@ -6,9 +6,13 @@ import java.security.NoSuchAlgorithmException;
 
 public class PasswordUtils {
   public PasswordUtils() {
-    
   }
   
+  /**
+   * Exposes the function to encrypt the password.
+   * @param passwordToHash is the password to be encrypted. 
+   * @return the encrypted password.
+   */
   public String generatePwd(String passwordToHash) {
     String generatedPassword = null;
     String salt = "englishvalidation"; 
@@ -21,11 +25,9 @@ public class PasswordUtils {
         sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
       }
       generatedPassword = sb.toString();
-    } 
-    catch (NoSuchAlgorithmException e) {
+    } catch (NoSuchAlgorithmException e) {
       e.printStackTrace();
     }
     return generatedPassword;
-  }
-  
+  } 
 }

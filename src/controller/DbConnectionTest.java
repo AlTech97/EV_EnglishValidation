@@ -47,8 +47,8 @@ public class DbConnectionTest {
 
   @Test
   void testgetInstance() {
-    DbConnection db = DbConnection.getIstance();
-    DbConnection db1 = DbConnection.getIstance();
+    DbConnection db = DbConnection.getInstance();
+    DbConnection db1 = DbConnection.getInstance();
     assertEquals(db, db1);
   }
 
@@ -92,6 +92,6 @@ public class DbConnectionTest {
   @Test
   void testsetConn() throws Exception {
     new DbConnection();
-    DbConnection.getIstance();
+    DbConnection.getInstance();
   }
 }

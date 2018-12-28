@@ -8,7 +8,7 @@ public class DbConnection {
   /**
    * Variables.
    */
-  private static DbConnection istance = null;
+  private static DbConnection instance = null;
   private Connection conn;
   private String databaseName;
   private String userName;
@@ -41,11 +41,11 @@ public class DbConnection {
   /**
   * Get the instance of the database.
   */
-  public static DbConnection getIstance() {
-    if (istance == null) {
-      istance = new DbConnection();
+  public static DbConnection getInstance() {
+    if (instance == null) {
+    	instance = new DbConnection();
     }
-    return istance;
+    return instance;
   }
 
   /**
