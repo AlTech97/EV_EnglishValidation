@@ -39,7 +39,7 @@
 									   	</div>
 										<form id="firstForm">	
 									
-										     <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+										     <div class="form-group">
 											  <label for="immatricolazione">Anno di immatricolazione:</label>
 											  <select class="form-control" id="immatricolazione" required>
 											    <option>2015/2016</option>
@@ -48,17 +48,19 @@
 											    <option>2018/2019</option>
 											  </select>
 											</div>
-											 
+											
+											<div class="form-group">
 									     	<label class="radio-inline"><input type="radio" name="optradio" class="optradio" value="T"checked>Laurea Triennale</label>
 											<label class="radio-inline"><input type="radio" name="optradio" class="optradio" value="M">Laurea Magistrale</label>
+										  	</div>
 										  	
-										  	<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">	<!-- NUMERO DI MATRICOLA -->
+										  	<div class="form-group">	<!-- NUMERO DI MATRICOLA -->
 											  	<label for="matricola">Matricola</label>
 											    <input class="form-control" type="number" value="512104999" id="matricola" required>
-											  </div>
 											</div>
 											
-											<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											
+											<div class="form-group">
 											  <label for="ente">Ente di rilascio:</label>
 											  <select class="form-control" id="ente" required>
 											    <option>Cambridge Assessment English</option>
@@ -81,18 +83,18 @@
 											  </select>
 											</div>
 											
-											<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<div class="form-group">
 												 <label for="datarilascio" class="col-2 col-form-label">Data di rilascio dell'attestato</label>
 												<input class="form-control" type="date" value="2011-08-19" id="datarilascio">
 											</div>
 											
-											<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">	<!-- SERIALE CERTIFICATO  -->
+											<div class="form-group">	<!-- SERIALE CERTIFICATO  -->
 											  	<label for="seriale">Seriale del certificato</label>
 											    <input class="form-control" type="text" id="seriale" required>
-											  </div>
 											</div>
 											
-											<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											
+											<div class="form-group ">
 											  <label for="lvlcefr">livello CEFR:</label>
 											  <select class="form-control" id="lvlcefr" required>
 											    <option>A1</option>
@@ -104,7 +106,7 @@
 											  </select>
 											</div>
 											
-										   <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+										   <div class="form-group">
 											  <label for="cfu">CFU conseguiti:</label>
 											  <select class="form-control" id="cfu" required>
 											    <option>0</option>
@@ -123,7 +125,7 @@
 											  </select>
 											</div>
 											  
-										    <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">	
+										    <div class="form-group">	
 										    	<button type="submit" class="btn btn-primary btn-submit">Invia</button>
 										    </div>
 										    
