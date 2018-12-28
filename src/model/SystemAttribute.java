@@ -1,5 +1,9 @@
 package model;
 
+import controller.DbConnection;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.HashMap;
 
 public class SystemAttribute {
@@ -11,9 +15,20 @@ public class SystemAttribute {
    * Constructor.
    */
   public SystemAttribute() {
-    hashMap.put("http://localhost/Admin.jsp", "1");
-    hashMap.put("http://localhost/Segretary.jsp", "2");
-    hashMap.put("http://localhost/Student.jsp", "3");
+    Connection conn = new DbConnection().getInstance().getConn();
+    if (conn != null) {
+
+      try {
+        Statement stmt = conn.createStatement();
+        ResultSet r = stmt.executeQuery("SELECT slug, value FROM system_attribute");
+        while (r.next()) {
+          hashMap.put(r.getString("slug"), r.getString("value"));
+        }
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }      
+      
+    }    
   }
 
   public HashMap<String, String> getHashMap() {
