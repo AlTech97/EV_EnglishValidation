@@ -77,7 +77,5 @@ public class ServletSecretary extends HttpServlet {
         result = 0;
       }
     } 
-
   }
-
 }
