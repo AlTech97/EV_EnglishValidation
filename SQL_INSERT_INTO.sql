@@ -49,13 +49,15 @@ VALUES('request-refused', '6','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
 VALUES('request-number-max-upload', '2','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
-VALUES('request-extension-upload', '.pdf','fferrucci@unisa.it');
+VALUES('request-allowed-extension-upload', '.pdf','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
 VALUES('request-matriculation-year-range', '5','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
 VALUES('request-min-cfu', '1','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
 VALUES('request-max-cfu', '12','fferrucci@unisa.it');
+INSERT INTO SYSTEM_ATTRIBUTE
+VALUES('request-upload-path', 'E:\\Progetto-IS\\uploads\\','fferrucci@unisa.it');
 
 INSERT INTO ENTE
 VALUES ('1', '','Cambridge Assessment English','', 1);

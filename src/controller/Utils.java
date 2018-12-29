@@ -3,6 +3,10 @@ package controller;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Utils {
   public Utils() {
@@ -30,4 +34,24 @@ public class Utils {
     }
     return generatedPassword;
   } 
+  
+  public Integer getRequestState(Integer idRequest) {
+    Integer idState = 0;
+    Connection conn = new DbConnection().getInstance().getConn();
+    if (conn != null) {
+      try {
+        PreparedStatement stmt = conn.prepareStatement("SELECT fk_state FROM request WHERE id_request = ?");
+        stmt.setInt(1, idRequest);        
+        ResultSet r = stmt.executeQuery();
+          r.next();
+          idState = r.getInt("fk_state");
+      } catch (Exception e) {
+        idState = 0;
+        System.out.println(e.getMessage());
+      }             
+    }
+    
+    return idState;    
+  }
+   
 }
