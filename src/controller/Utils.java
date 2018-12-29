@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.servlet.http.HttpSession;
+import interfacce.UserInterface;
+import model.SystemAttribute;
 
 public class Utils {
   public Utils() {
@@ -43,8 +46,10 @@ public class Utils {
         PreparedStatement stmt = conn.prepareStatement("SELECT fk_state FROM request WHERE id_request = ?");
         stmt.setInt(1, idRequest);        
         ResultSet r = stmt.executeQuery();
+        if(!r.wasNull()) {  
           r.next();
           idState = r.getInt("fk_state");
+        }
       } catch (Exception e) {
         idState = 0;
         System.out.println(e.getMessage());
@@ -54,4 +59,27 @@ public class Utils {
     return idState;    
   }
    
+  public Integer getLastUserRequestPartiallyCompleted(HttpSession s) {
+    Integer idRequest = 0;
+    Connection conn = new DbConnection().getInstance().getConn();
+    if (conn != null) {
+      try {
+        UserInterface user =  (UserInterface) s.getAttribute("user");
+        
+        PreparedStatement stmt = conn.prepareStatement("SELECT id_request FROM request WHERE fk_user = ? AND fk_state = ?");
+        stmt.setString(1, user.getEmail());        
+        stmt.setInt(2, Integer.parseInt(new SystemAttribute().getValueByKey("request-partially-completed")));        
+        ResultSet r = stmt.executeQuery();
+        if(!r.wasNull()) {
+          r.next();
+          idRequest = r.getInt("id_request");          
+        }
+      } catch (Exception e) {
+        idRequest = 0;        
+      }             
+    }
+    
+    return idRequest;    
+  }
+
 }

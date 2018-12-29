@@ -24,28 +24,24 @@ VALUES('fferrucci@unisa.it','Filomena','Ferrucci','M','4bb47fd2a6c598d2a52ef7de3
 INSERT INTO STATE 
 VALUES (1,'Parzialmente Completata');
 INSERT INTO STATE 
-VALUES (2,'Ricevuta');
+VALUES (2,'In elaborazione dalla Segreteria');
 INSERT INTO STATE 
-VALUES (3,'In elaborazione dalla Segreteria');
+VALUES (3,'In elaborazione dal Consiglio Didattico');
 INSERT INTO STATE 
-VALUES (4,'In elaborazione dal Consiglio Didattico');
+VALUES (4,'Conclusa e Accettata');
 INSERT INTO STATE 
-VALUES (5,'Conclusa e Accettata');
-INSERT INTO STATE 
-VALUES (6,'Conclusa e Rifiutata');
+VALUES (5,'Conclusa e Rifiutata');
 
 INSERT INTO SYSTEM_ATTRIBUTE
 VALUES('request-partially-completed', '1','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
-VALUES('request-received', '2','fferrucci@unisa.it');
+VALUES('request-working-secretary', '2','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
-VALUES('request-working-secretary', '3','fferrucci@unisa.it');
+VALUES('request-working-admin', '3','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
-VALUES('request-working-admin', '4','fferrucci@unisa.it');
+VALUES('request-accepted', '4','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
-VALUES('request-accepted', '5','fferrucci@unisa.it');
-INSERT INTO SYSTEM_ATTRIBUTE
-VALUES('request-refused', '6','fferrucci@unisa.it');
+VALUES('request-refused', '5','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
 VALUES('request-number-max-upload', '2','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
