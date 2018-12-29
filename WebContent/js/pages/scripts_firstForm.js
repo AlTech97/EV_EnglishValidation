@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
 	
-	$(document).on('submit', '#signUp', function(e){
+	$(document).on('submit', '#firstForm', function(e){
 		var year = $("#immatricolazione").val();
 		var graduation = $(".optradio:checked").val();
 		var serial = $("#matricola").val();
