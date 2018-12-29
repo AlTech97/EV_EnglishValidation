@@ -13,7 +13,7 @@ primary key (EMAIL)
 );
 
 CREATE TABLE SYSTEM_ATTRIBUTE (
-SLUG varchar(20) not null, 
+SLUG varchar(50) not null, 
 VALUE varchar(50) not null, 
 FK_USER varchar(50) not null,
 primary key (SLUG),
@@ -49,8 +49,9 @@ primary key(ID_ATTACHED)
 CREATE TABLE ENTE (
 ID_ENTE int(20) not null AUTO_INCREMENT,
 EMAIL varchar(50) not null,
-NAME varchar(50) not null,
+NAME varchar(100) not null,
 SITE varchar(50) not null,
+STATO TINYINT not null DEFAULT 0,
 primary key (ID_ENTE)
 );
 

@@ -35,24 +35,63 @@ INSERT INTO STATE
 VALUES (6,'Conclusa e Rifiutata');
 
 INSERT INTO SYSTEM_ATTRIBUTE
-VALUES('partially-completed', '1','fferrucci@unisa.it');
+VALUES('request-partially-completed', '1','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
-VALUES('received', '2','fferrucci@unisa.it');
+VALUES('request-received', '2','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
-VALUES('working-secretary', '3','fferrucci@unisa.it');
+VALUES('request-working-secretary', '3','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
-VALUES('working-admin', '4','fferrucci@unisa.it');
+VALUES('request-working-admin', '4','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
-VALUES('accepted', '5','fferrucci@unisa.it');
+VALUES('request-accepted', '5','fferrucci@unisa.it');
 INSERT INTO SYSTEM_ATTRIBUTE
-VALUES('refused', '6','fferrucci@unisa.it');
-
+VALUES('request-refused', '6','fferrucci@unisa.it');
+INSERT INTO SYSTEM_ATTRIBUTE
+VALUES('request-number-max-upload', '2','fferrucci@unisa.it');
+INSERT INTO SYSTEM_ATTRIBUTE
+VALUES('request-extension-upload', '.pdf','fferrucci@unisa.it');
+INSERT INTO SYSTEM_ATTRIBUTE
+VALUES('request-matriculation-year-range', '5','fferrucci@unisa.it');
+INSERT INTO SYSTEM_ATTRIBUTE
+VALUES('request-min-cfu', '1','fferrucci@unisa.it');
+INSERT INTO SYSTEM_ATTRIBUTE
+VALUES('request-max-cfu', '12','fferrucci@unisa.it');
 
 INSERT INTO ENTE
-VALUES ('1', 'cambridge@gmail.com','Cambridge','https://www.cambridgeenglish.org/it/');
-
+VALUES ('1', '','Cambridge Assessment English','', 1);
 INSERT INTO ENTE
-VALUES ('2', 'trinity@gmail.com','Trinity','https://www.trinitycollege.it/');
+VALUES ('2', '','City and Guilds (Pitman)','', 1);
+INSERT INTO ENTE
+VALUES ('3', '','Edexcel /Pearson Ltd','', 1);
+INSERT INTO ENTE
+VALUES ('4', '','Educational Testing Service (ETS)','', 1);
+INSERT INTO ENTE
+VALUES ('5', '','English Speaking Board (ESB)','', 1);
+INSERT INTO ENTE
+VALUES ('6', '','International English Language Testing System (IELTS)','', 1);
+INSERT INTO ENTE
+VALUES ('7', '','Pearson - LCCI','', 1);
+INSERT INTO ENTE
+VALUES ('8', '','Pearson - EDI','', 1);
+INSERT INTO ENTE
+VALUES ('9', '','Trinity College London (TCL)','', 1);
+INSERT INTO ENTE
+VALUES ('10', '','Department of English, Faculty of Arts - University of Malta','', 1);
+INSERT INTO ENTE
+VALUES ('11', '','NQAI - ACELS','', 1);
+INSERT INTO ENTE
+VALUES ('12', '','Ascentis','', 1);
+INSERT INTO ENTE
+VALUES ('13', '','AIM Awards','', 1);
+INSERT INTO ENTE
+VALUES ('14', '','Learning Resource Network (LRN)','', 1);
+INSERT INTO ENTE
+VALUES ('15', '','British Institutes','', 1);
+INSERT INTO ENTE
+VALUES ('16', '','Gatehouse Awards Ltd','', 1);
+INSERT INTO ENTE
+VALUES ('17', '','LanguageCert','', 1);
+
 
 INSERT INTO REQUEST
 VALUES ('1','B.6.56546', 'A1','2017/05/25','2018/05/25','2018','3','0512103579','9','prova@unisa.it','1','2');

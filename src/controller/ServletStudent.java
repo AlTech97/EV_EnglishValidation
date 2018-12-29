@@ -142,13 +142,13 @@ public class ServletStudent extends HttpServlet {
         int validatedCfu = Integer.parseInt(request.getParameter("validatedCfu"));
         String idUser = user.getEmail();
         int idEnte = Integer.parseInt(request.getParameter("idEnte"));                
-        int idState = Integer.parseInt(new SystemAttribute().getValueByKey("partially-completed"));
+        int idState = Integer.parseInt(new SystemAttribute().getValueByKey("request-partially-completed"));
         try {
           sql = " SELECT id_request FROM request WHERE fk_user = ? AND (fk_state = ? OR fk_state = ?) ";
           stmt = conn.prepareStatement(sql);
           stmt.setString(1, idUser);
-          stmt.setString(2, new SystemAttribute().getValueByKey("accepted"));
-          stmt.setString(3, new SystemAttribute().getValueByKey("refused"));
+          stmt.setString(2, new SystemAttribute().getValueByKey("request-accepted"));
+          stmt.setString(3, new SystemAttribute().getValueByKey("request-refused"));
           ResultSet r = stmt.executeQuery();
           if (r.wasNull()) {
             error = "Errore nell'esecuzione della Query";
