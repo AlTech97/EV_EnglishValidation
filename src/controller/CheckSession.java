@@ -99,7 +99,7 @@ public class CheckSession implements Serializable {
     UserInterface u = (UserInterface) this.session.getAttribute("user");
     if (u != null) {
       int userType = u.getUserType();
-      if (userType == 0 && this.pageFolder.equals("_areaStudent")) { // Profilo Student
+      if (userType == 0 && this.pageFolder.equals("_areaStudent")) { // Profilo Student               
         this.setAllowed(true);
       }
       else if (userType == 1 && this.pageFolder.equals("_areaSecretary")) { // Profilo Secretary

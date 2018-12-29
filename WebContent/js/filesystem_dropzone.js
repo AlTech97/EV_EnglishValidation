@@ -138,7 +138,7 @@
       previewsContainer: null,
       hiddenInputContainer: "body",
       capture: null,
-      dictDefaultMessage: "Allega File",
+      dictDefaultMessage: "Trascina o premi qui per caricare un file",
       dictFallbackMessage: "Il suo browser non supporta il funzionamento drag & drop.",
       dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
       dictFileTooBig: "Il file &egrave; troppo grande ({{filesize}}MiB). Grandezza Massima: {{maxFilesize}}MiB.",

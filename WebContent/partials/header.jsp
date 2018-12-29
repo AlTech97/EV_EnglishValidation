@@ -30,6 +30,18 @@
 		else{
 		  menu += "<li><a href=\""+request.getContextPath()+"/"+pageFolder+"/viewRequest.jsp\">Richieste</a></li>";
 		}
+		if(pageName.equals("firstForm.jsp")){
+		  menu += "<li class=\"current\"><a href=\""+request.getContextPath()+"/"+pageFolder+"/firstForm.jsp\">First Form</a></li>";
+		}
+		else{
+		  menu += "<li><a href=\""+request.getContextPath()+"/"+pageFolder+"/firstForm.jsp\">First Form</a></li>";
+		}
+		if(pageName.equals("uploadAttached.jsp")){
+		  menu += "<li class=\"current\"><a href=\""+request.getContextPath()+"/"+pageFolder+"/uploadAttached.jsp\">Upload Attached</a></li>";
+		}
+		else{
+		  menu += "<li><a href=\""+request.getContextPath()+"/"+pageFolder+"/uploadAttached.jsp\">Upload Attached</a></li>";
+		}
 	}
 	else if(pageFolder.equals("")){
 		if(pageName.equals("blank.jsp")){

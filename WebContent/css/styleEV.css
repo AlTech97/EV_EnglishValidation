@@ -81,6 +81,38 @@
           font-size: 12px;
           margin-top: 0; } }
 
+.viewRequestAdmin .text-center {
+  border: 1px solid black;
+  width: 12%;
+  background-color: #FF9900; }
+
+.viewRequestAdmin .text-center2 {
+  width: 12%;
+  background-color: white;
+  border: 1px solid black; }
+
+.viewRequestAdmin .btn-primary {
+  width: 80%;
+  height: 30%;
+  font-size: 12px;
+  text-align: center;
+  margin-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 10px; }
+
+.viewRequestAdmin .inputCFU {
+  width: 80%;
+  height: 30%;
+  margin-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  border: 1px solid black; }
+
+.viewRequestAdmin .radio {
+  margin-left: 60px; }
+
 .loginPage .login-container {
   border: 1px solid #FF9900;
   padding: 10px;
@@ -117,6 +149,43 @@
   margin-top: 70px; }
   .firstFormPage .firstForm-container .panel h2, .firstFormPage .firstForm-container .panel p {
     color: #666; }
+
+.uploadAttachedPage h1, .uploadAttachedPage h2 {
+  text-align: center;
+  margin-bottom: 20px; }
+
+.uploadAttachedPage .dropzoneUploader {
+  cursor: pointer;
+  min-height: 200px;
+  background: #FF9900;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+  line-height: 100px;
+  padding: 15px; }
+  .uploadAttachedPage .dropzoneUploader span {
+    color: #FFF; }
+  .uploadAttachedPage .dropzoneUploader .dz-preview {
+    max-width: 120px;
+    display: inline-block;
+    margin-left: 20px;
+    position: relative;
+    overflow: hidden; }
+    .uploadAttachedPage .dropzoneUploader .dz-preview .dz-image, .uploadAttachedPage .dropzoneUploader .dz-preview .dz-error-message, .uploadAttachedPage .dropzoneUploader .dz-preview .dz-error-mark {
+      display: none; }
+    .uploadAttachedPage .dropzoneUploader .dz-preview .dz-remove {
+      color: #FFF;
+      position: absolute;
+      top: 80px;
+      left: 0;
+      text-align: center;
+      width: 100%; }
+    .uploadAttachedPage .dropzoneUploader .dz-preview .dz-details .dz-size {
+      line-height: 20px; }
+    .uploadAttachedPage .dropzoneUploader .dz-preview .dz-details .dz-filename {
+      line-height: 20px; }
+    .uploadAttachedPage .dropzoneUploader .dz-preview .dz-success-mark {
+      line-height: 60px; }
 
 body .scroll-to-top {
   bottom: 50px;

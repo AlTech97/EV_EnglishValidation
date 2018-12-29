@@ -166,7 +166,7 @@ public class ServletStudent extends HttpServlet {
               stmt.setInt(10, idState);
               stmt.setString(11, certificateSerial);
               if (stmt.executeUpdate() > 0) {            
-                content = "Richiesta presentata con successo.";
+                content = "Richiesta parziale presentata con successo.";
                 redirect = request.getContextPath() + "/_areaStudent/uploadAttached.jsp";
                 
                 Integer idRequest = 0;
@@ -199,11 +199,62 @@ public class ServletStudent extends HttpServlet {
           error += e.getMessage();
         }
       }
+      else if (flag == 3) { // inserimento allegati in DB
+        String filenames[] = request.getParameterValues("filenames[]");
+        Integer idRequest = (Integer) request.getSession().getAttribute("idRequest");
+        UserInterface user =  (UserInterface) request.getSession().getAttribute("user");
+        
+        result = 1;        
+        try {
+          for (int i = 0; i < filenames.length; i++) {
+            sql =
+                " INSERT INTO attached "
+              + " (filename, fk_request, fk_user) "
+              + " VALUES "
+              + " (?, ?, ?) ";
+            stmt = conn.prepareStatement(sql);              
+            stmt.setString(1, filenames[i]);
+            stmt.setInt(2, idRequest);
+            stmt.setString(3, user.getEmail());
+            if (stmt.executeUpdate() > 0) {            
+              result *= 1;                        
+            } else {
+              error += " Impossibile inserire l'allegato ."+filenames[i];
+              result *= 0;
+            }
+          }          
+                    
+          if (result == 1) {                      
+            Integer newState = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-secretary"));
+            sql = " UPDATE request SET fk_state = ? WHERE id_request = ?; ";
+            stmt = conn.prepareStatement(sql);              
+            stmt.setInt(1, newState);
+            stmt.setInt(2, idRequest);
+            if (stmt.executeUpdate() > 0) {            
+              result = 1;                        
+              redirect = request.getContextPath() + "/_areaStudent/viewRequest.jsp";
+              content = "Allegati inseriti con successo.";
+            } else {
+              error += " Impossibile cambiare stato alla richiesta.";
+              result = 0;
+            }            
+          }
+          
+          if (result == 0) {
+            conn.rollback();
+            result *= 0;
+          } else {            
+            conn.commit();            
+          }
+        } catch (Exception e) {
+          error += e.getMessage();
+          result *= 0;
+        }
       
-      
+      }
       
     } else {
-      error = "Nessuna connessione al database.";
+      error += "Nessuna connessione al database.";      
     }
 
 
