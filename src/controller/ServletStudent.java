@@ -125,23 +125,16 @@ public class ServletStudent extends HttpServlet {
       else if (flag == 2) { // registrazione primo form in DB
         UserInterface user =  (UserInterface) request.getSession().getAttribute("user");
         
-        Date releaseDate = null;
-        Date expiryDate = null;
-        Date year = null;
-        try {
-          releaseDate = (Date) new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("releaseDate"));
-          expiryDate = (Date) new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("expiryDate"));
-          year = (Date) new SimpleDateFormat("yyyy").parse(request.getParameter("year"));  
-        } catch (ParseException e) {
-          error += e.getMessage();
-        }           
+        String releaseDate = request.getParameter("releaseDate");
+        String expiryDate = request.getParameter("expiryDate");        
+        String year = request.getParameter("year");
         String certificateSerial = request.getParameter("certificateSerial");
         String level = request.getParameter("level");                
         int requestedCfu = Integer.parseInt(request.getParameter("requestedCfu"));
         int serial = Integer.parseInt(request.getParameter("serial"));
-        int validatedCfu = Integer.parseInt(request.getParameter("validatedCfu"));
+        int validatedCfu = 0;
         String idUser = user.getEmail();
-        int idEnte = Integer.parseInt(request.getParameter("idEnte"));                
+        int idEnte = Integer.parseInt(request.getParameter("idEnte"));
         int idState = Integer.parseInt(new SystemAttribute().getValueByKey("request-partially-completed"));
         try {
           sql = " SELECT id_request FROM request WHERE fk_user = ? AND (fk_state = ? OR fk_state = ?) ";
@@ -157,14 +150,14 @@ public class ServletStudent extends HttpServlet {
             if (count == 0) {
               sql =
                   " INSERT INTO request "
-                + " (level, realase_date, expiry_date, year, requested_cfu, serial, validated_cfu, fk_user, fk_certifier, fk_state, certificate_serial) "
+                + " (level, release_date, expiry_date, year, requested_cfu, serial, validated_cfu, fk_user, fk_certifier, fk_state, certificate_serial) "
                 + " VALUES "
-                + " (?, ?, ?, ?, ?, ?, ?) ";
-              stmt = conn.prepareStatement(sql);              
+                + " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+              stmt = conn.prepareStatement(sql, stmt.RETURN_GENERATED_KEYS);              
               stmt.setString(1, level);
-              stmt.setDate(2, releaseDate);
-              stmt.setDate(3, expiryDate);
-              stmt.setDate(4, year);
+              stmt.setString(2, releaseDate);
+              stmt.setString(3, expiryDate);
+              stmt.setString(4, year);
               stmt.setInt(5, requestedCfu);
               stmt.setInt(6, serial);
               stmt.setInt(7, validatedCfu);
@@ -175,7 +168,18 @@ public class ServletStudent extends HttpServlet {
               if (stmt.executeUpdate() > 0) {            
                 content = "Richiesta presentata con successo.";
                 redirect = request.getContextPath() + "/_areaStudent/uploadAttached.jsp";
+                
+                Integer idRequest = 0;
+                
+                ResultSet rs = stmt.getGeneratedKeys();
+                if (rs.next()) {
+                  idRequest = rs.getInt(1);
+                }
+                
+                request.getSession().setAttribute("idRequest", idRequest);
+                
                 result = 1;
+                rs.close();                
               } else {
                 error = "Impossibile presentare la richiesta.";
               }            
@@ -204,9 +208,9 @@ public class ServletStudent extends HttpServlet {
 
 
     JSONObject res = new JSONObject();
-    res.put("risultato", result);
-    res.put("errore", error);
-    res.put("contenuto", content);
+    res.put("result", result);
+    res.put("error", error);
+    res.put("content", content);
     res.put("redirect", redirect);
     PrintWriter out = response.getWriter();
     out.println(res);

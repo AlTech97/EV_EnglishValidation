@@ -199,9 +199,9 @@ public class ServletCommon extends HttpServlet {
 
 
     JSONObject res = new JSONObject();
-    res.put("risultato", result);
-    res.put("errore", error);
-    res.put("contenuto", content);
+    res.put("result", result);
+    res.put("error", error);
+    res.put("content", content);
     res.put("redirect", redirect);
     PrintWriter out = response.getWriter();
     out.println(res);

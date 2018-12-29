@@ -31,11 +31,11 @@ $(document).ready(function(){
 						"flag": 1
 					},
 					success:function(msg){
-						if(!msg.risultato){
-							showAlert(1, msg.errore);
+						if(!msg.result){
+							showAlert(1, msg.error);
 						}
 						else{
-							showAlert(0, msg.contenuto);
+							showAlert(0, msg.content);
 							
 							setTimeout(function (){
 								window.location.href = msg.redirect;

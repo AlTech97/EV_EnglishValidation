@@ -18,8 +18,8 @@ $( document ).ready(function() {
 					"flag" : 1
 				},
 				success:function(msg){
-					if(!msg.risultato){
-						showAlert(1, msg.errore);
+					if(!msg.result){
+						showAlert(1, msg.error);
 					}
 					else{
 						window.location.href = msg.redirect;

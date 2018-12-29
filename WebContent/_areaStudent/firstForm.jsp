@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1" import="controller.CheckSession" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1" import="controller.CheckSession, model.SystemAttribute, java.text.SimpleDateFormat, java.time.*, controller.DbConnection, java.sql.Connection, java.sql.ResultSet, java.sql.Statement" %>
 
 <%
 	String pageName = "firstForm.jsp";
@@ -42,16 +42,22 @@
 										     <div class="form-group">
 											  <label for="immatricolazione">Anno di immatricolazione:</label>
 											  <select class="form-control" id="immatricolazione" required>
-											    <option>2015/2016</option>
-											    <option>2016/2017</option>
-											    <option>2017/2018</option>
-											    <option>2018/2019</option>
+											    <%
+											    	Integer range = Integer.parseInt(new SystemAttribute().getValueByKey("request-matriculation-year-range"));
+											    	for(int i = (range*-1); i <= 0; i++){
+											    	  LocalDate year = LocalDate.now().plusYears(i);
+											    	  LocalDate nextYear = LocalDate.now().plusYears(i+1);
+											    	  %>
+											    	  	<option value="<%= year.getYear() %>"><%= year.getYear() %>/<%= nextYear.getYear() %></option>	  
+											    	  <%
+											    	}
+											    %>
 											  </select>
 											</div>
 											
 											<div class="form-group">
-									     	<label class="radio-inline"><input type="radio" name="optradio" class="optradio" value="T"checked>Laurea Triennale</label>
-											<label class="radio-inline"><input type="radio" name="optradio" class="optradio" value="M">Laurea Magistrale</label>
+									     	<label class="radio-inline"><input type="radio" name="tipoLaurea" class="tipoLaurea" value="T"checked>Laurea Triennale</label>
+											<label class="radio-inline"><input type="radio" name="tipoLaurea" class="tipoLaurea" value="M">Laurea Magistrale</label>
 										  	</div>
 										  	
 										  	<div class="form-group">	<!-- NUMERO DI MATRICOLA -->
@@ -63,29 +69,35 @@
 											<div class="form-group">
 											  <label for="ente">Ente di rilascio:</label>
 											  <select class="form-control" id="ente" required>
-											    <option>Cambridge Assessment English</option>
-											    <option>City and Guilds (Pitman)</option>
-											    <option>Edexcel /Pearson Ltd </option>
-											    <option>Educational Testing Service (ETS)</option>
-											    <option>English Speaking Board (ESB)</option>
-											    <option>International English Language Testing System (IELTS)</option>
-											    <option>Pearson - LCCI</option>
-											    <option>Pearson - EDI</option>
-											    <option>Trinity College London (TCL)</option>
-											    <option>Department of English, Faculty of Arts - University of Malta</option>
-											  	<option>NQAI - ACELS</option>
-											  	<option>Ascentis</option>
-											  	<option>AIM Awards</option>
-											  	<option>Learning Resource Network (LRN) </option>
-											  	<option>British Institutes</option>
-											  	<option>Gatehouse Awards Ltd </option>
-											  	<option>LanguageCert </option>
+											    <%
+												    Connection conn = new DbConnection().getInstance().getConn();
+												    if (conn != null) {
+	
+												      try {
+												        Statement stmt = conn.createStatement();
+												        ResultSet r = stmt.executeQuery("SELECT id_ente, name FROM ente WHERE stato = 1");
+												        while (r.next()) {
+												    	  %>
+												    	  	<option value="<%= r.getInt("id_ente") %>"><%= r.getString("name") %></option>	  
+												    	  <%												          
+												        }
+												      } catch (Exception e) {
+												        System.out.println(e.getMessage());
+												      }      
+												      
+												    } 											    													    
+											    %>
 											  </select>
 											</div>
 											
 											<div class="form-group">
 												 <label for="datarilascio" class="col-2 col-form-label">Data di rilascio dell'attestato</label>
 												<input class="form-control" type="date" value="2011-08-19" id="datarilascio">
+											</div>
+
+											<div class="form-group">
+												 <label for="datascadenza" class="col-2 col-form-label">Data di scadenza dell'attestato</label>
+												<input class="form-control" type="date" value="2011-08-19" id="datascadenza">
 											</div>
 											
 											<div class="form-group">	<!-- SERIALE CERTIFICATO  -->
@@ -94,7 +106,7 @@
 											</div>
 											
 											
-											<div class="form-group ">
+											<div class="form-group">
 											  <label for="lvlcefr">livello CEFR:</label>
 											  <select class="form-control" id="lvlcefr" required>
 											    <option>A1</option>
