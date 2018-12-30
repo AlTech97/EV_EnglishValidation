@@ -35,6 +35,7 @@
                             <div class="content ">
                                     <div class="news-block-seven">
                      <%
+                     /*
 						String outputIdRequest = ""; // output 
 						String outputUser = "";
 						
@@ -45,8 +46,7 @@
 									String sql = ""; // nome e cognome, idRequest , matricola, codiceCertificato
 									sql = ""
 										+ "SELECT * " // ID_REQUEST, CERTFICATE_SERIAL, FK_USER, SERIAL
-										+ "FROM REQUEST "
-									//	+ "WHERE attivo = 1 AND id_utente = "+ /*idCliente + */ " "
+										+ "FROM REQUEST "									
 										+ "ORDER BY ID_REQUEST DESC;";										
 									ResultSet result = stmt.executeQuery(sql);
 									
@@ -112,37 +112,32 @@
 					//	else{
 					//		output += "<input type='hidden' id='idOrdine' name='idOrdine' value='0' />";
 					//	}
+					*/
 					%>
 				 	
-					<table id="blankTable col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <table id="adminTable">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center ">Nome e Cognome</th>
-                                                    <th class="text-center ">ID</th>
-                                                    <th class="text-center ">Matricola</th>
-                                                    <th class="text-center ">Codice Certificato</th>
-                                                    <th class="text-center ">Verifica Certificato</th>
-                                                    <th class="text-center ">CFU Convalidati</th>
-                                                    <th class="text-center ">Accetta</th>
-                                                    <th class="text-center ">Rifiuta</th>
+                                                    <th class="text-center">ID</th>
+                                                    <th class="text-center">Matricola</th>
+                                                    <th class="text-center">Nome</th>                                                    
+                                                    <th class="text-center">Cognome</th>
+                                                    <th class="text-center">A.A.</th>                                                    
+                                                    <th class="text-center">Cod. Cert.</th>
+                                                    <th class="text-center">Liv. Cert.</th>
+                                                    <th class="text-center">Data Ril.</th>
+                                                    <th class="text-center">Data Scad.</th>                                                    
+                                                    <th class="text-center">CFU Ric.</th>
+                                                    <th class="text-center">CFU Conv.</th>
+                                                    <th class="text-center">Stato</th>
+                                                    <th class="text-center">Ente</th>
+                                                    <th class="text-center">Azioni</th>
                                                 </tr>	
                                             </thead>
-                                            <tbody id="bodyBlankTable">
-                                          
-                                            	<tr>
-                                            		<td id="td1NomeCognome" class="text-center2 "><%= outputUser %></td>
-                                            		<td id="td2IdRequest"class="text-center2 "><%= outputIdRequest %></td>
-                                            		<td id="td3Serial" class="text-center2 "></td>
-                                            		<td id="td4CodiceCertificato" class="text-center2 "></td> <!-- mettere il codice dell'attached -->
-                                            		<td class="text-center2 "><button type="button" class="btn-primary">Controlla Certificato</button></td>
-                                            		<td class="text-center2 "><input type="text" class="inputCFU" aria-label="CFU" aria-describedby="inputGroup-sizing-default"></td>
-                                            		<td class="text-center2 "><input class="radio" type="radio" name="radiobutton" value="accept" ></td>
-                                            		<td class="text-center2 "><input class="radio" type="radio" name="radiobutton" value="refuse" checked="checked"></td>
-                                            	</tr>  
+                                            <tbody id="bodyAdminTable">
+
                                             </tbody>
-                                            
-                                        </table>
-					 
+                                        </table>					
                                     </div>
                             </div>
                         </div>
@@ -153,13 +148,14 @@
 		</div>
 		<!--End pagewrapper-->		
 		
-		<jsp:include page="/partials/includes.jsp" />
-		
+		<jsp:include page="/partials/includes.jsp" />		
 		<script>
 			jQuery(document).ready(function($){
-				$('#blankTable').DataTable( {
+				$('#adminTable').DataTable( {
 			        "order": [[ 0, "desc" ]],
 			        "lengthMenu": [[10, -1], [10, "Tutti"]],
+			        "autoWidth": false,
+			        "bAutoWidth": false,
 			        "language": {
 						    "sEmptyTable":     "Nessuna richiesta Presente",
 						    "sInfo":           "Vista da _START_ a _END_ di _TOTAL_ elementi",
@@ -186,13 +182,6 @@
 			    } );
 			});
 		</script>
-		<script>
-			function showData() {
-  					document.getElementById("td1NomeCognome").innerHTML = output;
-  				//	document.getElementById("td2IdRequest").innerHTML = output;
-  				//	document.getElementById("td3Serial").innerHTML = output;
-  				//	document.getElementById("td4CodiceCertificato").innerHTML = output;
-			}
-		</script>		
+		<script src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestAdmin.js"></script>		
 	</body>
 </html>

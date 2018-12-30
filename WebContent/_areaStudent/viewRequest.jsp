@@ -98,6 +98,8 @@
 				$('#blankTable').DataTable( {
 			        "order": [[ 0, "desc" ]],
 			        "lengthMenu": [[10, -1], [10, "Tutti"]],
+			        "autoWidth": false,
+			        "bAutoWidth": false,			        
 			        "language": {
 						    "sEmptyTable":     "Nessun Ordine Presente",
 						    "sInfo":           "Vista da _START_ a _END_ di _TOTAL_ elementi",

@@ -27,6 +27,7 @@ body .scroll-to-top {
             padding: 102px 0px 80px;
         }
         .auto-container{
+        	max-width: 1920px;
             .row {
                 .content-side{
                     .content{
@@ -49,7 +50,6 @@ body .scroll-to-top {
 							}
                         
                             .dataTables_wrapper {
-                                width: 100%;
                                 .dataTables_length{
                                     width: 50%;
                                     float: left;
@@ -77,33 +77,27 @@ body .scroll-to-top {
                                     } 
                                 }
                                 .dataTable{
-                                    width: 100%;
                                     border: 1px solid #FF9900;
                                     color: #fff;
-                                    display: block;
-                                    max-width: 100%;
+                                    width: 100%;
                                     overflow-x: auto;                                    
+                                    @include media("<tablet") {                                    
+                                    	display: block;
+                                    }                                    
                                     thead{
                                         background: #FF9900; 
-                                        display: block;
                                         tr{
-                                            display: block;
                                             th{        
-                                                display: inline-block;
-                                                width: 24% !important;
                                                 padding: 5px 0 5px 0;
                                             }
                                         } 
                                     }
                                     tbody{
-                                        display: block;
                                         tr{
-                                            display: block;
                                             td{
-                                                display: inline-block;
-                                                width: 24% !important;
                                                 color: #666666;
                                                 padding: 5px 0 5px 0;
+                                                border: 1px solid #FF9900;
                                                 &::before, &::after {
                                                     display: none;
                                                 }
