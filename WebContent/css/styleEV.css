@@ -81,25 +81,17 @@
           font-size: 12px;
           margin-top: 0; } }
 
-.viewRequestAdmin .btn-action {
-  padding: 6px;
-  margin: 6px;
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  vertical-align: middle; }
-
 .viewRequestAdmin .btn-action.verifyCertificate {
-  background: #ffd700;
-  border: #ffd700; }
+  background-color: #ffd700 !important;
+  border-color: #ffd700 !important; }
 
 .viewRequestAdmin .btn-action.accept {
-  background: #149414;
-  border: #149414; }
+  background-color: #149414 !important;
+  border-color: #149414 !important; }
 
 .viewRequestAdmin .btn-action.refuse {
-  background: #DC483E;
-  border: #DC483E; }
+  background-color: #DC483E !important;
+  border-color: #DC483E !important; }
 
 .viewRequestAdmin .inputCFU {
   width: 80%;
@@ -248,6 +240,15 @@ body .scroll-to-top {
         border: 1px solid #FF9900; }
         .page-wrapper .sidebar-page-container.basePage .auto-container .row .content-side .content .news-block-seven .dataTables_wrapper .dataTable tbody tr td::before, .page-wrapper .sidebar-page-container.basePage .auto-container .row .content-side .content .news-block-seven .dataTables_wrapper .dataTable tbody tr td::after {
           display: none; }
+        .page-wrapper .sidebar-page-container.basePage .auto-container .row .content-side .content .news-block-seven .dataTables_wrapper .dataTable tbody tr td .btn-action {
+          padding: 6px;
+          margin: 6px;
+          width: 30px;
+          height: 30px;
+          text-align: center;
+          vertical-align: middle;
+          background-color: #FF9900;
+          border-color: #FF9900; }
     .page-wrapper .sidebar-page-container.basePage .auto-container .row .content-side .content .news-block-seven .dataTables_wrapper .dataTables_info {
       margin-top: 5px;
       width: 50%;

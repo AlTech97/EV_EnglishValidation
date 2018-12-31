@@ -2,27 +2,19 @@
 	#adminTable{
 
 	}
-	.btn-action{
-		padding: 6px;
-		margin: 6px;
-		width: 30px;
-		height: 30px;
-		text-align: center;
-		vertical-align: middle;
-	}
 	.btn-action.verifyCertificate{
-		background: #ffd700;
-		border: #ffd700;
+		background-color: #ffd700 !important;
+		border-color: #ffd700 !important;
 	}
 
 	.btn-action.accept{
-		background: #149414;
-		border: #149414;
+		background-color: #149414 !important;
+		border-color: #149414 !important;
 	}
 	
 	.btn-action.refuse{
-		background: #DC483E;
-		border: #DC483E;
+		background-color: #DC483E !important;
+		border-color: #DC483E !important;
 	}
 
 	.inputCFU{
