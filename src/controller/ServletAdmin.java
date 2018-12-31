@@ -127,17 +127,26 @@ public class ServletAdmin extends HttpServlet {
                     content += "<a target=\"_blank\" href=\""+r.getString("ente_site")+"\" class=\"btn btn-primary verifyCertificate\" title=\"Verifica Validit&agrave; Certificato Tramite Sito Web\"><i class=\"fa fa-question\"></i></button>";
                   } 
                   
-                  //Mettere in requestWorkingEducationAdvice1
+                  // Mettere in requestWorkingEducationAdvice1
                   content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice accept\" data-type=\"1\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Accetta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-check\"></i></button>";
                   
-                  //oppure Mettere in requestWorkingEducationAdvice2
+                  // oppure Mettere in requestWorkingEducationAdvice2
                   content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"2\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Rifiuta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
                 }
                 
-                if (r.getInt("id_state") == requestWorkingEducationAdvice1 || r.getInt("id_state") == requestWorkingEducationAdvice2) { //Se è in lavorazione da consiglio didattico
-                  //Mettere in requestAccepted
-                  //oppure Mettere in requestRefused                                
+               if (r.getInt("id_state") == requestWorkingEducationAdvice1 || r.getInt("id_state") == requestWorkingEducationAdvice2) { //Se è in lavorazione da consiglio didattico
+                  // Mettere in requestAccepted
+                  if( r.getInt("id_state") == requestAccepted ) {
+                    content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice accept\" data-type=\"1\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Richiesta accettata dal consiglio didattico\"><i class=\"fa fa-check\"></i></button>";
+                  }
+                  else if (r.getInt("id_state") == requestRefused ) {
+                    // oppure Mettere in requestRefused  
+                    content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"2\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Richiesta rifiutata dal Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
+                  }
+                  content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice accept\" data-type=\"3\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Accetta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-check\"></i></button>";
+                  content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"4\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Richiesta rifiutata dal Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
                 }
+// continuare fino a raggiungere l'ultimo stato delle request, aggiustare gli if e gli else if 
                 
                 content += "</td>";
                 
