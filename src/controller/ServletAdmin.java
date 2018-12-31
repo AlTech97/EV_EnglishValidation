@@ -70,7 +70,7 @@ public class ServletAdmin extends HttpServlet {
           
           
           stmtSelect = conn.createStatement();
-          sql = "SELECT r.id_request, r.certificate_serial, r.level, r.release_date, r.expiry_date, r.year, r.requested_cfu, r.serial, r.validated_cfu, u.name, u.surname, e.name AS state, e.email AS ente_mail, e.site AS ente_site, s.description AS ente, s.id_state "
+          sql = "SELECT r.id_request, r.certificate_serial, r.level, r.release_date, r.expiry_date, r.year, r.requested_cfu, r.serial, r.validated_cfu, u.email AS user_email, u.name, u.surname, e.name AS state, e.email AS ente_mail, e.site AS ente_site, s.description AS ente, s.id_state "
               + "FROM request r"
               + "     INNER JOIN ente e ON r.fk_certifier = e.id_ente "
               + "     INNER JOIN state s ON r.fk_state = s.id_state "
@@ -89,8 +89,17 @@ public class ServletAdmin extends HttpServlet {
                 content += "<tr>";
                 content += "    <td class='text-center'>"+r.getString("id_request")+"</td>";
                 content += "    <td class='text-center'>"+r.getString("serial")+"</td>";
-                content += "    <td class='text-center'>"+r.getString("name")+"</td>";
-                content += "    <td class='text-center'>"+r.getString("surname")+"</td>";
+                if(r.getInt("id_state") == requestWorkingAdmin) { //Se è in lavorazione dall'admin
+                  content += "<td class='text-center'>"+r.getString("name");
+                  content += "  <button class=\"btn btn-primary btn-action changeName\" data-iduser=\""+r.getString("user_email")+"\" data-name=\""+r.getString("name")+"\" title=\"Modifica Nome\"><i class=\"fa fa-edit\"></i></button>";
+                  content += "</td>";
+                  content += "<td class='text-center'>"+r.getString("surname");
+                  content += "  <button class=\"btn btn-primary btn-action changeSurname\" data-iduser=\""+r.getString("user_email")+"\" data-surname=\""+r.getString("surname")+"\" title=\"Modifica Cognome\"><i class=\"fa fa-edit\"></i></button>";
+                  content += "</td>";
+                } else {
+                  content += "    <td class='text-center'>"+r.getString("name")+"</td>";
+                  content += "    <td class='text-center'>"+r.getString("surname")+"</td>";                  
+                }
                 content += "    <td class='text-center'>"+r.getInt("year")+"/"+(r.getInt("year")+1)+"</td>";
                 content += "    <td class='text-center'>"+r.getString("certificate_serial")+"</td>";
                 content += "    <td class='text-center'>"+r.getString("level")+"</td>";
