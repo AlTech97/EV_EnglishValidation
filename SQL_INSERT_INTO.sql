@@ -28,9 +28,9 @@ VALUES (2,'In elaborazione dalla Segreteria');
 INSERT INTO STATE 
 VALUES (3,'In elaborazione dall&quot; Amministratore');
 INSERT INTO STATE 
-VALUES (4,'In elaborazione dal Consiglio Didattico 1');
+VALUES (4,'Accettata e In elaborazione dal Consiglio Didattico');
 INSERT INTO STATE 
-VALUES (5,'In elaborazione dal Consiglio Didattico 2');
+VALUES (5,'Rifiutata e In elaborazione dal Consiglio Didattico');
 INSERT INTO STATE 
 VALUES (6,'Conclusa e Accettata');
 INSERT INTO STATE 

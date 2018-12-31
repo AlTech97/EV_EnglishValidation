@@ -57,6 +57,6 @@ primary key (ID_ENTE)
 
 CREATE TABLE STATE (
 ID_STATE int(20) not null AUTO_INCREMENT, 
-DESCRIPTION varchar(50) not null,
+DESCRIPTION varchar(100) not null,
 primary key (ID_STATE)
 );

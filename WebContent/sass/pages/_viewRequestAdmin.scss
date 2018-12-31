@@ -2,16 +2,29 @@
 	#adminTable{
 
 	}
-	.btn-primary{
-		width: 80%;
-		height: 30%;
-		font-size: 12px;
+	.btn-action{
+		padding: 6px;
+		margin: 6px;
+		width: 30px;
+		height: 30px;
 		text-align: center;
-		margin-left: 10px;
-		margin-top: 5px;
-		margin-bottom: 5px;
-		margin-right: 10px;
+		vertical-align: middle;
 	}
+	.btn-action.verifyCertificate{
+		background: #ffd700;
+		border: #ffd700;
+	}
+
+	.btn-action.accept{
+		background: #149414;
+		border: #149414;
+	}
+	
+	.btn-action.refuse{
+		background: #DC483E;
+		border: #DC483E;
+	}
+
 	.inputCFU{
 		width: 80%;
 		height: 30%;

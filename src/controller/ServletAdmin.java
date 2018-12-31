@@ -59,11 +59,12 @@ public class ServletAdmin extends HttpServlet {
     String sql = "";
 
     if (conn != null) {
+      Integer requestWorkingEducationAdvice1 = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-1"));
+      Integer requestWorkingEducationAdvice2 = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-2"));
+
       if(flag == 1) { //Preleva tutte le richieste
         try {
           Integer requestWorkingAdmin = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-admin"));
-          Integer requestWorkingEducationAdvice1 = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-1"));
-          Integer requestWorkingEducationAdvice2 = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-2"));
           Integer requestAccepted = Integer.parseInt(new SystemAttribute().getValueByKey("request-accepted"));
           Integer requestRefused = Integer.parseInt(new SystemAttribute().getValueByKey("request-refused"));
           
@@ -105,7 +106,32 @@ public class ServletAdmin extends HttpServlet {
                 
                 content += "    <td class='text-center'>"+r.getString("ente")+"</td>";
                 content += "    <td class='text-center'>"+r.getString("state")+"</td>";
-                content += "    <td class='text-center'>Different Buttons (Accept, Refuse, etc.) differentiated by states</td>";
+                content += "    <td class='text-center'>";                
+                
+                
+                
+                if(r.getInt("id_state") == requestWorkingAdmin) { //Se è in lavorazione dall'admin
+                  if (!r.getString("ente_mail").equals("")) { //Se è settata la mail dell'ente                  
+                    content += "<button class=\"btn btn-primary btn-action verifyCertificate\" title=\"Verifica Validit&agrave; Certificato Tramite Mail\" data-mail=\""+r.getString("ente_mail")+"\" data-certserial=\""+r.getString("certificate_serial")+"\"><i class=\"fa fa-question\"></i></button>";
+                  } 
+                  else if (!r.getString("ente_site").equals("")) { //Se è settato il sito dell'ente                  
+                    content += "<a target=\"_blank\" href=\""+r.getString("ente_site")+"\" class=\"btn btn-primary verifyCertificate\" title=\"Verifica Validit&agrave; Certificato Tramite Sito Web\"><i class=\"fa fa-question\"></i></button>";
+                  } 
+                  
+                  //Mettere in requestWorkingEducationAdvice1
+                  content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice accept\" data-type=\"1\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Accetta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-check\"></i></button>";
+                  
+                  //oppure Mettere in requestWorkingEducationAdvice2
+                  content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"2\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Rifiuta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
+                }
+                
+                if (r.getInt("id_state") == requestWorkingEducationAdvice1 || r.getInt("id_state") == requestWorkingEducationAdvice2) { //Se è in lavorazione da consiglio didattico
+                  //Mettere in requestAccepted
+                  //oppure Mettere in requestRefused                                
+                }
+                
+                content += "</td>";
+                
                 content += "</tr>";
               } 
               result = 1;
@@ -117,6 +143,42 @@ public class ServletAdmin extends HttpServlet {
         } catch (Exception e) {
           System.out.println(e.getMessage());
         }           
+      } else if(flag == 2) {
+        Integer type = Integer.parseInt(request.getParameter("type"));
+        Integer idRequest = Integer.parseInt(request.getParameter("idRequest"));
+        if(type == 1) { //requestWorkingEducationAdvice1
+          type = requestWorkingEducationAdvice1;
+        }
+        else if(type == 2) { //requestWorkingEducationAdvice2
+          type = requestWorkingEducationAdvice2;
+        }
+        
+        try {
+          sql = " UPDATE request SET fk_state = ? WHERE id_request = ?; ";
+          stmt = conn.prepareStatement(sql);              
+          stmt.setInt(1, type);
+          stmt.setInt(2, idRequest);
+          if (stmt.executeUpdate() > 0) {            
+            result = 1;            
+            content = "Richiesta aggiornata con successo.";
+          } else {
+            error += " Impossibile cambiare stato alla richiesta.";
+            result = 0;
+          }   
+          
+          if (result == 0) {
+            conn.rollback();
+            result *= 0;
+          } else {            
+            conn.commit();            
+          }
+          
+        } catch (Exception e) {
+          error += e.getMessage();
+          result *= 0;
+        }        
+        
+        
       }
 
     } else {
