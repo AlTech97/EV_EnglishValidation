@@ -37,19 +37,23 @@
                                         <table id="blankTable">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">ID</th>
-                                                    <th class="text-center">Campo</th>
-                                                    <th class="text-center">Campo</th>
-                                                    <th class="text-center">Azioni</th>
+                                                     <th class="text-center">ID</th>
+                                                    <th class="text-center">Matricola</th>
+                                                    <th class="text-center">Nome</th>                                                    
+                                                    <th class="text-center">Cognome</th>                                                
+                                                    <th class="text-center">Cod. Cert.</th>
+                                                    <th class="text-center">CFU Conv.</th>
+                                                    <th class="text-center">Inoltra</th>
                                                 </tr>	
                                             </thead>
-                                            <tbody id="bodyBlankTable">
-                                            	<tr>
+                                 	        <tbody id="bodySegretaryTable">
+                                         <!-- 	<tr>
                                             		<td class="text-center">Ciao</td>
                                             		<td class="text-center">Ciao</td>
                                             		<td class="text-center">Ciao</td>
                                             		<td class="text-center">Ciao</td>
                                             	</tr>  
+                                            	--> 
                                             </tbody>
                                         </table>
 
@@ -57,6 +61,9 @@
                             </div>
                         </div>
                     </div>
+                   <form action = "../ServletSecretary" method = POST">  
+                    	<input id="forwardButton" type = "submit" value = "Inoltra le richieste selezionate" style="margin-left: 550px ; margin-top :-400px"/>
+              	   </form> 
                 </div>
             </div>
             <jsp:include page="/partials/footer.jsp" />
@@ -73,7 +80,7 @@
 			        "autoWidth": false,
 			        "bAutoWidth": false,			        
 			        "language": {
-						    "sEmptyTable":     "Nessun Ordine Presente",
+						    "sEmptyTable":     "Nessuna Richiesta Presente",
 						    "sInfo":           "Vista da _START_ a _END_ di _TOTAL_ elementi",
 						    "sInfoEmpty":      "Vista da 0 a 0 di 0 elementi",
 						    "sInfoFiltered":   "(filtrati da _MAX_ elementi totali)",
@@ -97,6 +104,7 @@
 			        }        
 			    } );
 			});
-		</script>		
+		</script>	
+		<script src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestsSegretary.js"></script>	
 	</body>
 </html>

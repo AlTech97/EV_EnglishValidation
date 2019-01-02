@@ -1,12 +1,16 @@
 package controller;
 
+import java.awt.Label;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,12 +19,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 import model.Request;
 import model.SystemAttribute;
+import sun.util.calendar.LocalGregorianCalendar.Date;
+
 
 /**
  * Servlet implementation class ServletAdmin.
+ * @param <WritableWorkbook>
  */
 @WebServlet("/ServletAdmin")
-public class ServletAdmin extends HttpServlet {
+public class ServletAdmin<WritableWorkbook> extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   /**
@@ -38,7 +45,60 @@ public class ServletAdmin extends HttpServlet {
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response) 
       throws ServletException, IOException {
-  }
+    
+    try{
+
+      Connection conn = new DbConnection().getInstance().getConn();
+   //   ResultSet rs;
+      Statement st = conn.createStatement();
+      Integer requestWorkingEducationAdvice1 = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-1"));
+      Integer requestWorkingEducationAdvice2 = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-2"));
+      Integer requestWorkingAdmin = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-admin"));
+      Integer requestAccepted = Integer.parseInt(new SystemAttribute().getValueByKey("request-accepted"));
+      Integer requestRefused = Integer.parseInt(new SystemAttribute().getValueByKey("request-refused"));
+      String sql = "SELECT r.id_request, r.certificate_serial, r.level, r.release_date, r.expiry_date, r.year, r.requested_cfu, r.serial, r.validated_cfu, u.email AS user_email, u.name, u.surname, e.name AS state, e.email AS ente_mail, e.site AS ente_site, s.description AS ente, s.id_state "
+          + "FROM request r"
+          + "     INNER JOIN ente e ON r.fk_certifier = e.id_ente "
+          + "     INNER JOIN state s ON r.fk_state = s.id_state "
+          + "     INNER JOIN user u ON r.fk_user = u.email "
+          + "WHERE s.id_state IN("+requestWorkingAdmin+", "+requestWorkingEducationAdvice1+", "+requestWorkingEducationAdvice2+", "+requestAccepted+", "+requestRefused+")";
+      ResultSet rs = st.executeQuery(sql);
+   //  rs = ps.executeQuery();
+      ArrayList<Request> requests = new ArrayList<Request>();
+      Request r = new Request();
+      while(rs.next()){
+        
+        int idRequest = rs.getInt("id_request"); // -----------
+        String certificateSerial = rs.getString("certificate_serial");
+        String level = rs.getString("level");
+        String releaseDate = rs.getString("release_date");
+  //      GregorianCalendar expiryDate = rs.getDate("expiry_date",expiryDate); // -----------
+        String year = rs.getString("year");
+        int requestedCfu = rs.getInt("requested_cfu");
+        int serial = rs.getInt("serial"); // -----------
+        int validatedCfu = rs.getInt("validatedCfu");
+        String fkUser = rs.getString("fk_user");
+        int fkCertifier = rs.getInt("fk_certifier");
+        int fkState = rs.getInt("fk_state");
+        
+        // prendo i dati e li piazzo nel file excel
+ //       response.setContentType("application/vmd.ms-excel");
+ //       response.setHeader("Content-Disposition", "richieste.xls");
+      }
+      // prendo i dati e li piazzo nel file excel
+      response.setContentType("application/vmd.ms-excel");
+      response.setHeader("Content-Disposition", "richieste.xls");
+      request.getRequestDispatcher("/viewRequest.jsp").forward(request, response);
+      rs.close();
+      st.close();
+      conn.close();
+    }
+    catch (Exception e2)
+    {
+      e2.printStackTrace();
+    }
+}
+  
 
   /**
    * Method doPost().
@@ -132,21 +192,28 @@ public class ServletAdmin extends HttpServlet {
                   
                   // oppure Mettere in requestWorkingEducationAdvice2
                   content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"2\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Rifiuta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
+                 
                 }
                 
-               if (r.getInt("id_state") == requestWorkingEducationAdvice1 || r.getInt("id_state") == requestWorkingEducationAdvice2) { //Se è in lavorazione da consiglio didattico
+               if (r.getInt("id_state") == requestWorkingEducationAdvice1 ) { //Se è in lavorazione da consiglio didattico
                   // Mettere in requestAccepted
+                 content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice accept\" data-type=\"3\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Accetta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-check\"></i></button>";
                   if( r.getInt("id_state") == requestAccepted ) {
-                    content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice accept\" data-type=\"1\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Richiesta accettata dal consiglio didattico\"><i class=\"fa fa-check\"></i></button>";
+                    content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice accept\" data-type=\"4\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Richiesta accettata dal consiglio didattico\"><i class=\"fa fa-check\"></i></button>";
                   }
-                  else if (r.getInt("id_state") == requestRefused ) {
+               }   
+                  if (r.getInt("id_state") == requestWorkingEducationAdvice2 ) {
+                    content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"5\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Rifiuta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
+                  }
+                    if (r.getInt("id_state") == requestRefused ) {
                     // oppure Mettere in requestRefused  
-                    content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"2\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Richiesta rifiutata dal Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
+                    content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"4\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Richiesta rifiutata dal Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
                   }
-                  content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice accept\" data-type=\"3\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Accetta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-check\"></i></button>";
-                  content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"4\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Richiesta rifiutata dal Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
-                }
-// continuare fino a raggiungere l'ultimo stato delle request, aggiustare gli if e gli else if 
+             //     content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice accept\" data-type=\"5\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Accetta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-check\"></i></button>";
+                  content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"6\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Richiesta rifiutata dal Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
+                
+               
+                // continuare fino a raggiungere l'ultimo stato delle request, aggiustare gli if e gli else if 
                 
                 content += "</td>";
                 
@@ -166,9 +233,11 @@ public class ServletAdmin extends HttpServlet {
         Integer idRequest = Integer.parseInt(request.getParameter("idRequest"));
         if(type == 1) { //requestWorkingEducationAdvice1
           type = requestWorkingEducationAdvice1;
+        //  content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice accept\" data-type=\"3\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Accetta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-check\"></i></button>";
         }
         else if(type == 2) { //requestWorkingEducationAdvice2
           type = requestWorkingEducationAdvice2;
+        //  content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"5\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Rifiuta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
         }
         
         try {

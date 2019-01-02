@@ -1,3 +1,4 @@
+
 $( document ).ready(function() {		
 	$( document ).on( "submit", "#saveSurname", function() {
 		var idUser = $("#saveSurname .confirm").data("iduser");
@@ -151,7 +152,7 @@ $( document ).ready(function() {
 		var type = $(this).data("type");
 		var idRequest = $(this).data("idrequest");
 		
-		if(type != undefined && (type == 1 || type == 2 || type == 3 || type == 4 ) && idRequest != undefined && idRequest > 0){
+		if(type != undefined && (type == 1 || type == 2 || type == 3 || type == 4 || type == 5 || type == 6 ) && idRequest != undefined && idRequest > 0){
 			if(confirm("Conferma il cambio di stato della richiesta?")){
 				$(".preloader").show();
 				
