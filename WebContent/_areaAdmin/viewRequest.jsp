@@ -56,15 +56,12 @@
                                             <tbody id="bodyAdminTable">
 													
                                             </tbody>
-                                        </table>
-                                       				
+                                        </table>                                       	
+                                       	<button class="btn btn-primary btn-action generateExcel" title="Genera File Excel">Genera Excel</button>                                       		
                                     </div>
                             </div>
                         </div>
                     </div>
-                    <form action = "../ServletAdmin" method = GET">
-                    	<input id="excelButton" type = "submit" value = "Genera Excel" style="margin-left: 1250px ; margin-top :-400px"/>
-                    </form>
                 </div>
             </div>
             

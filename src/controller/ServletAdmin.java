@@ -45,59 +45,66 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response) 
       throws ServletException, IOException {
+    int flag = Integer.parseInt(request.getParameter("flag"));
     
-    try{
-
+    if(flag == 5) { //Genera Excel      
+      String content = "";     
       Connection conn = new DbConnection().getInstance().getConn();
-   //   ResultSet rs;
-      Statement st = conn.createStatement();
-      Integer requestWorkingEducationAdvice1 = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-1"));
-      Integer requestWorkingEducationAdvice2 = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-2"));
-      Integer requestWorkingAdmin = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-admin"));
-      Integer requestAccepted = Integer.parseInt(new SystemAttribute().getValueByKey("request-accepted"));
-      Integer requestRefused = Integer.parseInt(new SystemAttribute().getValueByKey("request-refused"));
-      String sql = "SELECT r.id_request, r.certificate_serial, r.level, r.release_date, r.expiry_date, r.year, r.requested_cfu, r.serial, r.validated_cfu, u.email AS user_email, u.name, u.surname, e.name AS state, e.email AS ente_mail, e.site AS ente_site, s.description AS ente, s.id_state "
-          + "FROM request r"
-          + "     INNER JOIN ente e ON r.fk_certifier = e.id_ente "
-          + "     INNER JOIN state s ON r.fk_state = s.id_state "
-          + "     INNER JOIN user u ON r.fk_user = u.email "
-          + "WHERE s.id_state IN("+requestWorkingAdmin+", "+requestWorkingEducationAdvice1+", "+requestWorkingEducationAdvice2+", "+requestAccepted+", "+requestRefused+")";
-      ResultSet rs = st.executeQuery(sql);
-   //  rs = ps.executeQuery();
-      ArrayList<Request> requests = new ArrayList<Request>();
-      Request r = new Request();
-      while(rs.next()){
-        
-        int idRequest = rs.getInt("id_request"); // -----------
-        String certificateSerial = rs.getString("certificate_serial");
-        String level = rs.getString("level");
-        String releaseDate = rs.getString("release_date");
-  //      GregorianCalendar expiryDate = rs.getDate("expiry_date",expiryDate); // -----------
-        String year = rs.getString("year");
-        int requestedCfu = rs.getInt("requested_cfu");
-        int serial = rs.getInt("serial"); // -----------
-        int validatedCfu = rs.getInt("validatedCfu");
-        String fkUser = rs.getString("fk_user");
-        int fkCertifier = rs.getInt("fk_certifier");
-        int fkState = rs.getInt("fk_state");
-        
-        // prendo i dati e li piazzo nel file excel
- //       response.setContentType("application/vmd.ms-excel");
- //       response.setHeader("Content-Disposition", "richieste.xls");
+      Statement stmtSelect = null;
+      String sql = "";
+      PrintWriter out = response.getWriter();
+
+      if (conn != null) {
+        Integer requestWorkingEducationAdvice1 = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-1"));
+        Integer requestWorkingEducationAdvice2 = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-2"));
+
+        try {
+          stmtSelect = conn.createStatement();
+          sql = "SELECT r.id_request, r.serial, u.name, u.surname, r.year, r.certificate_serial, r.level, r.release_date, r.expiry_date, r.requested_cfu, r.validated_cfu, e.name AS ente "
+              + "FROM request r "
+              + "     INNER JOIN ente e ON r.fk_certifier = e.id_ente "
+              + "     INNER JOIN state s ON r.fk_state = s.id_state "
+              + "     INNER JOIN user u ON r.fk_user = u.email "
+              + "WHERE s.id_state IN("+requestWorkingEducationAdvice1+", "+requestWorkingEducationAdvice2+")";
+          ResultSet r = stmtSelect.executeQuery(sql);
+          if (r.wasNull()) {
+            content = "Errore nell'esecuzione della Query";
+          } else {
+            int count = r.last() ? r.getRow() : 0;
+            if (count > 0) {
+              r.beforeFirst();                          
+              content += "ID\tMatricola\tNome\tCognome\tA. A.\tCod. Cert.\tLiv. Cert\tData Ril.\tData Scad.\tCFU Ric.\tCFU Conv.\tEnte\n";
+              while (r.next()) {
+                content += r.getString("id_request")+ "\t";
+                content += r.getString("serial")+ "\t";
+                content += r.getString("name")+ "\t";
+                content += r.getString("surname")+ "\t";
+                content += r.getString("year")+ "\t";
+                content += r.getString("certificate_serial")+ "\t";
+                content += r.getString("level")+ "\t";
+                content += r.getString("release_date")+ "\t";
+                content += r.getString("expiry_date")+ "\t";
+                content += r.getString("requested_cfu")+ "\t";
+                content += r.getString("validated_cfu")+ "\t";
+                content += r.getString("ente")+ "\t";
+                content += "\n";
+              }
+            }
+          }
+          
+        } catch (Exception e) {
+          content = e.getMessage();
+        }        
       }
-      // prendo i dati e li piazzo nel file excel
-      response.setContentType("application/vmd.ms-excel");
-      response.setHeader("Content-Disposition", "richieste.xls");
-      request.getRequestDispatcher("/viewRequest.jsp").forward(request, response);
-      rs.close();
-      st.close();
-      conn.close();
+      
+      response.setContentType("application/vnd.ms-excel");
+      response.setHeader("Content-Disposition", "attachment;filename=Richieste.xls");      
+      out.println(content);
     }
-    catch (Exception e2)
-    {
-      e2.printStackTrace();
-    }
-}
+    else {
+      doPost(request, response);
+    }   
+  }
   
 
   /**
@@ -316,100 +323,7 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
     res.put("content", content);
     res.put("redirect", redirect);
     PrintWriter out = response.getWriter();
-    out.println(res);    
-
-    /*
-    // creiamo la connessione al DB
-    new DbConnection();
-    Connection connDb = DbConnection.getIstance().getConn();
-    // VISUALIZZAZIONE DI TUTTE LE RICHIESTE
-    if (((DbConnection) connDb).getConn() != null) {
-      try {
-        // query per permettere la visualizzazione di una lista con le richieste
-        String sql = "SELECT * FROM REQUEST;";
-        PreparedStatement statement = ((DbConnection) connDb).getConn().prepareStatement(sql);
-        if (statement.executeUpdate() == 1) {
-          content = "Success ";
-          result = 1;
-        } else {
-          error = "Error";
-          result = 0;
-        }
-
-        if (result == 0) {
-          ((DbConnection) connDb).getConn().rollback();
-        } else {
-          ((DbConnection) connDb).getConn().commit();
-        }
-        ((DbConnection) connDb).getConn().close();
-      } catch (Exception e) {
-        error = "Errore nell'esecuzione Query.";
-        result = 0;
-      }
-    }
-    // Permettere la verifica del certificato tramite il suo codice (( INCOMPLETA ))
-    int idAttached = Integer.parseInt(request.getParameter("idAttached"));
-    new DbConnection();
-    Connection connDb2 = DbConnection.getIstance().getConn();
-    if (((DbConnection) connDb2).getConn() != null) {
-      try {
-        String sql = "SELECT * FROM ATTACHED WHERE ID_ATTACHED = " + idAttached + ";";
-        PreparedStatement statement = ((DbConnection) connDb).getConn().prepareStatement(sql);
-        statement.setInt(1, idAttached);
-        ResultSet resultSet = statement.executeQuery(sql);
-        if (statement.executeUpdate() == 1) {
-          content = "Success ";
-          result = 1;
-        } else {
-          error = "Error";
-          result = 0;
-        }
-
-        if (result == 0) {
-          ((DbConnection) connDb).getConn().rollback();
-        } else {
-          ((DbConnection) connDb).getConn().commit();
-        }
-        ((DbConnection) connDb).getConn().close();
-      } catch (Exception e) {
-        error = "Errore nell'esecuzione della query";
-        result = 0;
-      }
-    }
-     */
-    /*
-    // della request ci serve mostrare il suo id e il serial
-    Connection connDb = null; // serve per aprire la connessione al db
-    PreparedStatement stmt = null; // usata per permettere l'exe della query sul db (query"sql")
-    ResultSet rs = null; // insieme dei dati che abbiamo ricavato dal db, lo mostreremo nella jsp
-    String sql = "SELECT * FROM REQUEST;";
-    try {
-      ArrayList list = new ArrayList();
-      connDb = DbConnection.getInstance().getConn();
-      stmt = ((DbConnection) connDb).getConn().prepareStatement(sql);
-      rs = stmt.executeQuery(sql);
-      while (rs.next()) {
-        Request r = new Request();
-        r.setIdRequest(rs.getInt("idRequest"));
-        r.setSerial(rs.getInt("serial"));
-        list.add(r);
-      }
-      //set la req del browser (request) con attrib list (Array) ci serve a rich.i dati presi da jsp
-      request.setAttribute("list", list);
-      // esegue un reindirizzamento sulla pagina in modo che venga visualizzata dopo la query
-      RequestDispatcher disp = request.getRequestDispatcher("/viewRequest.jsp"); 
-      disp.forward(request, response);
-    } catch (SQLException ex) {
-      ex.getMessage();
-    } finally {
-      try {
-        rs.close();
-        stmt.close();
-      } catch (SQLException ex) {
-        ex.getMessage();
-      }
-    }
-    */
+    out.println(res);
   }
 }
 

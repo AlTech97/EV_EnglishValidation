@@ -1,6 +1,16 @@
 
 $( document ).ready(function() {		
 	
+	$( document ).on( "click", ".generateExcel", function() {
+		$(".preloader").show();		
+		window.open(
+			window.location.href = absolutePath+"/ServletAdmin?flag=5",
+			'_blank'
+		);
+		$(".preloader").hide();
+		showData();
+	});
+	
 	$( document ).on( "click", ".toRefused", function() {
 		var idRequest = $(this).data("idrequest");
 		

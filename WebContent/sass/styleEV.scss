@@ -37,6 +37,16 @@ body .scroll-to-top {
                             }
                         }
                         .news-block-seven{
+							.btn-action{
+								padding: 6px;
+								margin: 6px;
+								width: 30px;
+								height: 30px;
+								text-align: center;
+								vertical-align: middle;
+								background-color: #FF9900;
+								border-color: #FF9900;
+							}                                                
                         
 							.form-group{
 								text-align: center;
@@ -101,16 +111,6 @@ body .scroll-to-top {
                                                 &::before, &::after {
                                                     display: none;
                                                 }
-												.btn-action{
-													padding: 6px;
-													margin: 6px;
-													width: 30px;
-													height: 30px;
-													text-align: center;
-													vertical-align: middle;
-													background-color: #FF9900;
-													border-color: #FF9900;
-												}                                                
                                             }
                                         } 
                                     }       
