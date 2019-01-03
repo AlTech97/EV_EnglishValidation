@@ -56,6 +56,7 @@
                         </div>
                     </div>
                 </div>
+                <button type="submit" class="btn btn-primary btn-GeneratePDF" id="generatePDF">Genera PDF</button>
             </div>
             <jsp:include page="/partials/footer.jsp" />
 		</div>

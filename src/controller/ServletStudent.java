@@ -1,6 +1,7 @@
 package controller;
 
 import interfacce.UserInterface;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -18,6 +19,13 @@ import javax.servlet.http.HttpServletResponse;
 import model.Student;
 import model.SystemAttribute;
 import org.json.simple.JSONObject;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.pdf.PdfWriter;
 
 /**
  * Servlet implementation class ServletStudent.
@@ -251,6 +259,29 @@ public class ServletStudent extends HttpServlet {
           result *= 0;
         }
       
+      }else if(flag == 4) {
+        UserInterface user =  (UserInterface) request.getSession().getAttribute("user");
+        
+        Document document = new Document();
+        try {
+          PdfWriter.getInstance(document, new FileOutputStream("request.pdf"));
+          
+        } catch (DocumentException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+         
+        document.open();
+        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+        Chunk chunk = new Chunk("Proof text", font);
+         
+        try {
+          document.add(chunk);
+        } catch (DocumentException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        document.close();
       }
       
     } else {
