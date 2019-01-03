@@ -109,8 +109,7 @@ public class CheckSession implements Serializable {
         this.setAllowed(true);
       }      
     }    
-    return true;
-    //return allowed;
+    return allowed;
   }
 
   /**
