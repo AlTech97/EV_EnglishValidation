@@ -1,5 +1,87 @@
 
 $( document ).ready(function() {		
+	
+	$( document ).on( "click", ".toRefused", function() {
+		var idRequest = $(this).data("idrequest");
+		
+		if(idRequest != undefined && idRequest > 0){
+			if(confirm("Conferma il cambio di stato della richiesta?")){
+				$(".preloader").show();
+				
+				$.ajax({
+					url: absolutePath+"/ServletAdmin",
+					type: "POST",
+					dataType: 'JSON',
+					async: false,
+					data: {
+						"idRequest": idRequest,
+						"flag": 4
+					},
+					success:function(msg){
+						if(!msg.result){
+							showAlert(1, msg.error);
+						}
+						else{
+							showAlert(0, msg.content);
+							setTimeout(function(){							
+								showData();
+							},2000);					
+						}
+					},
+					error: function(msg){
+						showAlert(1, "Impossibile Recuperare i dati.");
+					}
+				});
+				
+				$(".preloader").hide();				
+			}			
+		}
+		else{
+			showAlert(1, "Errore parametri.");
+		}
+	});
+	
+	$( document ).on( "click", ".toAccepted", function() {
+		var idRequest = $(this).data("idrequest");
+		
+		if(idRequest != undefined && idRequest > 0){
+			if(confirm("Conferma il cambio di stato della richiesta?")){
+				$(".preloader").show();
+				
+				$.ajax({
+					url: absolutePath+"/ServletAdmin",
+					type: "POST",
+					dataType: 'JSON',
+					async: false,
+					data: {
+						"idRequest": idRequest,
+						"flag": 3
+					},
+					success:function(msg){
+						if(!msg.result){
+							showAlert(1, msg.error);
+						}
+						else{
+							showAlert(0, msg.content);
+							setTimeout(function(){							
+								showData();
+							},2000);					
+						}
+					},
+					error: function(msg){
+						showAlert(1, "Impossibile Recuperare i dati.");
+					}
+				});
+				
+				$(".preloader").hide();				
+			}			
+		}
+		else{
+			showAlert(1, "Errore parametri.");
+		}
+	});
+
+	
 	$( document ).on( "submit", "#saveSurname", function() {
 		var idUser = $("#saveSurname .confirm").data("iduser");
 		var newSurname = $("#saveSurname #surname").val();
@@ -152,7 +234,7 @@ $( document ).ready(function() {
 		var type = $(this).data("type");
 		var idRequest = $(this).data("idrequest");
 		
-		if(type != undefined && (type == 1 || type == 2 || type == 3 || type == 4 || type == 5 || type == 6 ) && idRequest != undefined && idRequest > 0){
+		if(type != undefined && (type == 1 || type == 2) && idRequest != undefined && idRequest > 0){
 			if(confirm("Conferma il cambio di stato della richiesta?")){
 				$(".preloader").show();
 				

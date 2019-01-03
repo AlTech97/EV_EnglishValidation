@@ -121,13 +121,12 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
     if (conn != null) {
       Integer requestWorkingEducationAdvice1 = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-1"));
       Integer requestWorkingEducationAdvice2 = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-2"));
+      Integer requestAccepted = Integer.parseInt(new SystemAttribute().getValueByKey("request-accepted"));
+      Integer requestRefused = Integer.parseInt(new SystemAttribute().getValueByKey("request-refused"));
 
       if(flag == 1) { //Preleva tutte le richieste
         try {
-          Integer requestWorkingAdmin = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-admin"));
-          Integer requestAccepted = Integer.parseInt(new SystemAttribute().getValueByKey("request-accepted"));
-          Integer requestRefused = Integer.parseInt(new SystemAttribute().getValueByKey("request-refused"));
-          
+          Integer requestWorkingAdmin = Integer.parseInt(new SystemAttribute().getValueByKey("request-working-admin"));          
           
           stmtSelect = conn.createStatement();
           sql = "SELECT r.id_request, r.certificate_serial, r.level, r.release_date, r.expiry_date, r.year, r.requested_cfu, r.serial, r.validated_cfu, u.email AS user_email, u.name, u.surname, e.name AS state, e.email AS ente_mail, e.site AS ente_site, s.description AS ente, s.id_state "
@@ -173,11 +172,9 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
                   content += "    <td class='text-center'>"+r.getInt("validated_cfu")+"</td>";
                 }
                 
-                content += "    <td class='text-center'>"+r.getString("ente")+"</td>";
                 content += "    <td class='text-center'>"+r.getString("state")+"</td>";
-                content += "    <td class='text-center'>";                
-                
-                
+                content += "    <td class='text-center'>"+r.getString("ente")+"</td>";
+                content += "    <td class='text-center'>";                                                
                 
                 if(r.getInt("id_state") == requestWorkingAdmin) { //Se è in lavorazione dall'admin
                   if (!r.getString("ente_mail").equals("")) { //Se è settata la mail dell'ente                  
@@ -191,34 +188,22 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
                   content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice accept\" data-type=\"1\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Accetta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-check\"></i></button>";
                   
                   // oppure Mettere in requestWorkingEducationAdvice2
-                  content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"2\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Rifiuta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
+                  content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"2\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Rifiuta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";                 
+                }                
+                else if (r.getInt("id_state") == requestWorkingEducationAdvice1 || r.getInt("id_state") == requestWorkingEducationAdvice2) { //Se è in lavorazione da consiglio didattico
+                  //Mettere in requestAccepted
+                  content += "<button class=\"btn btn-primary btn-action toAccepted accept\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Accettata dal Consiglio Didattico\"><i class=\"fa fa-check\"></i></button>";
                  
+                  //oppure Mettere in requestRefused
+                  content += "<button class=\"btn btn-primary btn-action toRefused refuse\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Rifiutata dal Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
+                } 
+                else if (r.getInt("id_state") == requestAccepted || r.getInt("id_state") == requestRefused) { //Se è conclusa
+                  content += "/";
                 }
-                
-               if (r.getInt("id_state") == requestWorkingEducationAdvice1 ) { //Se è in lavorazione da consiglio didattico
-                  // Mettere in requestAccepted
-                 content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice accept\" data-type=\"3\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Accetta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-check\"></i></button>";
-                  if( r.getInt("id_state") == requestAccepted ) {
-                    content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice accept\" data-type=\"4\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Richiesta accettata dal consiglio didattico\"><i class=\"fa fa-check\"></i></button>";
-                  }
-               }   
-                  if (r.getInt("id_state") == requestWorkingEducationAdvice2 ) {
-                    content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"5\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Rifiuta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
-                  }
-                    if (r.getInt("id_state") == requestRefused ) {
-                    // oppure Mettere in requestRefused  
-                    content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"4\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Richiesta rifiutata dal Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
-                  }
-             //     content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice accept\" data-type=\"5\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Accetta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-check\"></i></button>";
-                  content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"6\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Richiesta rifiutata dal Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
-                
-               
-                // continuare fino a raggiungere l'ultimo stato delle request, aggiustare gli if e gli else if 
-                
                 content += "</td>";
                 
                 content += "</tr>";
-              } 
+              }
               result = 1;
             } else {
               result = 1;
@@ -233,11 +218,9 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
         Integer idRequest = Integer.parseInt(request.getParameter("idRequest"));
         if(type == 1) { //requestWorkingEducationAdvice1
           type = requestWorkingEducationAdvice1;
-        //  content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice accept\" data-type=\"3\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Accetta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-check\"></i></button>";
         }
         else if(type == 2) { //requestWorkingEducationAdvice2
           type = requestWorkingEducationAdvice2;
-        //  content += "<button class=\"btn btn-primary btn-action toWorkingEducationAdvice refuse\" data-type=\"5\" data-idrequest=\""+r.getInt("id_request")+"\" title=\"Rifiuta e Inoltra al Consiglio Didattico\"><i class=\"fa fa-times\"></i></button>";
         }
         
         try {
@@ -266,6 +249,60 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
         }        
         
         
+      } else if(flag == 3) { //Passaggio di stato a requestAccepted 
+        Integer idRequest = Integer.parseInt(request.getParameter("idRequest"));
+        
+        try {
+          sql = " UPDATE request SET fk_state = ? WHERE id_request = ?; ";
+          stmt = conn.prepareStatement(sql);              
+          stmt.setInt(1, requestAccepted);
+          stmt.setInt(2, idRequest);
+          if (stmt.executeUpdate() > 0) {            
+            result = 1;            
+            content = "Richiesta aggiornata con successo.";
+          } else {
+            error += " Impossibile cambiare stato alla richiesta.";
+            result = 0;
+          }   
+          
+          if (result == 0) {
+            conn.rollback();
+            result *= 0;
+          } else {            
+            conn.commit();            
+          }
+          
+        } catch (Exception e) {
+          error += e.getMessage();
+          result *= 0;
+        }                        
+      } else if(flag == 4) { //Passaggio di stato a requestRefused
+        Integer idRequest = Integer.parseInt(request.getParameter("idRequest"));
+        
+        try {
+          sql = " UPDATE request SET fk_state = ? WHERE id_request = ?; ";
+          stmt = conn.prepareStatement(sql);              
+          stmt.setInt(1, requestRefused);
+          stmt.setInt(2, idRequest);
+          if (stmt.executeUpdate() > 0) {            
+            result = 1;            
+            content = "Richiesta aggiornata con successo.";
+          } else {
+            error += " Impossibile cambiare stato alla richiesta.";
+            result = 0;
+          }   
+          
+          if (result == 0) {
+            conn.rollback();
+            result *= 0;
+          } else {            
+            conn.commit();            
+          }
+          
+        } catch (Exception e) {
+          error += e.getMessage();
+          result *= 0;
+        }                        
       }
 
     } else {

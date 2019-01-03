@@ -48,8 +48,8 @@
                                                     <th class="text-center">Data Scad.</th>                                                    
                                                     <th class="text-center">CFU Ric.</th>
                                                     <th class="text-center">CFU Conv.</th>
-                                                    <th class="text-center">Stato</th>
                                                     <th class="text-center">Ente</th>
+                                                    <th class="text-center">Stato</th>
                                                     <th class="text-center">Azioni</th>
                                                 </tr>	
                                             </thead>
