@@ -1,13 +1,15 @@
 package controller;
 
+import interfacce.UserInterface;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.HttpSession;
-import interfacce.UserInterface;
 import model.Admin;
 import model.Secretary;
 import model.Student;
+
+
 
 public class CheckSession implements Serializable {
 
@@ -17,7 +19,7 @@ public class CheckSession implements Serializable {
   private static final long serialVersionUID = -6469233075067075161L;
   private String pageFolder;
   private String pageName;
-  private String urlRedirect;  
+  private String urlRedirect;
   private HttpSession session;
   private boolean allowed;
 
@@ -40,6 +42,7 @@ public class CheckSession implements Serializable {
 
   /**
    * Set the Session between client and server.
+   * 
    * @param session is a sequence of network request-response transactions.
    */
   public void setSession(HttpSession session) {
@@ -55,6 +58,7 @@ public class CheckSession implements Serializable {
 
   /**
    * Set the URL.
+   * 
    * @param urlRedirect is a reference to a web resource that specifies its location on Internet.
    */
   public void setUrlRedirect(String urlRedirect) {
@@ -70,6 +74,7 @@ public class CheckSession implements Serializable {
 
   /**
    * Set the name of the web page.
+   * 
    * @param pageName is the name of the web page.
    */
   public void setPageName(String pageName) {
@@ -85,6 +90,7 @@ public class CheckSession implements Serializable {
 
   /**
    * Set the name of the location folder of the page.
+   * 
    * @param pageFolder is the name of the folder that contains the page.
    */
   public void setPageFolder(String pageFolder) {
@@ -99,25 +105,27 @@ public class CheckSession implements Serializable {
     UserInterface u = (UserInterface) this.session.getAttribute("user");
     if (u != null) {
       int userType = u.getUserType();
-      if (userType == 0 && this.pageFolder.equals("_areaStudent")) { // Profilo Student               
-        this.setAllowed(true);
+
+      if (userType == 0 && this.pageFolder.equals("_areaStudent")) {
+        this.setAllowed(true); // Profilo Student
+
+      } else if (userType == 1 && this.pageFolder.equals("_areaSecretary")) {
+        this.setAllowed(true); // Profilo Secretary
+
+      } else if (userType == 2 && this.pageFolder.equals("_areaAdmin")) {
+        this.setAllowed(true); // Profilo Admin
       }
-      else if (userType == 1 && this.pageFolder.equals("_areaSecretary")) { // Profilo Secretary
-        this.setAllowed(true);
-      }
-      else if (userType == 2 && this.pageFolder.equals("_areaAdmin")) { // Profilo Admin
-        this.setAllowed(true);
-      }      
-    }    
+    }
     return allowed;
   }
 
   /**
    * Set the variable allowed.
+   * 
    * @param allowed contains a boolean that specifies if the user is allowed to see the page.
    */
   public void setAllowed(boolean allowed) {
     this.allowed = allowed;
   }
-  
+
 }

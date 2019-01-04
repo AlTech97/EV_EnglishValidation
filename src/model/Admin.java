@@ -1,6 +1,6 @@
 package model;
 
-import interfacce.UserInterface;
+import interfacce.UserInterface;  
 
 public class Admin implements UserInterface {
 
@@ -16,6 +16,7 @@ public class Admin implements UserInterface {
 
   /**
    * Contructor.
+   * 
    * @param email is the address that the Admin uses to Log in the site.
    * @param name is the name of the Admin.
    * @param surname is the surname of the Admin.
@@ -31,7 +32,7 @@ public class Admin implements UserInterface {
     this.password = password;
     this.userType = userType;
   }
-  
+
   /**
    * Empty Constructor.
    */
@@ -81,6 +82,7 @@ public class Admin implements UserInterface {
 
   /**
    * Set the email of the Admin.
+   * 
    * @param email is the address that the Admin uses to Log in the site.
    */
   public void setEmail(String email) {
@@ -89,6 +91,7 @@ public class Admin implements UserInterface {
 
   /**
    * Set the name of the Admin.
+   * 
    * @param name is the name of the Admin.
    */
   public void setName(String name) {
@@ -97,6 +100,7 @@ public class Admin implements UserInterface {
 
   /**
    * Set the surname of the Admin.
+   * 
    * @param surname is the surname of the Admin.
    */
   public void setSurname(String surname) {
@@ -105,6 +109,7 @@ public class Admin implements UserInterface {
 
   /**
    * Set the sex of the Admin.
+   * 
    * @param sex specifies the sex of the Admin with one letter (M,F).
    */
   public void setSex(char sex) {
@@ -113,6 +118,7 @@ public class Admin implements UserInterface {
 
   /**
    * Set the password of the Admin.
+   * 
    * @param password is the password that the Admin uses to Log in the site.
    */
   public void setPassword(String password) {
@@ -121,6 +127,7 @@ public class Admin implements UserInterface {
 
   /**
    * Set the type of the user.
+   * 
    * @param userType specifies the type of the user (0,1,2).
    */
   public void setUserType(int userType) {

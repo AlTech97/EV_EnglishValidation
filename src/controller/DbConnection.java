@@ -39,11 +39,11 @@ public class DbConnection {
   }
 
   /**
-  * Get the instance of the database.
-  */
+   * Get the instance of the database.
+   */
   public static DbConnection getInstance() {
     if (instance == null) {
-    	instance = new DbConnection();
+      instance = new DbConnection();
     }
     return instance;
   }
@@ -57,8 +57,9 @@ public class DbConnection {
 
   /**
    * Set the connection with the database.
-   * @param conn is the variable that contains the object that allows you
-   *     to connect the database to the code. 
+   * 
+   * @param conn is the variable that contains the object that allows you to connect the database to
+   *        the code.
    */
   public void setConn(Connection conn) {
     this.conn = conn;
@@ -70,10 +71,11 @@ public class DbConnection {
   public String getDatabaseName() {
     return this.databaseName;
   }
-  
+
   /**
    * Set the name of the database.
-   * @param databaseName is the variable that contains the name of the database. 
+   * 
+   * @param databaseName is the variable that contains the name of the database.
    */
   public void setDatabaseName(String databaseName) {
     this.databaseName = databaseName;
@@ -88,14 +90,15 @@ public class DbConnection {
 
   /**
    * Set the name of the user.
-   * @param userName is the variable that contains the name of the user. 
+   * 
+   * @param userName is the variable that contains the name of the user.
    */
   public void setUserName(String userName) {
     this.userName = userName;
   }
 
   /**
-   *  Get the password. 
+   * Get the password.
    */
   public String getPassword() {
     return this.password;
@@ -103,29 +106,31 @@ public class DbConnection {
 
   /**
    * Set the name of the user.
+   * 
    * @param password is the variable that contains the password.
    */
   public void setPassword(String password) {
     this.password = password;
   }
-  
+
   /**
-   *  Get the number of the host port.
+   * Get the number of the host port.
    */
   public int getHostPort() {
     return this.hostPort;
   }
-  
+
   /**
    * Set the number of the host port.
-   * @param hostPort is the variable that contains the number of the host port. 
+   * 
+   * @param hostPort is the variable that contains the number of the host port.
    */
   public void setHostPort(int hostPort) {
     this.hostPort = hostPort;
   }
 
   /**
-   *  Get the name of the host port.
+   * Get the name of the host port.
    */
   public String getHostName() {
     return this.hostName;
@@ -133,6 +138,7 @@ public class DbConnection {
 
   /**
    * Set the number of the host port.
+   * 
    * @param hostName is the variable that contains the name of the host port.
    */
   public void setHostName(String hostName) {

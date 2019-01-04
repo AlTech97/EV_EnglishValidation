@@ -10,20 +10,15 @@ public class Secretary implements UserInterface {
   private char sex;
   private String password;
   private int userType;
-  
+
   public Secretary() {}
+
   /**
-   * email
-   * name
-   * surname
-   * sex
-   * password
-   * userType
-   * Return object Secretary.
+   * email name surname sex password userType Return object Secretary.
    */
-  
-  public Secretary(String email, String name, String surname,
-                  char sex, String password, int userType) {
+
+  public Secretary(String email, String name, String surname, char sex, String password,
+      int userType) {
     this.email = email;
     this.name = name;
     this.surname = surname;
@@ -94,7 +89,7 @@ public class Secretary implements UserInterface {
 
   @Override
   public boolean validate() {
-    return new Stub().database.containsKey(getEmail()) 
-        && new Stub().database.containsValue(getPassword());    
+    return new Stub().database.containsKey(getEmail())
+        && new Stub().database.containsValue(getPassword());
   }
 }
