@@ -59,7 +59,10 @@ $(document).ready(function(){
 		return false;
 	});	
 
-	$(document).on('submit', '#firstForm', function(e){
+});
+
+$(document).ready(function(){
+	$(document).on('click', '.btn btn-primary generatePDF', function(e){
 
 		$.ajax({
 			url: absolutePath+"/ServletStudent",
@@ -67,11 +70,10 @@ $(document).ready(function(){
 			dataType: 'JSON',
 			async: false,
 			data: {
-
 				"flag": 4
 			},
-			
+
 		});
-		
+
 	});
 });
