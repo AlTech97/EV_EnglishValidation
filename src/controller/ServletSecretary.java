@@ -150,6 +150,8 @@ public class ServletSecretary extends HttpServlet {
 
                 content += "    <td class='text-center'>";
               }
+              
+              result = 1;
             }
           }
         } catch (Exception e) {

@@ -1,41 +1,5 @@
 $( document ).ready(function() {		
-	
-		if(idUser != undefined && idUser.length > 0 ){
-	//		$(".preloader").show();
-			
-			$.ajax({
-				url: absolutePath+"/ServletSecretary",
-				type: "POST",
-				dataType: 'JSON',
-				async: false,
-				data: {
-					"flag": 1 // controllare il flag 
-				},
-				success:function(msg){
-					if(!msg.result){
-						showAlert(1, msg.error);
-					}
-					else{
-						showAlert(0, msg.content);
-						setTimeout(function(){							
-							showData();
-						},2000);
-					}
-				},
-				error: function(msg){
-					showAlert(1, "Impossibile Recuperare i dati.");
-				}
-			});
-			
-			$(".preloader").hide();				
-		}
-		else{
-			showAlert(1, "Errore parametri.");
-		}
-	});
 
-
-// $( document ).ready(function() {		SBAGLIATA
 	$( document ).on( "submit", "#forwardButton", function() {
 		var idUser = '';
 		var serial = '';
@@ -53,9 +17,8 @@ $( document ).ready(function() {
 				type: "POST",
 				dataType: 'JSON',
 				async: false,
-				data: {	
-					
-					"flag": 1 // vedere se il flag è corretto
+				data: {						
+					"flag": 1
 				},
 				success:function(msg){
 					if(!msg.result){
@@ -79,7 +42,7 @@ $( document ).ready(function() {
 			showAlert(1, "Errore parametri.");
 		}
 	});
-// });
+});
 
 	
 function showData() {
@@ -98,7 +61,7 @@ function showData() {
 				showAlert(1, msg.error);
 			}
 			else{
-				$("bodySegretaryTable").html(msg.content);				
+				$("#bodySegretaryBody").html(msg.content);				
 			}
 		},
 		error: function(msg){

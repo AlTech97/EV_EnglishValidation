@@ -15,7 +15,7 @@
 		<jsp:include page="/partials/head.jsp" />
 	</head>
 
-	<body onLoad="">
+	<body onLoad="showData()">
 		<div class="page-wrapper">
 		 	
 		    <!-- Preloader -->
@@ -34,7 +34,7 @@
                         <div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="content">
                                     <div class="news-block-seven">
-                                        <table id="blankTable">
+                                        <table id="bodySegretaryTable">
                                             <thead>
                                                 <tr>
                                                      <th class="text-center">ID</th>
@@ -46,7 +46,7 @@
                                                     <th class="text-center">Inoltra</th>
                                                 </tr>	
                                             </thead>
-                                 	        <tbody id="bodySegretaryTable">
+                                 	        <tbody id="bodySegretaryBody">
                                          <!-- 	<tr>
                                             		<td class="text-center">Ciao</td>
                                             		<td class="text-center">Ciao</td>
@@ -74,7 +74,7 @@
 		
 		<script>
 			jQuery(document).ready(function($){
-				$('#blankTable').DataTable( {
+				$('#bodySegretaryTable').DataTable( {
 			        "order": [[ 0, "desc" ]],
 			        "lengthMenu": [[10, -1], [10, "Tutti"]],
 			        "autoWidth": false,
