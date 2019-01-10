@@ -37,7 +37,7 @@
                                         <table id="bodySegretaryTable">
                                             <thead>
                                                 <tr>
-                                                     <th class="text-center">ID</th>
+                                                    <th class="text-center">ID</th>
                                                     <th class="text-center">Matricola</th>
                                                     <th class="text-center">Nome</th>                                                    
                                                     <th class="text-center">Cognome</th>                                                
@@ -47,13 +47,7 @@
                                                 </tr>	
                                             </thead>
                                  	        <tbody id="bodySegretaryBody">
-                                         <!-- 	<tr>
-                                            		<td class="text-center">Ciao</td>
-                                            		<td class="text-center">Ciao</td>
-                                            		<td class="text-center">Ciao</td>
-                                            		<td class="text-center">Ciao</td>
-                                            	</tr>  
-                                            	--> 
+ 
                                             </tbody>
                                         </table>
 

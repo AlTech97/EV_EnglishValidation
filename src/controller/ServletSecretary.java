@@ -97,16 +97,8 @@ public class ServletSecretary extends HttpServlet {
     String sql = "";
 
     if (conn != null) {
-      Integer requestWorkingEducationAdvice1 = Integer
-          .parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-1"));
-      Integer requestWorkingEducationAdvice2 = Integer
-          .parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-2"));
-      Integer requestWorkingAdmin =
-          Integer.parseInt(new SystemAttribute().getValueByKey("request-working-admin"));
-      Integer requestAccepted =
-          Integer.parseInt(new SystemAttribute().getValueByKey("request-accepted"));
-      Integer requestRefused =
-          Integer.parseInt(new SystemAttribute().getValueByKey("request-refused"));
+      Integer requestWorkingSecretary = Integer
+          .parseInt(new SystemAttribute().getValueByKey("request-working-secretary"));
 
       if (flag == 1) { // Preleva tutte le richieste
         try {
@@ -118,8 +110,7 @@ public class ServletSecretary extends HttpServlet {
               + "     INNER JOIN ente e ON r.fk_certifier = e.id_ente "
               + "     INNER JOIN state s ON r.fk_state = s.id_state "
               + "     INNER JOIN user u ON r.fk_user = u.email " + "WHERE s.id_state IN("
-              + requestWorkingAdmin + ", " + requestWorkingEducationAdvice1 + ", "
-              + requestWorkingEducationAdvice2 + ", " + requestAccepted + ", " + requestRefused
+              + requestWorkingSecretary
               + ")";
           ResultSet r = stmtSelect.executeQuery(sql);
           if (r.wasNull()) {
@@ -140,15 +131,24 @@ public class ServletSecretary extends HttpServlet {
                 content += "</td>";
                 content +=
                     "    <td class='text-center'>" + r.getString("certificate_serial") + "</td>";
-                content += "    <td class='text-center'>" + r.getString("level") + "</td>";
-                content += "<td>" + "<input type=\"checkbox\" name=\"\" value=\"\">" + "</td>";
-                if (r.getInt("validated_cfu") == 0) {
-                  content += "    <td class='text-center'>NC</td>";
-                } else {
-                  content += "    <td class='text-center'>" + r.getInt("validated_cfu") + "</td>";
-                }
+                content += "<td>" 
+                    + "<input type=\"text\" class=\"form-control cfuToValidate\" "
+                    +"value=\""+r.getString("validated_cfu")+"\" "
+                    +"placeholder=\"Inserire i CFU gi&agrave; convalidati\""
+                    +" data-idRequest=\""+r.getInt("id_request")+"\">";
 
-                content += "    <td class='text-center'>";
+                content += "<button class=\"btn btn-primary btn-action saveCfu"
+                    + "\" title=\"Inserisci i CFU Convalidati\" data-idRequest=\"" 
+                    + r.getString("id_request")
+                    + "\"><i class=\"fa fa-edit\"></i></button>";
+                
+                content += "</td>";
+
+                content += "<button class=\"btn btn-primary btn-action accept toWorkingAdmin"
+                    + "\" title=\"Inoltra all'admin\" data-idRequest=\"" + r.getString("id_request")
+                    + "\"><i class=\"fa fa-check\"></i></button>";
+                
+                content += "    <td class='text-center'></td>";
               }
               
               result = 1;
@@ -158,13 +158,76 @@ public class ServletSecretary extends HttpServlet {
           System.out.println(e.getMessage());
         }
 
-        JSONObject res = new JSONObject();
-        res.put("result", result);
-        res.put("error", error);
-        res.put("content", content);
-        PrintWriter out = response.getWriter();
-        out.println(res);
-      }
+      } else if (flag == 2) { //Set cfu        
+        Integer idRequest = Integer.parseInt(request.getParameter("idRequest"));
+        Integer cfu = Integer.parseInt(request.getParameter("cfu"));
+        
+        try {
+          sql = " UPDATE request SET validate_cfu = ? WHERE id_request = ?; ";
+          stmt = conn.prepareStatement(sql);
+          stmt.setInt(1, cfu);
+          stmt.setInt(2, idRequest);
+          if (stmt.executeUpdate() > 0) {
+            result = 1;
+            content = "CFU aggiornati con successo.";
+          } else {
+            error += " Impossibile cambiare i CFU nella richiesta.";
+            result = 0;
+          }
+
+          if (result == 0) {
+            conn.rollback();
+            result *= 0;
+          } else {
+            conn.commit();
+          }
+
+        } catch (Exception e) {
+          error += e.getMessage();
+          result = 0;
+        }        
+      } else if (flag == 3) { //Inoltra all'admin        
+        Integer idRequest = Integer.parseInt(request.getParameter("idRequest"));
+        Integer requestWorkingAdminState = Integer
+            .parseInt(new SystemAttribute().getValueByKey("request-working-admin"));
+        
+        try {
+          sql = " UPDATE request SET fk_state = ? WHERE id_request = ?; ";
+          stmt = conn.prepareStatement(sql);
+          stmt.setInt(1, requestWorkingAdminState);
+          stmt.setInt(2, idRequest);
+          if (stmt.executeUpdate() > 0) {
+            result = 1;
+            content = "Richiesta inoltrata all'amministratore con successo.";
+          } else {
+            error += " Impossibile inoltrare la richiesta.";
+            result = 0;
+          }
+
+          if (result == 0) {
+            conn.rollback();
+            result *= 0;
+          } else {
+            conn.commit();
+          }
+
+        } catch (Exception e) {
+          error += e.getMessage();
+          result = 0;
+        }        
+      }    
+
     }
+    else {
+      error = "Nessuna connesione al DB";
+    }
+
+    JSONObject res = new JSONObject();
+    res.put("result", result);
+    res.put("error", error);
+    res.put("content", content);
+    PrintWriter out = response.getWriter();
+    out.println(res);
+    response.setContentType("json");
   }
 }
