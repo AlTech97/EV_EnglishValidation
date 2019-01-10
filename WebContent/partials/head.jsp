@@ -6,7 +6,7 @@
 		<link href="<%= request.getContextPath() %>/css/bootstrap.css" rel="stylesheet">
 		<link href="<%= request.getContextPath() %>/css/style.css" rel="stylesheet">
 		<link href="<%= request.getContextPath() %>/css/responsive.css" rel="stylesheet">
-		<link href="<%= request.getContextPath() %>/css/jquery.dataTables.min.css.css" rel="stylesheet">		
+		<link href="<%= request.getContextPath() %>/css/jquery.dataTables.min.css" rel="stylesheet">		
 		<link href="<%= request.getContextPath() %>/css/font-awesome.css" rel="stylesheet">		
 		<link href="<%= request.getContextPath() %>/css/toastr.min.css" rel="stylesheet">
 		<link href="<%= request.getContextPath() %>/css/styleEV.css" rel="stylesheet">
