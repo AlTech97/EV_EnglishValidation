@@ -122,7 +122,7 @@
 											</div>
 											
 										   <div class="form-group">
-											  <label for="cfu">CFU conseguiti:</label>
+											  <label for="cfu">CFU da Conseguire:</label>
 											  <select class="form-control" id="cfu" required>
 											    <option>3</option>
 											    <option>6</option>

@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Request;
 import model.Student;
 import model.SystemAttribute;
 import org.eclipse.jdt.internal.compiler.env.IModule;
@@ -176,6 +177,16 @@ public class ServletStudent extends HttpServlet {
                 }
 
                 request.getSession().setAttribute("idRequest", idRequest);
+                request.getSession().setAttribute("idEnte", idEnte);                
+                request.getSession().setAttribute("requestedCfu", requestedCfu);
+                request.getSession().setAttribute("level", level);
+                request.getSession().setAttribute("releaseDate", releaseDate);
+                request.getSession().setAttribute("expiryDate", expiryDate);
+                request.getSession().setAttribute("validatedCfu", validatedCfu);
+                request.getSession().setAttribute("serial", serial);
+                request.getSession().setAttribute("year", year);
+                request.getSession().setAttribute("certificateSerial", certificateSerial);
+                
 
                 result = 1;
                 rs.close();

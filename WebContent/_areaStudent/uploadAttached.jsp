@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"
-	import="controller.CheckSession, model.SystemAttribute, controller.Utils"%>
+	import="controller.CheckSession, model.SystemAttribute, controller.Utils, controller.DbConnection, java.sql.Connection, java.sql.ResultSet, java.sql.Statement, java.text.SimpleDateFormat"%>
 
 <%
 	String pageName = "uploadAttached.jsp";
 	String pageFolder = "_areaStudent";
-	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
+	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());	
 	Integer idRequest = (Integer) request.getSession().getAttribute("idRequest");
 	if(idRequest == null){
 	  idRequest = new Utils().getLastUserRequestPartiallyCompleted(request.getSession());
@@ -18,6 +18,50 @@
 	if(!ck.isAllowed() || idRequest == 0 || requestState != shouldState){
 	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
 	}
+	
+  	String name = "";
+	String surname = "";
+	String tipoLaurea = "Magistrale";
+	String year = "";	
+	String serial = "";
+	String ente = "";
+	String certificateSerial = "";
+	String level = "";
+	String requestedCfu = "";
+
+	Connection conn = new DbConnection().getInstance().getConn();
+    if (conn != null) {
+
+      try {
+        Statement stmt = conn.createStatement();
+        String sql;
+        sql = "SELECT r.id_request, r.serial, u.name, u.surname, r.year, r.certificate_serial, "
+            + "r.level, r.release_date, r.expiry_date, r.requested_cfu, "
+            + "r.validated_cfu, e.name AS ente " + "FROM request r "
+            + "     INNER JOIN ente e ON r.fk_certifier = e.id_ente "
+            + "     INNER JOIN state s ON r.fk_state = s.id_state "
+            + "     INNER JOIN user u ON r.fk_user = u.email ";
+
+        ResultSet r = stmt.executeQuery(sql);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        while (r.next()) {
+	    	name = r.getString("name");
+	    	surname = r.getString("surname");
+          	if(r.getInt("requested_cfu") == 3){
+	    	  tipoLaurea = "Triennale";	  
+	    	}
+          	year = sdf.format(r.getDate("year"))+ " / " + (Integer.parseInt(sdf.format(r.getDate("year")))+1);
+          	serial = r.getString("serial");
+          	ente = r.getString("ente");
+          	certificateSerial = r.getString("certificate_serial");
+          	level = r.getString("level");
+          	requestedCfu = r.getString("requested_cfu");
+        }
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }      
+      
+    } 	    	
 %>
 
 <!DOCTYPE html>
@@ -49,6 +93,11 @@
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content">
 							<div class="news-block-seven">
+								<div class="form-group">
+									<button type="button" class="btn btn-primary btn-submit generatePDF"
+										onclick="createPdf()">Genera PDF</button>
+								</div>
+									
 								<h2>
 									Richiesta N.<%= idRequest %>
 									</h1>
@@ -67,10 +116,16 @@
 					</div>
 				</div>
 			</div>
-
-			<button type="button" class="btn btn-primary generatePDF"
-				onclick="createPdf()">Genera PDF</button>
-
+					
+			<input type="hidden" id="name" value="<%= name %>" />
+			<input type="hidden" id="surname" value="<%= surname %>" />			
+			<input type="hidden" id="tipoLaurea" value="<%= tipoLaurea %>" />			
+			<input type="hidden" id="year" value="<%= year %>" />
+			<input type="hidden" id="serial" value="<%= serial %>" />
+			<input type="hidden" id="ente" value="<%= ente %>" />
+			<input type="hidden" id="certificateSerial" value="<%= certificateSerial %>" />
+			<input type="hidden" id="level" value="<%= level %>" />
+			<input type="hidden" id="requestedCfu" value="<%= requestedCfu %>" />							               							               
 		</div>
 		<jsp:include page="/partials/footer.jsp" />
 	</div>
@@ -88,17 +143,15 @@
 			doc.text("DIPARTIMENTO DI INFORMATICA",60,45)
 			doc.text("Alla Presidente del Consiglio Didattico di Informatica",600,55)
 			doc.text("DOMANDA DI RICONOSCIMENTO DEI CREDITI FORMATIVI PREVISTI PER LA CONOSCENZA DELLA LINGUA INGLESE",150,75)
-			doc.text('La/Il sottoscritta/o ___________________________________________________________', 10, 100)
-			doc.text("immatricolata/o nell'aa _________________al corso di ",10,120)
-			doc.text("() Laurea Triennale",30,140)
-			doc.text("() Laurea Magistrale",30,160)
-			doc.text("In Informatica matricola n° ____________________________________",10,180)
+			doc.text('La/Il sottoscritta/o ' + $("#name").val() + ' ' + $("#surname").val(), 10, 100)
+			doc.text("immatricolata/o nell'aa " + $("#year").val() + " al corso di ",10,120)			
+			doc.text("Laurea "+$("#tipoLaurea").val()+"",30,140)
+			doc.text("In Informatica matricola n° "+$("#serial").val()+"",10,180)
 			doc.text("														CHIEDE",10,210)
 			doc.text("Che venga valutata la certificazione allegata ",10,220)
-			doc.text("ENTE CERTIFICATORE :",10,240)
-			doc.text("GRADE :",10,260)
-			doc.text("LIVELLO CEFR :",10,280)
-			doc.text("ai fini del riconoscimento di N° ___ CFU relativi alla prova di Lingua Inglese previsti nel proprio piano di studi",10,300)
+			doc.text("ENTE CERTIFICATORE :"+$("#ente").val(),10,240)
+			doc.text("LIVELLO CEFR :"+$("#level").val(),10,260)
+			doc.text("ai fini del riconoscimento di N° "+$("#requestedCfu").val()+" CFU relativi alla prova di Lingua Inglese previsti nel proprio piano di studi",10,300)
 			doc.text("Si allega certificazione",10,320)
 			doc.text("Fisciano, _____________																	Firma studente _________________________________",10,340)
 			doc.text("ATTENZIONE: Il presente modulo va compilato al computer, va quindi stampato, firmato, scannerizzato salvato con il nome che segue questa regola:",10,360)
