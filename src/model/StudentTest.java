@@ -81,8 +81,8 @@ class StudentTest {
   @Test
   void testSetPassword() {
     Student st = new Student("aaa@sss.it", "", "", 'r', "", 0);
-    st.setSurname("xxx");
-    assertEquals("xxx", st.getSurname());
+    st.setPassword("xxx");
+    assertEquals("xxx", st.getPassword());
   }
 
   @Test

@@ -81,8 +81,8 @@ class SecretaryTest {
   @Test
   void testSetPassword() { 
     Secretary sc = new Secretary("aaa@sss.it", "", "", 'r', "", 0);
-    sc.setSurname("xxx");
-    assertEquals("xxx", sc.getSurname());
+    sc.setPassword("xxx");
+    assertEquals("xxx", sc.getPassword());
   }
   
   @Test
