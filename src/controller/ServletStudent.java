@@ -257,10 +257,7 @@ public class ServletStudent extends HttpServlet {
           result *= 0;
         }
 
-      } else if (flag == 4) {
-
-        System.out.println("ciao");
-      }
+      } 
 
     } else {
       error += "Nessuna connessione al database.";

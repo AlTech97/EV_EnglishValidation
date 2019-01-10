@@ -46,7 +46,6 @@ public class ServletAdminTest extends Mockito {
   
   @Test
   public void testUpdateRequest() throws ServletException, IOException {
-    System.out.println(response);
     request.addParameter("type", "1");
     request.addParameter("idRequest", "2");
     request.addParameter("flag", "2");
@@ -56,7 +55,6 @@ public class ServletAdminTest extends Mockito {
   
   @Test
   public void testUpdateRequest1() throws ServletException, IOException {
-    System.out.println(response);
     request.addParameter("type", "2");
     request.addParameter("idRequest", "3");
     request.addParameter("flag", "2");
@@ -66,7 +64,6 @@ public class ServletAdminTest extends Mockito {
   
   @Test
   public void testUpdateRequestAccepted() throws ServletException, IOException {
-    System.out.println(response);
     request.addParameter("idRequest", "1");
     request.addParameter("flag", "3");
     servlet.doPost(request, response);
@@ -75,7 +72,6 @@ public class ServletAdminTest extends Mockito {
   
   @Test
   public void testUpdateRequestRefused() throws ServletException, IOException {
-    System.out.println(response);
     request.addParameter("idRequest", "4");
     request.addParameter("flag", "4");
     servlet.doPost(request, response);
