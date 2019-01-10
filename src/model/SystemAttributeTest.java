@@ -3,6 +3,7 @@ package model;
 import static org.hamcrest.CoreMatchers.is; 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import controller.DbConnection;
@@ -15,6 +16,12 @@ import org.hamcrest.collection.IsMapContaining;
 import org.junit.jupiter.api.Test;
 
 public class SystemAttributeTest {
+  
+  @Test
+  void testSystemAttributeCostructorEmpty() {
+    SystemAttribute sy = new SystemAttribute();
+    assertNotNull(sy);
+  }
 
   @Test
   void testGetHashMap() {

@@ -1,7 +1,7 @@
 package model;
 
 import static org.junit.Assert.assertEquals;
-
+import static org.junit.Assert.assertNotNull;
 import interfacce.UserInterface;
 
 import java.time.Year;
@@ -10,10 +10,13 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-
-
-
 class RequestTest {
+  
+  @Test
+  void testRequestCostructorEmpty() {
+    Request re = new Request();
+    assertNotNull(re);
+  }
 
   @Test
   void testGetIdRequest() {

@@ -1,10 +1,17 @@
 package model;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals; 
 
 import org.junit.jupiter.api.Test;
 
 public class StateTest {
+  
+  @Test
+  void testStateCostructorEmpty() {
+    State st = new State();
+    assertNotNull(st);
+  }
 
   //Test Metodi GET
 

@@ -1,5 +1,6 @@
 package model;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals; 
 
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,12 @@ class EnteTest {
   void testGetIdEnte() {
     Ente en = new Ente(01, "", "", "");
     assertEquals(01, en.getIdEnte());
+  }
+  
+  @Test
+  void testEnteCostructorEmpty() {
+    Ente en = new Ente();
+    assertNotNull(en);
   }
 
 

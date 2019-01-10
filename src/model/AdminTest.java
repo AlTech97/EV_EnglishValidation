@@ -1,5 +1,6 @@
 package model;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,6 +8,12 @@ import org.junit.jupiter.api.Test;
 
 class AdminTest {
 
+  @Test
+  void testAdminCostructorEmpty() {
+    Admin ad = new Admin();
+    assertNotNull(ad);
+  }
+  
   // INIZIO TEST GET
 
   @Test

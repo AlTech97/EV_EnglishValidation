@@ -1,10 +1,17 @@
 package model;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals; 
 
 import org.junit.jupiter.api.Test;
 
 class AttachedTest {
+  
+  @Test
+  void testAttachedCostructorEmpty() {
+    Attached at = new Attached();
+    assertNotNull(at);
+  }
 
   // Test Metodi GET.
 
