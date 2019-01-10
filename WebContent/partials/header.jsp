@@ -11,39 +11,22 @@
 		if (pageName.equals("viewRequest.jsp")) {
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/viewRequest.jsp\">Richieste</a></li>";
-		} else {
-			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-					+ "/viewRequest.jsp\">Richieste</a></li>";
-		}
+			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Logout</a></li>";
+		} 
 	} else if (pageFolder.equals("_areaSecretary")) { //se stiamo in una pagina dell'area segreteria
 		if (pageName.equals("viewRequest.jsp")) {
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/viewRequest.jsp\">Richieste</a></li>";
-		} else {
-			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-					+ "/viewRequest.jsp\">Richieste</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Logout</a></li>";
 		}
 	} else if (pageFolder.equals("_areaStudent")) { //se stiamo in una pagina dell'area studente
-		Integer idRequest = (Integer) request.getSession().getAttribute("idRequest");
-		if (idRequest == null) {
-			idRequest = new Utils().getLastUserRequestPartiallyCompleted(request.getSession());
-			request.getSession().setAttribute("idRequest", idRequest);
-		}
-
-		if (pageName.equals("viewRequest.jsp")) { //se stiamo in viewRequest e...
-			if (idRequest == 0) { // ...se la richiesta non è ancora stata presentata
+		
+		if (pageName.equals("viewRequest.jsp")) { //se stiamo in viewRequest
 				menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 						+ "/viewRequest.jsp\">Richieste</a></li>";
 				menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 						+ "/firstForm.jsp\">First Form</a></li>";
 				menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Logout</a></li>";
-			} else { //...se la richiesta è stata già presentata
-				menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
-						+ "/viewRequest.jsp\">Richieste</a></li>";
-				menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-						+ "/uploadAttached.jsp\">Upload Attached</a></li>";
-				menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Logout</a></li>";
-			}
 		}
 		if (pageName.equals("firstForm.jsp")) {
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
