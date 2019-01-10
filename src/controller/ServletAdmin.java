@@ -219,7 +219,7 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
                     content += "<a target=\"_blank\" href=\"" + r.getString("ente_site")
                         + "\" class=\"btn btn-primary verifyCertificate"
                         + "\" title=\"Verifica Validit&agrave; Certificato Tramite Sito Web"
-                        + "\"><i class=\"fa fa-question\"></i></button>";
+                        + "\"><i class=\"fa fa-question\"></i></a>";
                   }
 
                   // Mettere in requestWorkingEducationAdvice1
