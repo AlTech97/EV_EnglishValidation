@@ -1,70 +1,77 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1" import="controller.CheckSession"%>
+	pageEncoding="ISO-8859-1" import="controller.CheckSession , controller.Utils"%>
 
 <%
-  String pageName = request.getParameter("pageName");
-  String pageFolder = request.getParameter("pageFolder");
-  String menu = "";
-  String hiddenMenu = "";
+	String pageName = request.getParameter("pageName");
+	String pageFolder = request.getParameter("pageFolder");
+	String menu = "";
+	String hiddenMenu = "";
 
-  if (pageFolder.equals("_areaAdmin")) {
-    if (pageName.equals("viewRequest.jsp")) {
-      menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
-          + "/viewRequest.jsp\">Richieste</a></li>";
-    } else {
-      menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-          + "/viewRequest.jsp\">Richieste</a></li>";
-    }
-  } else if (pageFolder.equals("_areaSecretary")) {
-    if (pageName.equals("viewRequest.jsp")) {
-      menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
-          + "/viewRequest.jsp\">Richieste</a></li>";
-    } else {
-      menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-          + "/viewRequest.jsp\">Richieste</a></li>";
-    }
-  } else if (pageFolder.equals("_areaStudent")) {
-    if (pageName.equals("viewRequest.jsp")) {
-      menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
-          + "/viewRequest.jsp\">Richieste</a></li>";
-    } else {
-      menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-          + "/viewRequest.jsp\">Richieste</a></li>";
-    }
-    if (pageName.equals("firstForm.jsp")) {
-      menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
-          + "/firstForm.jsp\">First Form</a></li>";
-    } else {
-      menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-          + "/firstForm.jsp\">First Form</a></li>";
-    }
-    if (pageName.equals("uploadAttached.jsp")) {
-      menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
-          + "/uploadAttached.jsp\">Upload Attached</a></li>";
-    } else {
-      menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-          + "/uploadAttached.jsp\">Upload Attached</a></li>";
-    }
-  } else if (pageFolder.equals("")) {
+	if (pageFolder.equals("_areaAdmin")) { //se stiamo in una pagina dell'area admin
+		if (pageName.equals("viewRequest.jsp")) {
+			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
+					+ "/viewRequest.jsp\">Richieste</a></li>";
+		} else {
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
+					+ "/viewRequest.jsp\">Richieste</a></li>";
+		}
+	} else if (pageFolder.equals("_areaSecretary")) { //se stiamo in una pagina dell'area segreteria
+		if (pageName.equals("viewRequest.jsp")) {
+			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
+					+ "/viewRequest.jsp\">Richieste</a></li>";
+		} else {
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
+					+ "/viewRequest.jsp\">Richieste</a></li>";
+		}
+	} else if (pageFolder.equals("_areaStudent")) { //se stiamo in una pagina dell'area studente
+		Integer idRequest = (Integer) request.getSession().getAttribute("idRequest");
+		if (idRequest == null) {
+			idRequest = new Utils().getLastUserRequestPartiallyCompleted(request.getSession());
+			request.getSession().setAttribute("idRequest", idRequest);
+		}
 
-    if (pageName.equals("login.jsp")) {
-      menu += "<li class=\"current\"><a href=\"" + request.getContextPath()
-          + "/login.jsp\">Login</a></li>";
-    } else {
-      menu += "<li><a href=\"" + request.getContextPath() + "/login.jsp\">Login</a></li>";
-      CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
-      if (pageName.equals("logout.jsp") && ck.isAllowed()) { //Da implementare il controllo che lo mostra solo se l'utente è loggato
-        menu += "<li class=\"current\"><a href=\"" + request.getContextPath()
-            + "/logout.jsp\">Logout</a></li>";
-      } else {
-        menu = "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Logout</a></li>";
-      }
+		if (pageName.equals("viewRequest.jsp")) { //se stiamo in viewRequest e...
+			if (idRequest == 0) { // ...se la richiesta non è ancora stata presentata
+				menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
+						+ "/viewRequest.jsp\">Richieste</a></li>";
+				menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
+						+ "/firstForm.jsp\">First Form</a></li>";
+				menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Logout</a></li>";
+			} else { //...se la richiesta è stata già presentata
+				menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
+						+ "/viewRequest.jsp\">Richieste</a></li>";
+				menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
+						+ "/uploadAttached.jsp\">Upload Attached</a></li>";
+				menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Logout</a></li>";
+			}
+		}
+		if (pageName.equals("firstForm.jsp")) {
+			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
+					+ "/firstForm.jsp\">First Form</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Logout</a></li>";
+		}
+		if (pageName.equals("uploadAttached.jsp")) {
+			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
+					+ "/uploadAttached.jsp\">Upload Attached</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Logout</a></li>";
+		}
+	} else if (pageFolder.equals("")) { //se non siamo (o siamo) loggati
 
+		if (pageName.equals("login.jsp")) {
+			menu += "<li class=\"current\"><a href=\"" + request.getContextPath()
+					+ "/login.jsp\">Login</a></li>";
+		} else {
+			CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
+			if (pageName.equals("logout.jsp") && ck.isAllowed()) { 
+				menu += "<li class=\"current\"><a href=\"" + request.getContextPath()
+						+ "/logout.jsp\">Logout</a></li>";
+				menu += "<li><a href=\"" + request.getContextPath()
+				+ "/login.jsp\">Login</a></li>";
+			}
+		}
+	}
 
-    }
-  }
-
-  hiddenMenu = menu;
+	hiddenMenu = menu;
 %>
 <!-- Modal -->
 <div id="defaultModal" class="modal fade" role="dialog">
