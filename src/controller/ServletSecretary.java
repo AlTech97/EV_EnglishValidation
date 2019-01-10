@@ -57,7 +57,7 @@ public class ServletSecretary extends HttpServlet {
     PreparedStatement stmt = null;
     Statement stmtSelect = null;
 
-    int flag = 1;// Integer.parseInt(request.getParameter("flag"));
+    int flag = Integer.parseInt(request.getParameter("flag"));
     Connection conn = new DbConnection().getInstance().getConn();
     String sql = "";
 
@@ -110,14 +110,16 @@ public class ServletSecretary extends HttpServlet {
                 
                 content += "</td>";
 
-                content += "<button class=\"btn btn-primary btn-action accept toWorkingAdmin"
+                content += "<td class='text-center'>";
+                content += "<button class=\"btn btn-primary btn-action toWorkingAdmin"
                     + "\" title=\"Inoltra all'admin\" data-idRequest=\"" + r.getString("id_request")
-                    + "\"><i class=\"fa fa-check\"></i></button>";
+                    + "\" style='background-color: #149414; border-color: #149414;' "
+                    + "><i class=\"fa fa-check\"></i></button>";
                 
-                content += "    <td class='text-center'></td>";
+                content += "</td>";
               }              
             } else {
-              content += "Nessuna Richiesta Presente";
+              content += "<tr><td colspan='7' class=\"text-center\">Nessuna Richiesta Presente</td></tr>";
             }
           }
         } catch (Exception e) {
@@ -129,7 +131,7 @@ public class ServletSecretary extends HttpServlet {
         Integer cfu = Integer.parseInt(request.getParameter("cfu"));
         
         try {
-          sql = " UPDATE request SET validate_cfu = ? WHERE id_request = ?; ";
+          sql = " UPDATE request SET validated_cfu = ? WHERE id_request = ?; ";
           stmt = conn.prepareStatement(sql);
           stmt.setInt(1, cfu);
           stmt.setInt(2, idRequest);

@@ -55,9 +55,6 @@
                             </div>
                         </div>
                     </div>
-                   <form action = "../ServletSecretary" method = POST">  
-                    	<input id="forwardButton" type = "submit" value = "Inoltra le richieste selezionate" style="margin-left: 550px ; margin-top :-400px"/>
-              	   </form> 
                 </div>
             </div>
             <jsp:include page="/partials/footer.jsp" />
