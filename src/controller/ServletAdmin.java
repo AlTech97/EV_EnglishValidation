@@ -371,6 +371,8 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
     res.put("redirect", redirect);
     PrintWriter out = response.getWriter();
     out.println(res);
+    response.setContentType("json");
+
   }
 }
 

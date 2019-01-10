@@ -274,5 +274,6 @@ public class ServletStudent extends HttpServlet {
     res.put("redirect", redirect);
     PrintWriter out = response.getWriter();
     out.println(res);
+    response.setContentType("json");
   }
 }

@@ -1,0 +1,84 @@
+package controller;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mockito;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+
+public class ServletAdminTest extends Mockito {
+  private ServletAdmin servlet;
+  private MockHttpServletRequest request;
+  private MockHttpServletResponse response;
+
+  @Before
+  public void setUp() {
+    servlet = new ServletAdmin();
+    request = new MockHttpServletRequest();
+    response = new MockHttpServletResponse();
+  }
+  
+  @Test
+  public void testGenerateExcel() throws ServletException, IOException {
+    request.addParameter("flag", "5");
+    servlet.doGet(request, response);
+    assertEquals("application/vnd.ms-excel", response.getContentType());
+  }
+  
+  //Testing dell'else nel flag del doGet()
+  @Test
+  public void testGenerateExcelElse() throws ServletException, IOException {
+    request.addParameter("flag", "6");
+    servlet.doGet(request, response);
+    assertEquals("json", response.getContentType());
+  }
+
+  @Test
+  public void testViewRequest() throws ServletException, IOException {
+    request.addParameter("flag", "1");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
+  public void testUpdateRequest() throws ServletException, IOException {
+    System.out.println(response);
+    request.addParameter("type", "1");
+    request.addParameter("idRequest", "2");
+    request.addParameter("flag", "2");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
+  public void testUpdateRequest1() throws ServletException, IOException {
+    System.out.println(response);
+    request.addParameter("type", "2");
+    request.addParameter("idRequest", "3");
+    request.addParameter("flag", "2");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
+  public void testUpdateRequestAccepted() throws ServletException, IOException {
+    System.out.println(response);
+    request.addParameter("idRequest", "1");
+    request.addParameter("flag", "3");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
+  public void testUpdateRequestRefused() throws ServletException, IOException {
+    System.out.println(response);
+    request.addParameter("idRequest", "4");
+    request.addParameter("flag", "4");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+}
