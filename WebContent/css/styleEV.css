@@ -186,6 +186,16 @@
     .uploadAttachedPage .dropzoneUploader .dz-preview .dz-success-mark {
       line-height: 60px; }
 
+.indexPage .index-container {
+  border: 1px solid #FF9900;
+  padding: 10px;
+  border-radius: 15px;
+  float: none;
+  margin: 0 auto;
+  margin-top: 70px; }
+  .indexPage .index-container .panel h2 {
+    color: #666; }
+
 body .scroll-to-top {
   bottom: 50px;
   background: #FF9900; }
@@ -208,6 +218,9 @@ body .scroll-to-top {
       height: 30px;
       text-align: center;
       vertical-align: middle;
+      background-color: #FF9900;
+      border-color: #FF9900; }
+    .page-wrapper .sidebar-page-container.basePage .auto-container .row .content-side .content .news-block-seven .btn-block {
       background-color: #FF9900;
       border-color: #FF9900; }
     .page-wrapper .sidebar-page-container.basePage .auto-container .row .content-side .content .news-block-seven .form-group {
