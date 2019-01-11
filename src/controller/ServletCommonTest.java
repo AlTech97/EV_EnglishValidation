@@ -25,7 +25,6 @@ public class ServletCommonTest extends Mockito {
 
   @Test
   public void testLoginAdmin() throws ServletException, IOException {
-    System.out.println(response);
     request.addParameter("email", "fferrucci@unisa.it");
     request.addParameter("password", "password");
     request.addParameter("flag", "1");
@@ -35,7 +34,6 @@ public class ServletCommonTest extends Mockito {
   
   @Test
   public void testUpdateName() throws ServletException, IOException {
-    System.out.println(response);
     request.addParameter("idUser", "fferrucci@unisa.it");
     request.addParameter("newName", "Luigia");
     request.addParameter("flag", "2");
@@ -45,7 +43,6 @@ public class ServletCommonTest extends Mockito {
   
   @Test
   public void testUpdateSurname() throws ServletException, IOException {
-    System.out.println(response);
     request.addParameter("idUser", "fferrucci@unisa.it");
     request.addParameter("newSurname", "Melchionno");
     request.addParameter("flag", "3");
@@ -55,7 +52,6 @@ public class ServletCommonTest extends Mockito {
   
   @Test
   public void testDoGet() throws ServletException, IOException {
-    System.out.println(response);
     request.addParameter("idUser", "fferrucci@unisa.it");
     request.addParameter("newSurname", "Melchionno");
     request.addParameter("flag", "3");
@@ -65,7 +61,6 @@ public class ServletCommonTest extends Mockito {
   
   @Test
   public void testLoginStudent() throws ServletException, IOException {
-    System.out.println(response);
     request.addParameter("email", "a.prova@studenti.unisa.it");
     request.addParameter("password", "password");
     request.addParameter("flag", "1");
@@ -75,7 +70,6 @@ public class ServletCommonTest extends Mockito {
   
   @Test
   public void testLoginSecretary() throws ServletException, IOException {
-    System.out.println(response);
     request.addParameter("email", "segreteria@unisa.it");
     request.addParameter("password", "password");
     request.addParameter("flag", "1");

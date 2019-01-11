@@ -37,18 +37,34 @@ public class ServletStudentTest extends Mockito {
   
   @Test
   public void addNewStudent() throws ServletException, IOException  {
-    String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    String Ab = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     SecureRandom rnd = new SecureRandom();
-    StringBuilder sb = new StringBuilder( 10 );
-    // create a random string with len 10;
-    for( int i = 0; i < 10; i++ ) 
-       sb.append(AB.charAt(rnd.nextInt(AB.length())));
+    StringBuilder sb = new StringBuilder(10);
+    // Crea una stringa random per l'email di lunghezza 10
+    for (int i = 0; i < 10; i++) {
+      sb.append(Ab.charAt(rnd.nextInt(Ab.length()))); 
+    }
     request.addParameter("name", "Giuseppe");
     request.addParameter("surname", "Cirino");
-    request.addParameter("email", sb.toString()+"@unisa.it");
+    request.addParameter("email", sb.toString() + "@unisa.it");
     request.addParameter("sex", "M");
     request.addParameter("password", "password");
     request.addParameter("flag", "1");
     servlet.doPost(request, response);
   } 
+  
+  @Test
+  public void testFirstForm() throws ServletException, IOException {    
+    request.addParameter("releaseDate", "2015-02-14");
+    request.addParameter("expiryDate", "2020-02-14");
+    request.addParameter("year", "2018");
+    request.addParameter("certificateSerial", "A00000001");
+    request.addParameter("level", "A2");
+    request.addParameter("requestedCfu", "6");
+    request.addParameter("serial", "512104365");
+    request.addParameter("idEnte", "1");
+    request.addParameter("flag", "2");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
 }
