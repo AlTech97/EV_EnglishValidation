@@ -76,10 +76,27 @@ public class ServletStudent extends HttpServlet {
 
       if (flag == 1) { // registrazione nuovo utente
         String name = request.getParameter("name");
+        if(name.length()==0 || name.length() > 20)
+        	throw new IllegalArgumentException("Formato non corretto");
         String surname = request.getParameter("surname");
+        if(name.length()==0 || name.length() > 20)
+        	throw new IllegalArgumentException("Formato non corretto");
         String email = request.getParameter("email");
+        /*l'email è valida se la sua lunghezza è diversa da 0, 
+         * se non è presente nel DB e se rispetta il formato
+         * se finisce con @studenti.unisa.it
+        if(email.length()==0 || !email.endsWith("@studenti.unisa.it") || )
+        	throw new IllegalArgumentException("Formato non corretto");
+        */
         char sex = request.getParameter("sex").charAt(0);
-        String password = new Utils().generatePwd(request.getParameter("password"));
+        if(sex != 'M' && sex != 'F')
+        	throw new IllegalArgumentException("Valore non corretto");
+
+        String pass = request.getParameter("password");	//controlla la password prima di criptarla
+        if(pass.length() <8)
+        	throw new IllegalArgumentException("Formato non corretto");
+        //quì la password viene criptata per essere poi salvata nel db
+        String password = new Utils().generatePwd(pass);
         int userType = 0;
         UserInterface user = null;
 
@@ -128,16 +145,23 @@ public class ServletStudent extends HttpServlet {
       } else if (flag == 2) { // registrazione primo form in DB
         UserInterface user = (UserInterface) request.getSession().getAttribute("user");
         
-        String releaseDate = request.getParameter("releaseDate");
-        String expiryDate = request.getParameter("expiryDate");
         String year = request.getParameter("year");
+        /*da decidere se tenere o togliere
+        String graduation = request.getParameter("graduation");
+        */
+        int serial = Integer.parseInt(request.getParameter("serial"));
+        int idEnte = Integer.parseInt(request.getParameter("idEnte"));
+        String expiryDate = request.getParameter("expiryDate");
+        String releaseDate = request.getParameter("releaseDate");
         String certificateSerial = request.getParameter("certificateSerial");
         String level = request.getParameter("level");
         int requestedCfu = Integer.parseInt(request.getParameter("requestedCfu"));
-        int serial = Integer.parseInt(request.getParameter("serial"));
+        
+        
+        
         int validatedCfu = 0;
         String idUser = user.getEmail();
-        int idEnte = Integer.parseInt(request.getParameter("idEnte"));
+        
         int idState =
             Integer.parseInt(new SystemAttribute().getValueByKey("request-partially-completed"));
         try {
