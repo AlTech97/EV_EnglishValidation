@@ -1,4 +1,4 @@
-package model;
+package test;
 
 import static org.hamcrest.CoreMatchers.is; 
 import static org.hamcrest.CoreMatchers.not;
@@ -7,7 +7,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import controller.DbConnection;
-
+import model.SystemAttribute;
 import java.util.HashMap;
 import java.util.Map;
 

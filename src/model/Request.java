@@ -1,6 +1,6 @@
 package model;
 
-import interfacce.UserInterface; 
+import interfacce.UserInterface;
 import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
@@ -46,6 +46,12 @@ public class Request {
     this.user = user;
   }
 
+  public static SimpleDateFormat getSdf() {
+    return sdf;
+  }
+  public void setSdf(SimpleDateFormat newSdf) {
+    sdf= newSdf;
+  }
   public int getIdRequest() {
     return idRequest;
   }

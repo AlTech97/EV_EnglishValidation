@@ -1,4 +1,4 @@
-package controller;
+package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import controller.ServletCommon;
 
 
 public class ServletCommonTest extends Mockito {

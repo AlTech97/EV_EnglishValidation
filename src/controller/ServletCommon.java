@@ -37,7 +37,7 @@ public class ServletCommon extends HttpServlet {
    * 
    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
    */
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     doPost(request, response);
   }
@@ -48,7 +48,7 @@ public class ServletCommon extends HttpServlet {
    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
    */
   @SuppressWarnings("unchecked")
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     Integer result = 0;

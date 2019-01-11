@@ -29,6 +29,7 @@ import org.json.simple.JSONObject;
 @WebServlet("/ServletStudent")
 public class ServletStudent extends HttpServlet {
   private static final long serialVersionUID = 1L;
+ 
 
   /**
    * Constructor.
@@ -44,7 +45,10 @@ public class ServletStudent extends HttpServlet {
    * 
    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
    */
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+  
+ 
+  
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     doPost(request, response);
   }
@@ -55,7 +59,7 @@ public class ServletStudent extends HttpServlet {
    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
    */
   @SuppressWarnings("unchecked")
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     Integer result = 0;
@@ -123,7 +127,7 @@ public class ServletStudent extends HttpServlet {
         }
       } else if (flag == 2) { // registrazione primo form in DB
         UserInterface user = (UserInterface) request.getSession().getAttribute("user");
-
+        
         String releaseDate = request.getParameter("releaseDate");
         String expiryDate = request.getParameter("expiryDate");
         String year = request.getParameter("year");

@@ -1,9 +1,14 @@
-package model;
+package test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import interfacce.UserInterface;
-
+import model.Attached;
+import model.Ente;
+import model.Request;
+import model.Secretary;
+import model.State;
+import model.Student;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -95,7 +100,7 @@ class RequestTest {
 
     Request req = new Request(1, 0, "", rd, ed, 0, 111, Year.of(0), new ArrayList<Attached>(),
         new State(0, ""), new Ente(0, "", "", ""), ui);
-    assertEquals("2001 - 01 - 01", Request.sdf.format(req.getReleaseDate().getTime()));
+    assertEquals("2001 - 01 - 01", Request.getSdf().format(req.getReleaseDate().getTime()));
   }
 
   @Test
@@ -107,7 +112,7 @@ class RequestTest {
     Request req = new Request(1, 0, "", rd, ed, 0, 111, Year.of(0), new ArrayList<Attached>(),
         new State(0, ""), new Ente(0, "", "", ""), ui);
     req.setReleaseDate(new GregorianCalendar(2008, 03, 17));
-    assertEquals("2008 - 04 - 17", Request.sdf.format(req.getReleaseDate().getTime()));
+    assertEquals("2008 - 04 - 17", Request.getSdf().format(req.getReleaseDate().getTime()));
   }
 
   @Test
@@ -118,7 +123,7 @@ class RequestTest {
 
     Request req = new Request(1, 0, "", rd, ed, 0, 111, Year.of(0), new ArrayList<Attached>(),
         new State(0, ""), new Ente(0, "", "", ""), ui);
-    assertEquals("2001 - 09 - 09", Request.sdf.format(req.getExpireDate().getTime()));
+    assertEquals("2001 - 09 - 09", Request.getSdf().format(req.getExpireDate().getTime()));
   }
 
   @Test
@@ -130,7 +135,7 @@ class RequestTest {
     Request req = new Request(1, 0, "", rd, ed, 0, 111, Year.of(0), new ArrayList<Attached>(),
         new State(0, ""), new Ente(0, "", "", ""), ui);
     req.setExpireDate(new GregorianCalendar(2014, 7, 21));
-    assertEquals("2014 - 08 - 21", Request.sdf.format(req.getExpireDate().getTime()));
+    assertEquals("2014 - 08 - 21", Request.getSdf().format(req.getExpireDate().getTime()));
   }
 
   @Test

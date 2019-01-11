@@ -1,9 +1,10 @@
-package controller;
+package test;
 
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+import controller.DbConnection;
 
 public class DbConnectionTest {
 
@@ -91,7 +92,6 @@ public class DbConnectionTest {
 
   @Test
   void testsetConn() throws Exception {
-    new DbConnection();
-    DbConnection.getInstance();
+    new DbConnection().setConn(null);
   }
 }

@@ -44,7 +44,7 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
    * 
    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
    */
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     int flag = Integer.parseInt(request.getParameter("flag"));
 
@@ -116,7 +116,7 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
    * 
    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
    */
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     Integer result = 0; // indica se la query è riuscita
     String error = ""; // indica il mex di errore
