@@ -33,7 +33,7 @@ public class ServletStudentTest extends Mockito {
   public void testAlreadyRegistered() throws ServletException, IOException {    
     request.addParameter("name", "Giuseppe");
     request.addParameter("surname", "Cirino");
-    request.addParameter("email", "g.cirino2@unisa.it");
+    request.addParameter("email", "g.cirino@unisa.it");
     request.addParameter("sex", "M");
     request.addParameter("password", "password");
     request.addParameter("flag", "1");
@@ -61,8 +61,6 @@ public class ServletStudentTest extends Mockito {
   
   @Test
   public void testFirstForm() throws ServletException, IOException {   
-    MockHttpServletRequest request2 = new MockHttpServletRequest();
-    ServletCommon common = new ServletCommon();
     request.addParameter("releaseDate", "2015-02-14");
     request.addParameter("expiryDate", "2020-02-14");
     request.addParameter("year", "2018");
@@ -72,13 +70,8 @@ public class ServletStudentTest extends Mockito {
     request.addParameter("serial", "512104365");
     request.addParameter("idEnte", "1");
     request.addParameter("flag", "2");
-    
-  
-    
     UserInterface user = new Student("8hecbexqp1u@unisa.it", "fdgb", "surname", 'M', "password", 0);
     request.getSession().setAttribute("user", user);
-    /*String [] x= ;
-    request.addParameter("filenames[]", x);*/
     servlet.doPost(request, response);
     assertEquals("json", response.getContentType());
   }
@@ -90,6 +83,21 @@ public class ServletStudentTest extends Mockito {
     request.addParameter("sex", "M");
     request.addParameter("password", "password");
     request.addParameter("flag", "1");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
+  public void testAttachedDb() throws ServletException, IOException {
+    String[] file = new String[2];
+    file[0] = "allegato1.pdf";
+    file[1] = "allegato2.pdf";
+    request.addParameter("filenames[]", file);
+    request.addParameter("idRequest", "1");
+    request.getSession().setAttribute("idRequest", 1);
+    UserInterface user = new Student("prova00@unisa.it", "Paolo", "Beningno", 'M', "password", 0);
+    request.getSession().setAttribute("user", user);
+    request.addParameter("flag", "3");
     servlet.doPost(request, response);
     assertEquals("json", response.getContentType());
   }
