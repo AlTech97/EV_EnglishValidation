@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1" import="controller.CheckSession" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="ISO-8859-1" import="controller.CheckSession"%>
 
 <%
 	String pageName = "viewRequest.jsp";
@@ -11,59 +12,59 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<jsp:include page="/partials/head.jsp" />
-	</head>
+<head>
+<jsp:include page="/partials/head.jsp" />
+</head>
 
-	<body onLoad="showData()">
-		<div class="page-wrapper">
-		 	
-		    <!-- Preloader -->
-		    <div class="preloader"></div>
-		 	
-		    
-			<jsp:include page="/partials/header.jsp">
-				<jsp:param name="pageName" value="<%= pageName %>" />
-				<jsp:param name="pageFolder" value="<%= pageFolder %>" />					
-			</jsp:include>
-	    
-            
-            <div class="sidebar-page-container basePage viewRequestSecretary">
-                <div class="auto-container">
-                    <div class="row clearfix">
-                        <div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="content">
-                                    <div class="news-block-seven">
-                                        <table id="bodySegretaryTable">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center">ID</th>
-                                                    <th class="text-center">Matricola</th>
-                                                    <th class="text-center">Nome</th>                                                    
-                                                    <th class="text-center">Cognome</th>                                                
-                                                    <th class="text-center">Cod. Cert.</th>
-                                                    <th class="text-center">CFU Conv.</th>
-                                                    <th class="text-center">Inoltra</th>
-                                                </tr>	
-                                            </thead>
-                                 	        <tbody id="bodySegretaryBody">
- 
-                                            </tbody>
-                                        </table>
+<body onLoad="showData()">
+	<div class="page-wrapper">
 
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <jsp:include page="/partials/footer.jsp" />
+		<!-- Preloader -->
+		<div class="preloader"></div>
+
+
+		<jsp:include page="/partials/header.jsp">
+			<jsp:param name="pageName" value="<%= pageName %>" />
+			<jsp:param name="pageFolder" value="<%= pageFolder %>" />
+		</jsp:include>
+
+
+		<div class="sidebar-page-container basePage viewRequestSecretary">
+			<div class="auto-container">
+				<div class="row clearfix">
+					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="content">
+							<div class="news-block-seven">
+								<table id="bodySegretaryTable">
+									<thead>
+										<tr>
+											<th class="text-center">ID</th>
+											<th class="text-center">Matricola</th>
+											<th class="text-center">Nome</th>
+											<th class="text-center">Cognome</th>
+											<th class="text-center">Cod. Cert.</th>
+											<th class="text-center">CFU Conv.</th>
+											<th class="text-center">Inoltra</th>
+										</tr>
+									</thead>
+									<tbody id="bodySegretaryBody">
+
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<!--End pagewrapper-->		
-		
-		<jsp:include page="/partials/includes.jsp" />
-		
-		<script>
+		<jsp:include page="/partials/footer.jsp" />
+	</div>
+	<!--End pagewrapper-->
+
+	<jsp:include page="/partials/includes.jsp" />
+
+	<script>
 			jQuery(document).ready(function($){
 				$('#bodySegretaryTable').DataTable( {
 			        "order": [[ 0, "desc" ]],
@@ -95,7 +96,8 @@
 			        }        
 			    } );
 			});
-		</script>	
-		<script src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestsSegretary.js"></script>	
-	</body>
+		</script>
+	<script
+		src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestsSegretary.js"></script>
+</body>
 </html>

@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1" import="controller.CheckSession" %>
-<%@ page import="java.util.*,model.Request" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="ISO-8859-1" import="controller.CheckSession"%>
+<%@ page import="java.util.*,model.Request"%>
 <%
 	String pageName = "viewRequest.jsp";
 	String pageFolder = "_areaStudent";
@@ -27,40 +28,40 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<jsp:include page="/partials/head.jsp" />
-	</head>
+<head>
+<jsp:include page="/partials/head.jsp" />
+</head>
 
-	<body onLoad="">
-		<div class="page-wrapper">
-		 	
-		    <!-- Preloader -->
-		    <div class="preloader"></div>
-		 	
-		    
-			<jsp:include page="/partials/header.jsp">
-				<jsp:param name="pageName" value="<%= pageName %>" />
-				<jsp:param name="pageFolder" value="<%= pageFolder %>" />					
-			</jsp:include>
-	    
-            
-            <div class="sidebar-page-container basePage viewRequestStudent">
-                <div class="auto-container">
-                    <div class="row clearfix">
-                        <div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="content">
-                                    <div class="news-block-seven">
-                                        <table id="blankTable">
-                                            <thead>
-                                                <tr align="center">
-                                                    <th class="text-center" align="center">ID</th>
-                                                    <th class="text-center" align="center">Matricola</th>
-                                                    <th class="text-center" align="center">Allegati</th>
-                                                    <th class="text-center" align="center">Stato</th>
-                                                </tr>	
-                                            </thead>
-                                            <tbody id="bodyBlankTable">
-                                            <%
+<body onLoad="">
+	<div class="page-wrapper">
+
+		<!-- Preloader -->
+		<div class="preloader"></div>
+
+
+		<jsp:include page="/partials/header.jsp">
+			<jsp:param name="pageName" value="<%= pageName %>" />
+			<jsp:param name="pageFolder" value="<%= pageFolder %>" />
+		</jsp:include>
+
+
+		<div class="sidebar-page-container basePage viewRequestStudent">
+			<div class="auto-container">
+				<div class="row clearfix">
+					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="content">
+							<div class="news-block-seven">
+								<table id="blankTable">
+									<thead>
+										<tr align="center">
+											<th class="text-center" align="center">ID</th>
+											<th class="text-center" align="center">Matricola</th>
+											<th class="text-center" align="center">Allegati</th>
+											<th class="text-center" align="center">Stato</th>
+										</tr>
+									</thead>
+									<tbody id="bodyBlankTable">
+										<%
  											 // products.clear();
 												if(requests!=null){
    													if(requests.size()>0){
@@ -68,32 +69,32 @@
 	 													 	while(it.hasNext()){
 		   													Request bean = (Request)it.next();
 											%>
-                                            	
-                                            	<tr align="center">
-                                            		<td class="text-center" align="center"><%= bean.getIdRequest()%></td>
-                                            		<td class="text-center" align="center"><%= bean.getSerial() %></td>
-                                            		<td class="text-center" align="center"><%= bean.getAttached() %></td>
-                                            		<td class="text-center" align="center"><%= bean.getState() %></td>
-                                            	</tr>  
-                                            </tbody>
-                                            <%				}  
+
+										<tr align="center">
+											<td class="text-center" align="center"><%= bean.getIdRequest()%></td>
+											<td class="text-center" align="center"><%= bean.getSerial() %></td>
+											<td class="text-center" align="center"><%= bean.getAttached() %></td>
+											<td class="text-center" align="center"><%= bean.getState() %></td>
+										</tr>
+									</tbody>
+									<%				}  
 	 												}
 	   											}  %>
-                                        </table>
+								</table>
 
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <jsp:include page="/partials/footer.jsp" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<!--End pagewrapper-->		
-		
-		<jsp:include page="/partials/includes.jsp" />
-		
-		<script>
+		<jsp:include page="/partials/footer.jsp" />
+	</div>
+	<!--End pagewrapper-->
+
+	<jsp:include page="/partials/includes.jsp" />
+
+	<script>
 			jQuery(document).ready(function($){
 				$('#blankTable').DataTable( {
 			        "order": [[ 0, "desc" ]],
@@ -125,6 +126,6 @@
 			        }        
 			    } );
 			});
-		</script>		
-	</body>
+		</script>
+</body>
 </html>

@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1" import="controller.CheckSession" %>
-<%@ page import="java.util.*,model.Request,controller.DbConnection,controller.ServletAdmin,java.sql.ResultSet,java.sql.Statement" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="ISO-8859-1" import="controller.CheckSession"%>
+<%@ page
+	import="java.util.*,model.Request,controller.DbConnection,controller.ServletAdmin,java.sql.ResultSet,java.sql.Statement"%>
 
 <%
 	String pageName = "viewRequest.jsp";
@@ -11,66 +13,67 @@
 %>
 <!DOCTYPE html>
 <html>
-	<head>
-		<jsp:include page="/partials/head.jsp" />
-	</head>
+<head>
+<jsp:include page="/partials/head.jsp" />
+</head>
 
-	<body onLoad="showData()">
-		<div class="page-wrapper">
-		 	
-		    <!-- Preloader -->
-		    <div class="preloader"></div>
-		 	
-		    
-			<jsp:include page="/partials/header.jsp">
-				<jsp:param name="pageName" value="<%= pageName %>" />
-				<jsp:param name="pageFolder" value="<%= pageFolder %>" />					
-			</jsp:include>
-	    
-            
-            <div class="sidebar-page-container basePage viewRequestAdmin">
-                <div class="auto-container">
-                    <div class="row clearfix">
-                        <div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="content ">
-                                    <div class="news-block-seven">		 	
-                                        <table id="adminTable">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center">ID</th>
-                                                    <th class="text-center">Matricola</th>
-                                                    <th class="text-center">Nome</th>                                                    
-                                                    <th class="text-center">Cognome</th>
-                                                    <th class="text-center">A.A.</th>                                                    
-                                                    <th class="text-center">Cod. Cert.</th>
-                                                    <th class="text-center">Liv. Cert.</th>
-                                                    <th class="text-center">Data Ril.</th>
-                                                    <th class="text-center">Data Scad.</th>                                                    
-                                                    <th class="text-center">CFU Ric.</th>
-                                                    <th class="text-center">CFU Conv.</th>
-                                                    <th class="text-center">Ente</th>
-                                                    <th class="text-center">Stato</th>
-                                                    <th class="text-center">Azioni</th>
-                                                </tr>	
-                                            </thead>
-                                            <tbody id="bodyAdminTable">
-													
-                                            </tbody>
-                                        </table>                                       	
-                                       	<button class="btn btn-primary btn-action generateExcel" title="Genera File Excel">Genera Excel</button>                                       		
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <jsp:include page="/partials/footer.jsp" />
+<body onLoad="showData()">
+	<div class="page-wrapper">
+
+		<!-- Preloader -->
+		<div class="preloader"></div>
+
+
+		<jsp:include page="/partials/header.jsp">
+			<jsp:param name="pageName" value="<%= pageName %>" />
+			<jsp:param name="pageFolder" value="<%= pageFolder %>" />
+		</jsp:include>
+
+
+		<div class="sidebar-page-container basePage viewRequestAdmin">
+			<div class="auto-container">
+				<div class="row clearfix">
+					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="content ">
+							<div class="news-block-seven">
+								<table id="adminTable">
+									<thead>
+										<tr>
+											<th class="text-center">ID</th>
+											<th class="text-center">Matricola</th>
+											<th class="text-center">Nome</th>
+											<th class="text-center">Cognome</th>
+											<th class="text-center">A.A.</th>
+											<th class="text-center">Cod. Cert.</th>
+											<th class="text-center">Liv. Cert.</th>
+											<th class="text-center">Data Ril.</th>
+											<th class="text-center">Data Scad.</th>
+											<th class="text-center">CFU Ric.</th>
+											<th class="text-center">CFU Conv.</th>
+											<th class="text-center">Ente</th>
+											<th class="text-center">Stato</th>
+											<th class="text-center">Azioni</th>
+										</tr>
+									</thead>
+									<tbody id="bodyAdminTable">
+
+									</tbody>
+								</table>
+								<button class="btn btn-primary btn-action generateExcel"
+									title="Genera File Excel">Genera Excel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<!--End pagewrapper-->		
-		
-		<jsp:include page="/partials/includes.jsp" />		
-		<script>
+
+		<jsp:include page="/partials/footer.jsp" />
+	</div>
+	<!--End pagewrapper-->
+
+	<jsp:include page="/partials/includes.jsp" />
+	<script>
 			jQuery(document).ready(function($){
 				$('#adminTable').DataTable( {
 			        "order": [[ 0, "desc" ]],
@@ -103,6 +106,7 @@
 			    } );
 			});
 		</script>
-		<script src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestAdmin.js"></script>		
-	</body>
+	<script
+		src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestAdmin.js"></script>
+</body>
 </html>

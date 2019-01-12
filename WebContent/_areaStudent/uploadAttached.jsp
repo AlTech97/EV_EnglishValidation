@@ -94,10 +94,11 @@
 						<div class="content">
 							<div class="news-block-seven">
 								<div class="form-group">
-									<button type="button" class="btn btn-primary btn-submit generatePDF"
+									<button type="button"
+										class="btn btn-primary btn-submit generatePDF"
 										onclick="createPdf()">Genera PDF</button>
 								</div>
-									
+
 								<h2>
 									Richiesta N.<%= idRequest %>
 									</h1>
@@ -116,16 +117,16 @@
 					</div>
 				</div>
 			</div>
-					
-			<input type="hidden" id="name" value="<%= name %>" />
-			<input type="hidden" id="surname" value="<%= surname %>" />			
-			<input type="hidden" id="tipoLaurea" value="<%= tipoLaurea %>" />			
-			<input type="hidden" id="year" value="<%= year %>" />
-			<input type="hidden" id="serial" value="<%= serial %>" />
-			<input type="hidden" id="ente" value="<%= ente %>" />
-			<input type="hidden" id="certificateSerial" value="<%= certificateSerial %>" />
-			<input type="hidden" id="level" value="<%= level %>" />
-			<input type="hidden" id="requestedCfu" value="<%= requestedCfu %>" />							               							               
+
+			<input type="hidden" id="name" value="<%= name %>" /> <input
+				type="hidden" id="surname" value="<%= surname %>" /> <input
+				type="hidden" id="tipoLaurea" value="<%= tipoLaurea %>" /> <input
+				type="hidden" id="year" value="<%= year %>" /> <input type="hidden"
+				id="serial" value="<%= serial %>" /> <input type="hidden" id="ente"
+				value="<%= ente %>" /> <input type="hidden" id="certificateSerial"
+				value="<%= certificateSerial %>" /> <input type="hidden" id="level"
+				value="<%= level %>" /> <input type="hidden" id="requestedCfu"
+				value="<%= requestedCfu %>" />
 		</div>
 		<jsp:include page="/partials/footer.jsp" />
 	</div>

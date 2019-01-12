@@ -1,42 +1,40 @@
-$( document ).ready(function() {		
-	
-	$( document ).on( "submit", "#login", function() {
+$(document).ready(function() {
+
+	$(document).on("submit", "#login", function() {
 		var email = $("#email").val();
 		var password = $("#password").val();
-		
-		if(email != undefined && password != undefined){
+
+		if (email != undefined && password != undefined) {
 			$(".preloader").show();
 
 			$.ajax({
-				url: absolutePath+"/ServletCommon",
-				type: "POST",
-				dataType: 'JSON',
-				async: false,
-				data: {
+				url : absolutePath + "/ServletCommon",
+				type : "POST",
+				dataType : 'JSON',
+				async : false,
+				data : {
 					"email" : email,
 					"password" : password,
 					"flag" : 1
 				},
-				success:function(msg){
-					if(!msg.result){
+				success : function(msg) {
+					if (!msg.result) {
 						showAlert(1, msg.error);
-					}
-					else{
+					} else {
 						window.location.href = msg.redirect;
 					}
 				},
-				error: function(msg){
+				error : function(msg) {
 					showAlert(1, "Impossibile Recuperare i dati.");
 				}
 			});
-			
+
 			$(".preloader").hide();
-		}
-		else{
+		} else {
 			showAlert(1, "Errore prelevamento dati.");
 		}
-		
+
 		return false;
 	});
-	
+
 });
