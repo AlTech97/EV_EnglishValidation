@@ -64,20 +64,11 @@
 										</div>
 
 										<div class="form-group">
-											<label class="radio-inline"><input type="radio"
-												name="tipoLaurea" class="tipoLaurea" value="T" checked>Laurea
-												Triennale</label> <label class="radio-inline"><input
-												type="radio" name="tipoLaurea" class="tipoLaurea" value="M">Laurea
-												Magistrale</label>
-										</div>
-
-										<div class="form-group">
 											<!-- NUMERO DI MATRICOLA -->
 											<label for="matricola">Matricola</label> <input
 												class="form-control" type="number" value="512104999"
 												id="matricola" required>
 										</div>
-
 
 										<div class="form-group">
 											<label for="ente">Ente di rilascio:</label> <select

@@ -8,8 +8,6 @@ $(document)
 									'#firstForm',
 									function(e) {
 										var year = $("#immatricolazione").val();
-										var graduation = $(
-												".tipoLaurea:checked").val();
 										var serial = $("#matricola").val();
 										var idEnte = $("#ente").val();
 										var releaseDate = $("#datarilascio")
@@ -23,7 +21,6 @@ $(document)
 										var requestedCfu = $("#cfu").val();
 
 										if (year != undefined
-												&& graduation != undefined
 												&& certificateSerial != undefined
 												&& ente != undefined
 												&& expiryDate != undefined
@@ -42,7 +39,6 @@ $(document)
 														async : false,
 														data : {
 															"year" : year,
-															"graduation" : graduation,
 															"serial" : serial,
 															"idEnte" : idEnte,
 															"expiryDate" : expiryDate,
