@@ -76,28 +76,35 @@ public class ServletStudent extends HttpServlet {
 
       if (flag == 1) { // registrazione nuovo utente
         String name = request.getParameter("name");
-        if(name.length()==0 || name.length() > 20)
-        	throw new IllegalArgumentException("Formato non corretto");
+        if (name.length() == 0 || name.length() > 20) {
+          throw new IllegalArgumentException("Formato non corretto");
+        }
         String surname = request.getParameter("surname");
-        if(name.length()==0 || name.length() > 20)
-        	throw new IllegalArgumentException("Formato non corretto");
+        if (surname.length() == 0 || surname.length() > 20) {
+          throw new IllegalArgumentException("Formato non corretto");
+        }
         String email = request.getParameter("email");
         /*l'email è valida se la sua lunghezza è diversa da 0, 
          * se non è presente nel DB e se rispetta il formato
          * se finisce con @studenti.unisa.it
         */
-        String prefix = email.substring(0 , email.indexOf("@"));
-        if(email.length()==0 || !email.endsWith("@studenti.unisa.it") ||
-         	prefix.length() < 3 || prefix.indexOf(".") == -1)
-        	throw new IllegalArgumentException("Formato non corretto");
+        String prefix = email.substring(0, email.indexOf("@"));
+        if (email.length() == 0 
+            || !email.endsWith("@studenti.unisa.it") 
+            || prefix.length() < 3 || prefix.indexOf(".") == -1) {
+          throw new IllegalArgumentException("Formato non corretto");
+        }
         
         char sex = request.getParameter("sex").charAt(0);
-        if(sex != 'M' && sex != 'F')
-        	throw new IllegalArgumentException("Valore non corretto");
+        if (sex != 'M' && sex != 'F') {
+          throw new IllegalArgumentException("Valore non corretto");
+        }
 
-        String pass = request.getParameter("password");	//controlla la password prima di criptarla
-        if(pass.length() <8)
-        	throw new IllegalArgumentException("Formato non corretto");
+        //controlla la password prima di criptarla
+        String pass = request.getParameter("password");
+        if (pass.length() < 8) {
+          throw new IllegalArgumentException("Formato non corretto");
+        }
         //quì la password viene criptata per essere poi salvata nel db
         String password = new Utils().generatePwd(pass);
         int userType = 0;
@@ -149,32 +156,40 @@ public class ServletStudent extends HttpServlet {
         UserInterface user = (UserInterface) request.getSession().getAttribute("user");
         
         String year = request.getParameter("year");
-        if(year == null)
-        	throw new IllegalArgumentException("Valore non corretto");
+        if (year.length() == 0) {
+          throw new IllegalArgumentException("Valore non corretto");
+        }
         /*da decidere se tenere o togliere
         String graduation = request.getParameter("graduation");
         */
         int serial = Integer.parseInt(request.getParameter("serial"));
-        if(serial> 999999999)
-        	throw new IllegalArgumentException("Valore non corretto");
+        if (serial > 999999999) {
+          throw new IllegalArgumentException("Valore non corretto");
+        }
         int idEnte = Integer.parseInt(request.getParameter("idEnte"));
-        if(idEnte == 0)
-        	throw new IllegalArgumentException("Valore non corretto");
+        if (idEnte == 0) {
+          throw new IllegalArgumentException("Valore non corretto");
+        }
         String expiryDate = request.getParameter("expiryDate");
-        if(expiryDate == null)
-        	throw new IllegalArgumentException("Valore non corretto");
+        if (expiryDate.length() == 0) {
+          throw new IllegalArgumentException("Valore non corretto");
+        }
         String releaseDate = request.getParameter("releaseDate");
-        if(releaseDate == null)
-        	throw new IllegalArgumentException("Valore non corretto");
+        if (releaseDate.length() == 0) {
+          throw new IllegalArgumentException("Valore non corretto");
+        }
         String certificateSerial = request.getParameter("certificateSerial");
-        if(certificateSerial == null)
-        	throw new IllegalArgumentException("Valore non corretto");
+        if (certificateSerial.length() == 0) {
+          throw new IllegalArgumentException("Valore non corretto");
+        }
         String level = request.getParameter("level");
-        if(level.length()<2 || level.length() > 4)
-        	throw new IllegalArgumentException("Valore non corretto");
+        if (level.length() < 2 || level.length() > 4) {
+          throw new IllegalArgumentException("Valore non corretto");
+        }
         int requestedCfu = Integer.parseInt(request.getParameter("requestedCfu"));
-        if(requestedCfu > 12)
-        	throw new IllegalArgumentException("Valore non corretto");
+        if (requestedCfu > 12) {
+          throw new IllegalArgumentException("Valore non corretto");
+        }
         
         
         
@@ -255,9 +270,12 @@ public class ServletStudent extends HttpServlet {
           error += e.getMessage();
         }
       } else if (flag == 3) { // inserimento allegati in DB
-        String filenames[] = request.getParameterValues("filenames[]");
-        if(filenames.length != 2 || !filenames[0].endsWith(".pdf") || !filenames[1].endsWith(".pdf"))
-        	throw new IllegalArgumentException("Valore non corretto");
+        String[] filenames = request.getParameterValues("filenames[]");
+        if (filenames.length != 2 
+            || !filenames[0].endsWith(".pdf") 
+            || !filenames[1].endsWith(".pdf")) {
+          throw new IllegalArgumentException("Valore non corretto");
+        }
         Integer idRequest = (Integer) request.getSession().getAttribute("idRequest");
         UserInterface user = (UserInterface) request.getSession().getAttribute("user");
 
