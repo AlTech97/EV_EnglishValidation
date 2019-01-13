@@ -64,6 +64,24 @@ public class ServletAdminTest extends Mockito {
   }
   
   @Test
+  public void testUpdateRequest2() throws ServletException, IOException {
+    request.addParameter("type", "3");
+    request.addParameter("idRequest", "3");
+    request.addParameter("flag", "2");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
+  public void testUpdateRequestEmpty() throws ServletException, IOException {
+    request.addParameter("type", "2");
+    request.addParameter("idRequest", "321456");
+    request.addParameter("flag", "2");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
   public void testUpdateRequestAccepted() throws ServletException, IOException {
     request.addParameter("idRequest", "1");
     request.addParameter("flag", "3");
@@ -72,8 +90,24 @@ public class ServletAdminTest extends Mockito {
   }
   
   @Test
+  public void testUpdateRequestAcceptedEmpty() throws ServletException, IOException {
+    request.addParameter("idRequest", "123456");
+    request.addParameter("flag", "3");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
   public void testUpdateRequestRefused() throws ServletException, IOException {
     request.addParameter("idRequest", "4");
+    request.addParameter("flag", "4");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
+  public void testUpdateRequestRefusedEmpty() throws ServletException, IOException {
+    request.addParameter("idRequest", "456789");
     request.addParameter("flag", "4");
     servlet.doPost(request, response);
     assertEquals("json", response.getContentType());

@@ -38,7 +38,7 @@ public class ServletSecretary extends HttpServlet {
    * 
    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
    */
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     doPost(request, response);
   }
@@ -47,7 +47,7 @@ public class ServletSecretary extends HttpServlet {
    * * Method doPost(). * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
    * response)
    */
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     Integer result = 0; // indica se la query è riuscita
     String error = ""; // indica il mex di errore
@@ -99,9 +99,9 @@ public class ServletSecretary extends HttpServlet {
                     "    <td class='text-center'>" + r.getString("certificate_serial") + "</td>";
                 content += "<td>" 
                     + "<input type=\"text\" class=\"form-control cfuToValidate\" "
-                    +"value=\""+r.getString("validated_cfu")+"\" "
-                    +"placeholder=\"Inserire i CFU gi&agrave; convalidati\""
-                    +" data-idRequest=\""+r.getInt("id_request")+"\">";
+                    + "value=\"" + r.getString("validated_cfu") + "\" "
+                    + "placeholder=\"Inserire i CFU gi&agrave; convalidati\""
+                    + " data-idRequest=\"" + r.getInt("id_request") + "\">";
 
                 content += "<button class=\"btn btn-primary btn-action saveCfu"
                     + "\" title=\"Inserisci i CFU Convalidati\" data-idRequest=\"" 
@@ -119,7 +119,8 @@ public class ServletSecretary extends HttpServlet {
                 content += "</td>";
               }              
             } else {
-              content += "<tr><td colspan='7' class=\"text-center\">Nessuna Richiesta Presente</td></tr>";
+              content += "<tr><td colspan='7' class=\"text-center\""
+                  + ">Nessuna Richiesta Presente</td></tr>";
             }
           }
         } catch (Exception e) {
@@ -185,8 +186,7 @@ public class ServletSecretary extends HttpServlet {
         }        
       }    
 
-    }
-    else {
+    } else {
       result = 0;
       error = "Nessuna connesione al DB";
     }

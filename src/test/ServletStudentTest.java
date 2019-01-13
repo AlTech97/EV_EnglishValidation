@@ -388,7 +388,23 @@ public class ServletStudentTest extends Mockito {
     request.addParameter("level", "A1");
     request.addParameter("requestedCfu", "6");
     request.addParameter("flag", "2");
-    UserInterface user = new Student("b.b@studenti.unisa.it", "fdg", "surname", 'M', "password", 0);
+    UserInterface user = new Student("g.c@studenti.unisa.it", "fdg", "surname", 'M', "password", 0);
+    request.getSession().setAttribute("user", user);
+    servlet.doPost(request, response);
+  }
+  
+  @Test
+  public void testFirstFormEmpty() throws ServletException, IOException {  
+    request.addParameter("year", "2018");
+    request.addParameter("serial", "512103579");
+    request.addParameter("idEnte", "1");
+    request.addParameter("expiryDate", "2020-02-14");
+    request.addParameter("releaseDate", "2015-02-14");
+    request.addParameter("certificateSerial", "A00000001");
+    request.addParameter("level", "A1");
+    request.addParameter("requestedCfu", "6");
+    request.addParameter("flag", "2");
+    UserInterface user = new Student("l.l@studenti.unisa.it", "fdg", "surname", 'M', "password", 0);
     request.getSession().setAttribute("user", user);
     servlet.doPost(request, response);
   }
@@ -407,5 +423,96 @@ public class ServletStudentTest extends Mockito {
     UserInterface user = new Student("b.b@studenti.unisa.it", "fdg", "surname", 'M', "password", 0);
     request.getSession().setAttribute("user", user);
     servlet.doPost(request, response);
+  }
+  
+  @Test
+  public void testAttachedDbFilenamesLenght() throws ServletException, IOException {
+    String[] file = new String[1];
+    file[0] = "allegato1.docx";
+    request.addParameter("filenames[]", file);
+    request.addParameter("idRequest", "1");
+    request.getSession().setAttribute("idRequest", 1);
+    UserInterface user = new Student("prova00@unisa.it", "Paolo", "Beningno", 'M', "password", 0);
+    request.getSession().setAttribute("user", user);
+    request.addParameter("flag", "3");
+    assertThrows(IllegalArgumentException.class, () -> {
+      servlet.doPost(request, response);
+    });
+  }
+
+  @Test
+  public void testAttachedDbFilenamesFail() throws ServletException, IOException {
+    String[] file = new String[2];
+    file[0] = "allegato1.docx";
+    file[1] = "allegato2.docx";
+    request.addParameter("filenames[]", file);
+    request.addParameter("idRequest", "1");
+    request.getSession().setAttribute("idRequest", 1);
+    UserInterface user = new Student("prova00@unisa.it", "Paolo", "Beningno", 'M', "password", 0);
+    request.getSession().setAttribute("user", user);
+    request.addParameter("flag", "3");
+    assertThrows(IllegalArgumentException.class, () -> {
+      servlet.doPost(request, response);
+    });
+  }
+  
+  @Test
+  public void testAttachedDbFilenamesFail2() throws ServletException, IOException {
+    String[] file = new String[2];
+    file[0] = "allegato1.pdf";
+    file[1] = "allegato2.docx";
+    request.addParameter("filenames[]", file);
+    request.addParameter("idRequest", "1");
+    request.getSession().setAttribute("idRequest", 1);
+    UserInterface user = new Student("prova00@unisa.it", "Paolo", "Beningno", 'M', "password", 0);
+    request.getSession().setAttribute("user", user);
+    request.addParameter("flag", "3");
+    assertThrows(IllegalArgumentException.class, () -> {
+      servlet.doPost(request, response);
+    });
+  }
+  
+  @Test
+  public void testAttachedDb() throws ServletException, IOException {
+    String[] file = new String[2];
+    file[0] = "allegato1.pdf";
+    file[1] = "allegato2.pdf";
+    request.addParameter("filenames[]", file);
+    request.addParameter("idRequest", "104");
+    request.getSession().setAttribute("idRequest", 104);
+    UserInterface user = new Student("g.c@studenti.unisa.it", "Giuseppe", 
+        "Cirino", 'M', "password", 0);
+    request.getSession().setAttribute("user", user);
+    request.addParameter("flag", "3");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
+  public void testAttachedDbEmpty() throws ServletException, IOException {
+    String[] file = new String[2];
+    file[0] = "allegato1.pdf";
+    file[1] = "allegato2.pdf";
+    request.addParameter("filenames[]", file);
+    request.addParameter("idRequest", "888");
+    request.getSession().setAttribute("idRequest", 888);
+    UserInterface user = new Student("p.p@studenti.unisa.it", "Giuseppe", 
+        "Cirino", 'M', "password", 0);
+    request.getSession().setAttribute("user", user);
+    request.addParameter("flag", "3");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
+  public void testDoGet() throws ServletException, IOException  {
+    request.addParameter("name", "Giuseppe");
+    request.addParameter("surname", "Cirino");
+    request.addParameter("email", "g.c@studenti.unisa.it");
+    request.addParameter("sex", "M");
+    request.addParameter("password", "password");
+    request.addParameter("flag", "1");
+    servlet.doGet(request, response);
+    assertEquals("json", response.getContentType());
   }
 }
