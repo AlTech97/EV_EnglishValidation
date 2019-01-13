@@ -3,12 +3,14 @@ package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
+import java.sql.Connection;
 import javax.servlet.ServletException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import controller.DbConnection;
 import controller.ServletAdmin;
 
 public class ServletAdminTest extends Mockito {

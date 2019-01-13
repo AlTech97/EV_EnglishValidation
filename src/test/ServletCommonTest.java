@@ -43,8 +43,26 @@ public class ServletCommonTest extends Mockito {
   }
   
   @Test
+  public void testUpdateNameFail() throws ServletException, IOException {
+    request.addParameter("idUser", "aferrucci@unisa.it");
+    request.addParameter("newName", "Luigia");
+    request.addParameter("flag", "2");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
   public void testUpdateSurname() throws ServletException, IOException {
     request.addParameter("idUser", "fferrucci@unisa.it");
+    request.addParameter("newSurname", "Melchionno");
+    request.addParameter("flag", "3");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
+  public void testUpdateSurnameFail() throws ServletException, IOException {
+    request.addParameter("idUser", "aferrucci@unisa.it");
     request.addParameter("newSurname", "Melchionno");
     request.addParameter("flag", "3");
     servlet.doPost(request, response);
@@ -64,6 +82,15 @@ public class ServletCommonTest extends Mockito {
   public void testLoginStudent() throws ServletException, IOException {
     request.addParameter("email", "a.prova@studenti.unisa.it");
     request.addParameter("password", "password");
+    request.addParameter("flag", "1");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
+  public void testLoginFail() throws ServletException, IOException {
+    request.addParameter("email", "a.prova@studenti.unisa.it");
+    request.addParameter("password", "passwordsbagliata");
     request.addParameter("flag", "1");
     servlet.doPost(request, response);
     assertEquals("json", response.getContentType());
