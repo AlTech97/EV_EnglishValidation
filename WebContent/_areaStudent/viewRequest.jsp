@@ -9,30 +9,13 @@
 	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
 	}
 %>
-<%    
-    Collection<?> requests = null;  
-    if((((String)session.getAttribute("currentSessionStudent")) !=null)){
-        if(((session.getAttribute("currentSessionStudent")).equals("Student"))){
-          requests=(Collection<?>)request.getAttribute("requests");
-           //se i dati non esistono chiamo la servlet che riempie i campi
-           if(requests == null){
-        	  	response.sendRedirect("./ServletStudent");
-        	  return;
-           }
-          }
-      
-     }else{    	
-     	//response.sendRedirect("viewRequest.jsp");
-     }     
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <jsp:include page="/partials/head.jsp" />
 </head>
 
-<body onLoad="">
+<body onLoad="showData()">
 	<div class="page-wrapper">
 
 		<!-- Preloader -->
@@ -51,7 +34,7 @@
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content">
 							<div class="news-block-seven">
-								<table id="blankTable">
+								<table id="studentTable">
 									<thead>
 										<tr align="center">
 											<th class="text-center" align="center">ID</th>
@@ -60,26 +43,8 @@
 											<th class="text-center" align="center">Stato</th>
 										</tr>
 									</thead>
-									<tbody id="bodyBlankTable">
-										<%
- 											 // products.clear();
-												if(requests!=null){
-   													if(requests.size()>0){
-														 Iterator<?> it=requests.iterator();
-	 													 	while(it.hasNext()){
-		   													Request bean = (Request)it.next();
-											%>
-
-										<tr align="center">
-											<td class="text-center" align="center"><%= bean.getIdRequest()%></td>
-											<td class="text-center" align="center"><%= bean.getSerial() %></td>
-											<td class="text-center" align="center"><%= bean.getAttached() %></td>
-											<td class="text-center" align="center"><%= bean.getState() %></td>
-										</tr>
+									<tbody id="bodyStudentTable">
 									</tbody>
-									<%				}  
-	 												}
-	   											}  %>
 								</table>
 
 							</div>
@@ -96,7 +61,7 @@
 
 	<script>
 			jQuery(document).ready(function($){
-				$('#blankTable').DataTable( {
+				$('#studentTable').DataTable( {
 			        "order": [[ 0, "desc" ]],
 			        "lengthMenu": [[10, -1], [10, "Tutti"]],
 			        "autoWidth": false,
@@ -127,5 +92,8 @@
 			    } );
 			});
 		</script>
+	<script
+		src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestStudent.js"></script>
+		
 </body>
 </html>

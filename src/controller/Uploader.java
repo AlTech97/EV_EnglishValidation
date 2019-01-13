@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.*;
-import java.io.IOException; 
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -70,7 +69,6 @@ public class Uploader extends HttpServlet {
       if (!file.mkdir()) {
         result = 0;
         error = "error Creazione Cartella per le immagini del Prodotto";
-        return;
       }
     }
 
@@ -79,7 +77,6 @@ public class Uploader extends HttpServlet {
     if (!isMultipart) {
       result = 0;
       error = "No file uploaded";
-      return;
     }
 
     DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -125,9 +122,8 @@ public class Uploader extends HttpServlet {
     res.put("result", result);
     res.put("error", error);
     res.put("content", content);
-    java.io.PrintWriter out = response.getWriter();
+    PrintWriter out = response.getWriter();
     out.println(res);
-
   }
 
 }

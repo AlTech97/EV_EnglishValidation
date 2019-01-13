@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
@@ -67,6 +68,8 @@ public class ServletStudent extends HttpServlet {
     String content = "";
     String redirect = "";
     PreparedStatement stmt = null;
+    Statement stmtSelect = null;
+    Statement stmtSelectTwo = null;
 
     int flag = Integer.parseInt(request.getParameter("flag"));
     Connection conn = new DbConnection().getInstance().getConn();
@@ -200,7 +203,7 @@ public class ServletStudent extends HttpServlet {
             Integer.parseInt(new SystemAttribute().getValueByKey("request-partially-completed"));
         try {
           sql = " SELECT id_request "
-              + "FROM request WHERE fk_user = ? AND (fk_state = ? OR fk_state = ?) ";
+              + "FROM request WHERE fk_user = ? AND fk_state != ? AND fk_state != ? ";
           stmt = conn.prepareStatement(sql);
           stmt.setString(1, idUser);
           stmt.setString(2, new SystemAttribute().getValueByKey("request-accepted"));
@@ -237,19 +240,6 @@ public class ServletStudent extends HttpServlet {
                 if (rs.next()) {
                   idRequest = rs.getInt(1);
                 }
-
-                request.getSession().setAttribute("idRequest", idRequest);
-                request.getSession().setAttribute("idEnte", idEnte);                
-                request.getSession().setAttribute("requestedCfu", requestedCfu);
-                request.getSession().setAttribute("level", level);
-                request.getSession().setAttribute("releaseDate", releaseDate);
-                request.getSession().setAttribute("expiryDate", expiryDate);
-                request.getSession().setAttribute("validatedCfu", validatedCfu);
-                request.getSession().setAttribute("serial", serial);
-                request.getSession().setAttribute("year", year);
-                request.getSession().setAttribute("certificateSerial", certificateSerial);
-                
-
                 result = 1;
                 rs.close();
               } else {
@@ -324,7 +314,77 @@ public class ServletStudent extends HttpServlet {
           result *= 0;
         }
 
-      } 
+      } else if (flag == 4) { // Preleva tutte le richieste dello studente
+        UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
+        if (currUser != null) {
+          String email = currUser.getEmail();
+          
+          try {
+            stmtSelect = conn.createStatement();
+            sql = "SELECT r.id_request, r.serial, s.description AS state "
+                + "FROM request r "
+                + "     INNER JOIN state s ON r.fk_state = s.id_state "
+                + "     INNER JOIN user u ON r.fk_user = u.email " + "WHERE u.email = '"
+                + email
+                + "';";
+            ResultSet r = stmtSelect.executeQuery(sql);
+            if (r.wasNull()) {
+              result *= 0;
+              error = "Errore nell'esecuzione della Query";
+            } else {
+              result = 1;
+              int count = r.last() ? r.getRow() : 0;
+              if (count > 0) {
+                r.beforeFirst();
+                while (r.next()) {
+                  int idRequest = r.getInt("id_request");
+                  content += "<tr>";
+                  content += "    <td class='text-center'>" + idRequest + "</td>";
+                  content += "    <td class='text-center'>" + r.getString("serial") + "</td>";
+                  content += "    <td class='text-center'>";
+                  
+                  
+                  stmtSelectTwo = conn.createStatement();
+                  sql = "SELECT a.filename AS filename "
+                      + "FROM attached a "
+                      + "WHERE a.fk_request = " + idRequest + ";";
+                  ResultSet r2 = stmtSelectTwo.executeQuery(sql);
+                  if (r2.wasNull()) {
+                    result *= 0;
+                    error = "Errore nell'esecuzione della Query degli Allegati";
+                  } else {
+                    int countAttached = r2.last() ? r2.getRow() : 0;
+                    int i = 0;
+                    if (countAttached > 0) {
+                      r2.beforeFirst();
+                      while (r2.next()) {
+                        if (i == countAttached) {
+                          content += "<a href='" + request.getContextPath() + "/Downloader?filename=" + r2.getString("filename") + "&idRequest=" + idRequest + "'>" + r2.getString("filename") + "</a>";
+                        } else {
+                          content += "<a href='" + request.getContextPath() + "/Downloader?filename=" + r2.getString("filename") + "&idRequest=" + idRequest + "'>" + r2.getString("filename") + "</a>" + " - ";
+                        }                        
+                        i++;
+                      }                      
+                    }
+                  }
+                  
+                  content += "    </td>";
+                  content += "    <td class='text-center'>" + r.getString("state") + "</td>";
+                  content += "</tr>";
+                }              
+              } else {
+                content += "<tr><td colspan='4' class=\"text-center\""
+                    + ">Nessuna Richiesta Presente</td></tr>";
+              }
+            }
+          } catch (Exception e) {
+            result *= 0;
+            error += e.getMessage();
+          }          
+        } else {
+          error += "Impossibile individuare l'utente.";
+        }         
+      }      
 
     } else {
       error += "Nessuna connessione al database.";

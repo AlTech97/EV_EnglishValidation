@@ -124,7 +124,7 @@ public class ServletSecretary extends HttpServlet {
             }
           }
         } catch (Exception e) {
-          System.out.println(e.getMessage());
+          error += e.getMessage();
         }
 
       } else if (flag == 2) { //Set cfu        

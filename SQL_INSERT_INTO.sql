@@ -101,10 +101,10 @@ VALUES ('17', '','LanguageCert','', 1);
 
 
 INSERT INTO REQUEST
-VALUES ('1','B.6.56546', 'A1','2017/05/25','2018/05/25','2018','3','0512103579','9','prova@unisa.it','1','2');
+VALUES ('1','B.6.56546', 'A1','2017/05/25','2018/05/25','2018','3','0512103579','9','prova@unisa.it','1','6');
 
 INSERT INTO REQUEST
-VALUES ('2','A00000052', 'GRADE 1','2014/04/01','2019/04/01','2018','3','0512105846','6','g.prova@studenti.unisa.it','1', '2');
+VALUES ('2','A00000052', 'GRADE 1','2014/04/01','2019/04/01','2018','3','0512105846','6','g.prova@studenti.unisa.it','1', '7');
 
 INSERT INTO REQUEST
 VALUES ('3','A00000021', 'C2','2018/07/14','2023/07/14','2018','3','0512106974','3','m.prova@studenti.unisa.it','1','1');
@@ -113,10 +113,10 @@ INSERT INTO ATTACHED
 VALUES ('1','certificato.pdf','1','prova@unisa.it');
 
 INSERT INTO ATTACHED
-VALUES ('2','certificato.pdf','1','prova@unisa.it');
+VALUES ('2','richiesta.pdf','1','prova@unisa.it');
 
 INSERT INTO ATTACHED
 VALUES ('3','certificato.pdf','2','g.prova@studenti.unisa.it');
 
 INSERT INTO ATTACHED
-VALUES ('4','certificato.pdf','2','g.prova@studenti.unisa.it');
+VALUES ('4','richiesta.pdf','2','g.prova@studenti.unisa.it');
