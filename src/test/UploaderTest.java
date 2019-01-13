@@ -1,5 +1,6 @@
 package test;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -27,5 +28,21 @@ public class UploaderTest extends Mockito {
     servlet = new Uploader();
     request = new MockHttpServletRequest();
     response = new MockHttpServletResponse();
+  }
+  
+  @Test
+  public void testDoPost() throws ServletException, IOException  {
+    request.addParameter("idRequest", "1");
+    request.getSession().setAttribute("idRequest", 1);
+    servlet.doPost(request, response);
+    assertNull("null", response.getContentType());
+  }
+  
+  @Test
+  public void testDoPost1() throws ServletException, IOException  {
+    request.addParameter("idRequest", "555");
+    request.getSession().setAttribute("idRequest", 555);
+    servlet.doPost(request, response);
+    assertNull("null", response.getContentType());
   }
 }
