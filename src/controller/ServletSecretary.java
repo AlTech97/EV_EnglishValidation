@@ -125,10 +125,21 @@ public class ServletSecretary extends HttpServlet {
                 }
                 content += "    </td>";
                 content += "    <td class='text-center'>" + r.getString("serial") + "</td>";
+                
                 content += "<td class='text-center'>" + r.getString("name");
+                content +=
+                    "  <button class=\"btn btn-primary btn-action changeName\" data-iduser=\""
+                        + r.getString("user_email") + "\" data-name=\"" + r.getString("name")
+                        + "\" title=\"Modifica Nome\"><i class=\"fa fa-edit\"></i></button>";
                 content += "</td>";
                 content += "<td class='text-center'>" + r.getString("surname");
+                content +=
+                    "  <button class=\"btn btn-primary btn-action changeSurname\" data-iduser=\""
+                        + r.getString("user_email") + "\" data-surname=\""
+                        + r.getString("surname")
+                        + "\" title=\"Modifica Cognome\"><i class=\"fa fa-edit\"></i></button>";
                 content += "</td>";
+                
                 content +=
                     "    <td class='text-center'>" + r.getString("certificate_serial") + "</td>";
                 content += "<td>" 

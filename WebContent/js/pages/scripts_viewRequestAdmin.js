@@ -1,14 +1,24 @@
 $(document)
 		.ready(
 				function() {
-
 					$(document).on(
 							"click",
-							".generateExcel",
+							"#generateExcelAccepted",
 							function() {
 								$(".preloader").show();
-								window.open(window.location.href = absolutePath
-										+ "/ServletAdmin?flag=5", '_blank');
+								window.location.href = absolutePath
+										+ "/ServletAdmin?flag=5";
+								$(".preloader").hide();
+								showData();
+							});
+					
+					$(document).on(
+							"click",
+							"#generateExcelRefused",
+							function() {
+								$(".preloader").show();
+								window.location.href = absolutePath
+										+ "/ServletAdmin?flag=6";
 								$(".preloader").hide();
 								showData();
 							});

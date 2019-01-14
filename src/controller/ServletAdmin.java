@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Request;
 import model.SystemAttribute;
 import org.json.simple.JSONObject;
+import interfacce.UserInterface;
 import sun.util.calendar.LocalGregorianCalendar.Date;
 
 
@@ -47,64 +48,118 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     int flag = Integer.parseInt(request.getParameter("flag"));
-
-    if (flag == 5) { // Genera Excel
+    
+    UserInterface user = (UserInterface) request.getSession().getAttribute("user");
+    
+    if (flag == 5 || flag == 6) { // Genera Excel
+      PrintWriter out = response.getWriter();
       String content = "";
-      Connection conn = new DbConnection().getInstance().getConn();
       Statement stmtSelect = null;
       String sql = "";
+      Connection conn = new DbConnection().getInstance().getConn();
       
-      if (conn != null) {
-        Integer requestWorkingEducationAdvice1 = Integer
-            .parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-1"));
-        Integer requestWorkingEducationAdvice2 = Integer
-            .parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-2"));
-
-        try {
-          stmtSelect = conn.createStatement();
-          sql = "SELECT r.id_request, r.serial, u.name, u.surname, r.year, r.certificate_serial, "
-              + "r.level, r.release_date, r.expiry_date, r.requested_cfu, "
-              + "r.validated_cfu, e.name AS ente " + "FROM request r "
-              + "     INNER JOIN ente e ON r.fk_certifier = e.id_ente "
-              + "     INNER JOIN state s ON r.fk_state = s.id_state "
-              + "     INNER JOIN user u ON r.fk_user = u.email " + "WHERE s.id_state IN("
-              + requestWorkingEducationAdvice1 + ", " + requestWorkingEducationAdvice2 + ")";
-          ResultSet r = stmtSelect.executeQuery(sql);
-          if (r.wasNull()) {
-            content = "Errore nell'esecuzione della Query";
-          } else {
-            int count = r.last() ? r.getRow() : 0;
-            if (count > 0) {
-              r.beforeFirst();
-              content += "ID\tMatricola\tNome\tCognome\tA. A.\tCod. "
-                  + "Cert.\tLiv. Cert\tData Ril.\tData Scad.\tCFU Ric.\tCFU Conv.\tEnte\n";
-              while (r.next()) {
-                content += r.getString("id_request") + "\t";
-                content += r.getString("serial") + "\t";
-                content += r.getString("name") + "\t";
-                content += r.getString("surname") + "\t";
-                content += r.getString("year") + "\t";
-                content += r.getString("certificate_serial") + "\t";
-                content += r.getString("level") + "\t";
-                content += r.getString("release_date") + "\t";
-                content += r.getString("expiry_date") + "\t";
-                content += r.getString("requested_cfu") + "\t";
-                content += r.getString("validated_cfu") + "\t";
-                content += r.getString("ente") + "\t";
-                content += "\n";
+      if (user.getUserType() == 2) {
+        if (conn != null) {
+          
+          if (flag == 5) { //Richieste Accettate
+            Integer requestWorkingEducationAdvice1 = Integer
+                .parseInt(new SystemAttribute()
+                    .getValueByKey("request-working-educational-advice-1"));
+  
+            try {
+              stmtSelect = conn.createStatement();
+              sql = "SELECT r.id_request, r.serial, u.name, u.surname, r.year, r.certificate_serial, "
+                  + "r.level, r.release_date, r.expiry_date, r.requested_cfu, "
+                  + "r.validated_cfu, e.name AS ente " + "FROM request r "
+                  + "     INNER JOIN ente e ON r.fk_certifier = e.id_ente "
+                  + "     INNER JOIN state s ON r.fk_state = s.id_state "
+                  + "     INNER JOIN user u ON r.fk_user = u.email " + "WHERE s.id_state = "
+                  + requestWorkingEducationAdvice1 + ";";
+              ResultSet r = stmtSelect.executeQuery(sql);
+              if (r.wasNull()) {
+                content = "Errore nell'esecuzione della Query";
+              } else {
+                int count = r.last() ? r.getRow() : 0;
+                if (count > 0) {
+                  r.beforeFirst();
+                  content += "ID\tMatricola\tNome\tCognome\tA. A.\tCod. "
+                      + "Cert.\tLiv. Cert\tData Ril.\tData Scad.\tCFU Ric.\tCFU Conv.\tEnte\n";
+                  while (r.next()) {
+                    content += r.getString("id_request") + "\t";
+                    content += r.getString("serial") + "\t";
+                    content += r.getString("name") + "\t";
+                    content += r.getString("surname") + "\t";
+                    content += r.getString("year") + "\t";
+                    content += r.getString("certificate_serial") + "\t";
+                    content += r.getString("level") + "\t";
+                    content += r.getString("release_date") + "\t";
+                    content += r.getString("expiry_date") + "\t";
+                    content += r.getString("requested_cfu") + "\t";
+                    content += r.getString("validated_cfu") + "\t";
+                    content += r.getString("ente") + "\t";
+                    content += "\n";
+                  }
+                }
               }
+            } catch (Exception e) {
+              content = e.getMessage();
+            }        
+            response.setHeader("Content-Disposition", "attachment;filename=Richieste_Accettate.xls");
+          } else if (flag == 6) { //Richieste Rifiutate
+            Integer requestWorkingEducationAdvice2 = Integer
+                .parseInt(new SystemAttribute()
+                    .getValueByKey("request-working-educational-advice-2"));
+  
+            try {
+              stmtSelect = conn.createStatement();
+              sql = "SELECT r.id_request, r.serial, u.name, u.surname, r.year, r.certificate_serial, "
+                  + "r.level, r.release_date, r.expiry_date, r.requested_cfu, "
+                  + "r.validated_cfu, e.name AS ente " + "FROM request r "
+                  + "     INNER JOIN ente e ON r.fk_certifier = e.id_ente "
+                  + "     INNER JOIN state s ON r.fk_state = s.id_state "
+                  + "     INNER JOIN user u ON r.fk_user = u.email " + "WHERE s.id_state = "
+                  + requestWorkingEducationAdvice2 + ";";
+              ResultSet r = stmtSelect.executeQuery(sql);
+              if (r.wasNull()) {
+                content = "Errore nell'esecuzione della Query";
+              } else {
+                int count = r.last() ? r.getRow() : 0;
+                if (count > 0) {
+                  r.beforeFirst();
+                  content += "ID\tMatricola\tNome\tCognome\tA. A.\tCod. "
+                      + "Cert.\tLiv. Cert\tData Ril.\tData Scad.\tCFU Ric.\tCFU Conv.\tEnte\n";
+                  while (r.next()) {
+                    content += r.getString("id_request") + "\t";
+                    content += r.getString("serial") + "\t";
+                    content += r.getString("name") + "\t";
+                    content += r.getString("surname") + "\t";
+                    content += r.getString("year") + "\t";
+                    content += r.getString("certificate_serial") + "\t";
+                    content += r.getString("level") + "\t";
+                    content += r.getString("release_date") + "\t";
+                    content += r.getString("expiry_date") + "\t";
+                    content += r.getString("requested_cfu") + "\t";
+                    content += r.getString("validated_cfu") + "\t";
+                    content += r.getString("ente") + "\t";
+                    content += "\n";
+                  }
+                }
+              }
+  
+            } catch (Exception e) {
+              content = e.getMessage();
             }
-          }
-
-        } catch (Exception e) {
-          content = e.getMessage();
-        }
+            response.setHeader("Content-Disposition", "attachment;filename=Richieste_Rifiutate.xls");
+          }        
+          
+          out.println(content);
+          response.setContentType("application/vnd.ms-excel");
+        } else {        
+          out.println("Errore connessione al DB");        
+        }        
+      } else {
+        out.println("Non si dispone dell'autorizzazione per l'utilizzo di questa funzionalita'.");
       }
-
-      PrintWriter out = response.getWriter();
-      response.setContentType("application/vnd.ms-excel");
-      response.setHeader("Content-Disposition", "attachment;filename=Richieste.xls");
-      out.println(content);
     } else {
       doPost(request, response);
     }

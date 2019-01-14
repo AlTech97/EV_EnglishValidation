@@ -148,9 +148,7 @@
 .viewRequestAdmin .btn-action.generateExcel {
 	width: auto !important;
 	height: 35px !important;
-	display: block !important;
-	float: none !important;
-	margin: 0 auto !important;
+	display: inline-block !important;
 }
 
 .viewRequestAdmin .btn-action.verifyCertificate {

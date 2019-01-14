@@ -5,20 +5,7 @@
 	<span class="icon fa fa-angle-double-up"></span>
 </div>
 
-
-<script src="<%= request.getContextPath() %>/js/jquery.js"></script>
-<script src="<%= request.getContextPath() %>/js/bootstrap.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/jquery.fancybox.pack.js"></script>
-<script
-	src="<%= request.getContextPath() %>/js/jquery.fancybox-media.js"></script>
-<script src="<%= request.getContextPath() %>/js/owl.js"></script>
-<script src="<%= request.getContextPath() %>/js/appear.js"></script>
-<script src="<%= request.getContextPath() %>/js/wow.js"></script>
-<script
-	src="<%= request.getContextPath() %>/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/script.js"></script>
-<script src="<%= request.getContextPath() %>/js/color-settings.js"></script>
-
+<!-- <script src="<%= request.getContextPath() %>/js/jquery.js"></script> -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.js"></script>
@@ -38,6 +25,20 @@
 <script type="text/javascript" src="https://cdn.datatables.net/rowgroup/1.1.0/js/dataTables.rowGroup.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/rowreorder/1.2.4/js/dataTables.rowReorder.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.6/js/dataTables.select.js"></script>
+
+
+<script src="<%= request.getContextPath() %>/js/bootstrap.min.js"></script>
+<script src="<%= request.getContextPath() %>/js/jquery.fancybox.pack.js"></script>
+<script
+	src="<%= request.getContextPath() %>/js/jquery.fancybox-media.js"></script>
+<script src="<%= request.getContextPath() %>/js/owl.js"></script>
+<script src="<%= request.getContextPath() %>/js/appear.js"></script>
+<script src="<%= request.getContextPath() %>/js/wow.js"></script>
+<script
+	src="<%= request.getContextPath() %>/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="<%= request.getContextPath() %>/js/script.js"></script>
+<script src="<%= request.getContextPath() %>/js/color-settings.js"></script>
+
 
 <script src="<%= request.getContextPath() %>/js/toastr.min.js"></script>
 <script src="<%= request.getContextPath() %>/js/pages/scripts.js"></script>

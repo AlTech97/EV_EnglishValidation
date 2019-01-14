@@ -60,8 +60,14 @@
 
 									</tbody>
 								</table>
-								<button class="btn btn-primary btn-action generateExcel"
-									title="Genera File Excel">Genera Excel</button>
+								
+								<div align="center">
+									<button class="btn btn-primary btn-action generateExcel" id="generateExcelAccepted"
+										title="Genera File Excel - Richieste Accettate">Richieste Accettate</button>
+									
+									<button class="btn btn-primary btn-action generateExcel" id="generateExcelRefused"
+										title="Genera File Excel - Richieste Rifiutate">Richieste Rifiutate</button>								
+								</div>
 							</div>
 						</div>
 					</div>
