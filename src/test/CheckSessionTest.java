@@ -50,7 +50,7 @@ public class CheckSessionTest {
     MockHttpServletRequest request = new MockHttpServletRequest();
     HttpSession session = request.getSession();
     CheckSession check = new CheckSession("","",session);
-    assertEquals("/login.jsp", check.getUrlRedirect());
+    assertEquals("/index.jsp", check.getUrlRedirect());
   }
   
   @Test
