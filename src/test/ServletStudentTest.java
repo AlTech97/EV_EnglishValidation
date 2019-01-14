@@ -420,7 +420,7 @@ public class ServletStudentTest extends Mockito {
     request.addParameter("level", "A1");
     request.addParameter("requestedCfu", "6");
     request.addParameter("flag", "2");
-    UserInterface user = new Student("g.cirino2@unisa.it", "Giuseppe", 
+    UserInterface user = new Student("msrxrb6kd2.@studenti.unisa.it", "Giuseppe", 
         "Cirino", 'M', "password", 0);
     request.getSession().setAttribute("user", user);
     servlet.doPost(request, response);
@@ -545,6 +545,23 @@ public class ServletStudentTest extends Mockito {
     request.addParameter("sex", "M");
     request.addParameter("password", "password");
     request.addParameter("flag", "1");
+    servlet.doGet(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
+  public void testViewRequest() throws ServletException, IOException  {
+    UserInterface user = new Student("g.prova@studenti.unisa.it", "Giacomo", "Lorenzin", 'M', "password", 0);
+    request.getSession().setAttribute("user", user);
+    request.addParameter("flag", "4");
+    servlet.doGet(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
+  public void testViewRequestFail() throws ServletException, IOException  {
+    UserInterface user = new Student("g.prova@studenti.unisa.it", "Giacomo", "Lorenzin", 'M', "password", 0);
+    request.addParameter("flag", "4");
     servlet.doGet(request, response);
     assertEquals("json", response.getContentType());
   }
