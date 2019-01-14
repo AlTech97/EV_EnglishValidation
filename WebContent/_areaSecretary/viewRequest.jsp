@@ -39,6 +39,7 @@
 									<thead>
 										<tr>
 											<th class="text-center">ID</th>
+											<th class="text-center">Allegati</th>
 											<th class="text-center">Matricola</th>
 											<th class="text-center">Nome</th>
 											<th class="text-center">Cognome</th>
@@ -70,7 +71,7 @@
 			        "order": [[ 0, "desc" ]],
 			        "lengthMenu": [[10, -1], [10, "Tutti"]],
 			        "autoWidth": false,
-			        "bAutoWidth": false,			        
+			        "bAutoWidth": false,
 			        "language": {
 						    "sEmptyTable":     "Nessuna Richiesta Presente",
 						    "sInfo":           "Vista da _START_ a _END_ di _TOTAL_ elementi",

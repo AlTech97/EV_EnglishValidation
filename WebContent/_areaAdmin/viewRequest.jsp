@@ -40,6 +40,7 @@
 									<thead>
 										<tr>
 											<th class="text-center">ID</th>
+											<th class="text-center">Allegati</th>
 											<th class="text-center">Matricola</th>
 											<th class="text-center">Nome</th>
 											<th class="text-center">Cognome</th>

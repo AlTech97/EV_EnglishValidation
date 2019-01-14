@@ -125,6 +125,7 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
 
     PreparedStatement stmt = null;
     Statement stmtSelect = null;
+    Statement stmtSelectTwo = null;
 
     int flag = Integer.parseInt(request.getParameter("flag"));
     Connection conn = new DbConnection().getInstance().getConn();
@@ -168,6 +169,36 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
 
                 content += "<tr>";
                 content += "    <td class='text-center'>" + r.getString("id_request") + "</td>";
+
+                //for attached 
+                content += "    <td class='text-center'>";                
+                int idRequest = r.getInt("id_request");
+                stmtSelectTwo = conn.createStatement();
+                sql = "SELECT a.filename AS filename "
+                    + "FROM attached a "
+                    + "WHERE a.fk_request = " + idRequest + ";";
+                ResultSet r2 = stmtSelectTwo.executeQuery(sql);
+                if (r2.wasNull()) {
+                  result *= 0;
+                  error = "Errore nell'esecuzione della Query degli Allegati";
+                } else {
+                  int countAttached = r2.last() ? r2.getRow() : 0;
+                  int i = 0;
+                  if (countAttached > 0) {
+                    r2.beforeFirst();
+                    while (r2.next()) {
+                      if (i == countAttached) {
+                        content += "<a href='" + request.getContextPath() + "/Downloader?filename=" + r2.getString("filename") + "&idRequest=" + idRequest + "'>" + r2.getString("filename") + "</a>";
+                      } else {
+                        content += "<a href='" + request.getContextPath() + "/Downloader?filename=" + r2.getString("filename") + "&idRequest=" + idRequest + "'>" + r2.getString("filename") + "</a>" + " - ";
+                      }                        
+                      i++;
+                    }                      
+                  }
+                }
+                content += "    </td>";
+                
+                
                 content += "    <td class='text-center'>" + r.getString("serial") + "</td>";
                 if (r.getInt("id_state") == requestWorkingAdmin) { // Se è in lavorazione dall'admin
                   content += "<td class='text-center'>" + r.getString("name");
@@ -187,6 +218,7 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
                   content += "    <td class='text-center'>" + r.getString("name") + "</td>";
                   content += "    <td class='text-center'>" + r.getString("surname") + "</td>";
                 }
+                                               
                 content += "    <td class='text-center'>" + r.getInt("year") + "/"
                     + (r.getInt("year") + 1) + "</td>";
                 content +=
