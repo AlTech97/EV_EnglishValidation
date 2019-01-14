@@ -30,7 +30,7 @@ public class CheckSession implements Serializable {
     this.pageFolder = pf;
     this.pageName = pn;
     this.session = s;
-    this.urlRedirect = "/login.jsp";
+    this.urlRedirect = "./index.jsp";
   }
 
   /**
