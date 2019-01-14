@@ -165,9 +165,15 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
             if (count > 0) {
               r.beforeFirst();
               SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+              String classe = "even";
               while (r.next()) {
+                if (classe.equals("odd")) {
+                  classe = "even";
+                } else if (classe.equals("even")) {
+                  classe = "odd";
+                }
 
-                content += "<tr>";
+                content += "<tr class='" + classe + "' role='row'>";
                 content += "    <td class='text-center'>" + r.getString("id_request") + "</td>";
 
                 //for attached 
@@ -183,7 +189,7 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
                   error = "Errore nell'esecuzione della Query degli Allegati";
                 } else {
                   int countAttached = r2.last() ? r2.getRow() : 0;
-                  int i = 0;
+                  int i = 1;
                   if (countAttached > 0) {
                     r2.beforeFirst();
                     while (r2.next()) {
@@ -294,7 +300,7 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
             } else {
               result = 1;
               content =
-                  "<tr><td colspan='14' class='text-center'>Nessuna Richiesta Presente</td></tr>";
+                  "<tr><td colspan='15' class='text-center'>Nessuna Richiesta Presente</td></tr>";
             }
           }
         } catch (Exception e) {

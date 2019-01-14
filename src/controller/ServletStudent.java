@@ -335,9 +335,15 @@ public class ServletStudent extends HttpServlet {
               int count = r.last() ? r.getRow() : 0;
               if (count > 0) {
                 r.beforeFirst();
+                String classe = "even";
                 while (r.next()) {
                   int idRequest = r.getInt("id_request");
-                  content += "<tr>";
+                  if (classe.equals("odd")) {
+                    classe = "even";
+                  } else if (classe.equals("even")) {
+                    classe = "odd";
+                  }
+                  content += "<tr class='" + classe + "' role='row'>";
                   content += "    <td class='text-center'>" + idRequest + "</td>";
                   content += "    <td class='text-center'>" + r.getString("serial") + "</td>";
                   content += "    <td class='text-center'>";
@@ -353,7 +359,7 @@ public class ServletStudent extends HttpServlet {
                     error = "Errore nell'esecuzione della Query degli Allegati";
                   } else {
                     int countAttached = r2.last() ? r2.getRow() : 0;
-                    int i = 0;
+                    int i = 1;
                     if (countAttached > 0) {
                       r2.beforeFirst();
                       while (r2.next()) {
@@ -372,7 +378,7 @@ public class ServletStudent extends HttpServlet {
                   content += "</tr>";
                 }              
               } else {
-                content += "<tr><td colspan='4' class=\"text-center\""
+                content += "<tr><td colspan='5' class=\"text-center\""
                     + ">Nessuna Richiesta Presente</td></tr>";
               }
             }
