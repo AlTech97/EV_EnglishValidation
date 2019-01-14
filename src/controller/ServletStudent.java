@@ -79,11 +79,11 @@ public class ServletStudent extends HttpServlet {
 
       if (flag == 1) { // registrazione nuovo utente
         String name = request.getParameter("name");
-        if (name.length() == 0 || name.length() > 20) {
+        if (name.length() == 0 || name.length() > 20 || name.matches(".*\\d+.*")) {
           throw new IllegalArgumentException("Formato non corretto");
         }
         String surname = request.getParameter("surname");
-        if (surname.length() == 0 || surname.length() > 20) {
+        if (surname.length() == 0 || surname.length() > 20 || surname.matches(".*\\d+.*")) {
           throw new IllegalArgumentException("Formato non corretto");
         }
         String email = request.getParameter("email");

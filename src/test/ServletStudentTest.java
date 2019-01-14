@@ -37,6 +37,19 @@ public class ServletStudentTest extends Mockito {
   }
   
   @Test
+  public void addNewStudentFailNameNumber() throws ServletException, IOException  {
+    request.addParameter("name", "Giuseppe1");
+    request.addParameter("surname", "Cirino");
+    request.addParameter("email", "g.c@unisa.it");
+    request.addParameter("sex", "M");
+    request.addParameter("password", "password");
+    request.addParameter("flag", "1");
+    assertThrows(IllegalArgumentException.class, () -> {
+      servlet.doPost(request, response);
+    });
+  } 
+  
+  @Test
   public void addNewStudentFailNameNull() throws ServletException, IOException  {
     request.addParameter("name", "");
     request.addParameter("surname", "Cirino");
@@ -77,6 +90,19 @@ public class ServletStudentTest extends Mockito {
   public void addNewStudentFailSurnameNull() throws ServletException, IOException  {
     request.addParameter("name", "Giuseppe");
     request.addParameter("surname", "");
+    request.addParameter("email", "g.c@unisa.it");
+    request.addParameter("sex", "M");
+    request.addParameter("password", "password");
+    request.addParameter("flag", "1");
+    assertThrows(IllegalArgumentException.class, () -> {
+      servlet.doPost(request, response);
+    });
+  }
+  
+  @Test
+  public void addNewStudentFailSurnameNumber() throws ServletException, IOException  {
+    request.addParameter("name", "Giuseppe");
+    request.addParameter("surname", "C1rino");
     request.addParameter("email", "g.c@unisa.it");
     request.addParameter("sex", "M");
     request.addParameter("password", "password");
