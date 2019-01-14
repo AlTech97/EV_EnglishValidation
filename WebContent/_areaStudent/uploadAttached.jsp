@@ -200,8 +200,7 @@
 						  	  }
 						  });
 					  }		  						
-				});	
-				
+				});					
 			});
 		</script>
 	<script src="<%= request.getContextPath() %>/js/filesystem_dropzone.js"></script>
