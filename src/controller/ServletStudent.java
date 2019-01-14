@@ -156,7 +156,6 @@ public class ServletStudent extends HttpServlet {
           error += e.getMessage();
         }
       } else if (flag == 2) { // registrazione primo form in DB
-        UserInterface user = (UserInterface) request.getSession().getAttribute("user");
         
         String year = request.getParameter("year");
         if (year.length() == 0) {
@@ -195,7 +194,7 @@ public class ServletStudent extends HttpServlet {
         }
         
         
-        
+        UserInterface user = (UserInterface) request.getSession().getAttribute("user");
         int validatedCfu = 0;
         String idUser = user.getEmail();
         

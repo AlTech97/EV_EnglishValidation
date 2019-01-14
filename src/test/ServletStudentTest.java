@@ -3,26 +3,32 @@ package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import controller.ServletCommon;
+import controller.ServletStudent;
+import interfacce.UserInterface;
+
 import java.io.IOException;
 import java.security.SecureRandom;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
+
+import model.Request;
+import model.Student;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import controller.ServletCommon;
-import controller.ServletStudent;
-import interfacce.UserInterface;
-import model.Request;
-import model.Student;
 
 public class ServletStudentTest extends Mockito {
   private ServletStudent servlet;
   private MockHttpServletRequest request;
   private MockHttpServletResponse response;
 
+  /**
+   * Before.
+   */
   @Before
   public void setUp() {
     servlet = new ServletStudent();
@@ -388,7 +394,8 @@ public class ServletStudentTest extends Mockito {
     request.addParameter("level", "A1");
     request.addParameter("requestedCfu", "6");
     request.addParameter("flag", "2");
-    UserInterface user = new Student("g.c@studenti.unisa.it", "fdg", "surname", 'M', "password", 0);
+    UserInterface user = new Student("g.cirino2@unisa.it", "Giuseppe", 
+        "Cirino", 'M', "password", 0);
     request.getSession().setAttribute("user", user);
     servlet.doPost(request, response);
   }

@@ -49,9 +49,11 @@ public class Request {
   public static SimpleDateFormat getSdf() {
     return sdf;
   }
+  
   public void setSdf(SimpleDateFormat newSdf) {
-    sdf= newSdf;
+    sdf = newSdf;
   }
+  
   public int getIdRequest() {
     return idRequest;
   }

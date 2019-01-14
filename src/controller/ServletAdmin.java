@@ -53,8 +53,7 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
       Connection conn = new DbConnection().getInstance().getConn();
       Statement stmtSelect = null;
       String sql = "";
-      PrintWriter out = response.getWriter();
-
+      
       if (conn != null) {
         Integer requestWorkingEducationAdvice1 = Integer
             .parseInt(new SystemAttribute().getValueByKey("request-working-educational-advice-1"));
@@ -102,6 +101,7 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
         }
       }
 
+      PrintWriter out = response.getWriter();
       response.setContentType("application/vnd.ms-excel");
       response.setHeader("Content-Disposition", "attachment;filename=Richieste.xls");
       out.println(content);

@@ -7,9 +7,11 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import controller.DbConnection;
-import model.SystemAttribute;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import model.SystemAttribute;
 
 import org.hamcrest.collection.IsMapContaining;
 
