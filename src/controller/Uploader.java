@@ -63,12 +63,12 @@ public class Uploader extends HttpServlet {
 
 
     filePath = new SystemAttribute().getValueByKey("request-upload-path")
-        + request.getSession().getAttribute("idRequest") + "\\";
+        + "\\" + request.getSession().getAttribute("idRequest") + "\\";
     File file = new File(filePath);
     if (!file.exists()) {
       if (!file.mkdir()) {
         result = 0;
-        error = "error Creazione Cartella per le immagini del Prodotto";
+        error = "error Creazione Cartella per l'upload dei file";
       }
     }
 

@@ -410,9 +410,9 @@ public class ServletStudentTest extends Mockito {
   }
   
   @Test
-  public void testFirstForm() throws ServletException, IOException {  
+  public void testFirstFormAlready() throws ServletException, IOException {  
     request.addParameter("year", "2018");
-    request.addParameter("serial", "512103579");
+    request.addParameter("serial", "512103578");
     request.addParameter("idEnte", "1");
     request.addParameter("expiryDate", "2020-02-14");
     request.addParameter("releaseDate", "2015-02-14");
@@ -420,14 +420,14 @@ public class ServletStudentTest extends Mockito {
     request.addParameter("level", "A1");
     request.addParameter("requestedCfu", "6");
     request.addParameter("flag", "2");
-    UserInterface user = new Student("msrxrb6kd2.@studenti.unisa.it", "Giuseppe", 
+    UserInterface user = new Student("a.prova@studenti.unisa.it", "Giuseppe", 
         "Cirino", 'M', "password", 0);
     request.getSession().setAttribute("user", user);
     servlet.doPost(request, response);
   }
   
   @Test
-  public void testFirstFormEmpty() throws ServletException, IOException {  
+  public void testFirstFormCatch() throws ServletException, IOException {  
     request.addParameter("year", "2018");
     request.addParameter("serial", "512103579");
     request.addParameter("idEnte", "1");
@@ -508,12 +508,28 @@ public class ServletStudentTest extends Mockito {
   @Test
   public void testAttachedDb() throws ServletException, IOException {
     String[] file = new String[2];
-    file[0] = "allegato1.pdf";
-    file[1] = "allegato2.pdf";
+    file[0] = "richiesta.pdf";
+    file[1] = "certificato.pdf";
     request.addParameter("filenames[]", file);
-    request.addParameter("idRequest", "104");
-    request.getSession().setAttribute("idRequest", 104);
-    UserInterface user = new Student("g.c@studenti.unisa.it", "Giuseppe", 
+    request.addParameter("idRequest", "7");
+    request.getSession().setAttribute("idRequest", 7);
+    UserInterface user = new Student("ogyqnsfof2.@studenti.unisa.it", "Giuseppe", 
+        "Cirino", 'M', "password", 0);
+    request.getSession().setAttribute("user", user);
+    request.addParameter("flag", "3");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
+  
+  @Test
+  public void testAttachedDbFail() throws ServletException, IOException {
+    String[] file = new String[2];
+    file[0] = "richiesta.pdf";
+    file[1] = "certificato.pdf";
+    request.addParameter("filenames[]", file);
+    request.addParameter("idRequest", "1");
+    request.getSession().setAttribute("idRequest", 1);
+    UserInterface user = new Student("cjuottot67.@studenti.unisa.it", "Giuseppe", 
         "Cirino", 'M', "password", 0);
     request.getSession().setAttribute("user", user);
     request.addParameter("flag", "3");

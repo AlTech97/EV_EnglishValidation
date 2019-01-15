@@ -107,5 +107,14 @@ public class ServletCommonTest extends Mockito {
     servlet.doPost(request, response);
     assertEquals("json", response.getContentType());
   }
+  
+  @Test
+  public void testLoginErrorType() throws ServletException, IOException {
+    request.addParameter("email", "loginerror@studenti.unisa.it");
+    request.addParameter("password", "password");
+    request.addParameter("flag", "1");
+    servlet.doPost(request, response);
+    assertEquals("json", response.getContentType());
+  }
 }
 

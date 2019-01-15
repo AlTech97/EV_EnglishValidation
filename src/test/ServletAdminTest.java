@@ -1,9 +1,13 @@
 package test;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import controller.DbConnection;
 import controller.ServletAdmin;
+import interfacce.UserInterface;
+import model.Admin;
+import model.Student;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -34,17 +38,38 @@ public class ServletAdminTest extends Mockito {
   
   @Test
   public void testGenerateExcel() throws ServletException, IOException {
+    UserInterface user = new Admin("fferrucci@unisa.it", "Luigi", "Melchionno", 'M', "password", 2);
+    request.getSession().setAttribute("user", user);
     request.addParameter("flag", "5");
     servlet.doGet(request, response);
     assertEquals("application/vnd.ms-excel", response.getContentType());
   }
   
-  //Testing dell'else nel flag del doGet()
   @Test
-  public void testGenerateExcelElse() throws ServletException, IOException {
+  public void testGenerateExcel2() throws ServletException, IOException {
+    UserInterface user = new Admin("fferrucci@unisa.it", "Luigi", "Melchionno", 'M', "password", 2);
+    request.getSession().setAttribute("user", user);
     request.addParameter("flag", "6");
     servlet.doGet(request, response);
+    assertEquals("application/vnd.ms-excel", response.getContentType());
+  }
+  
+  @Test
+  public void testGenerateExcelFail() throws ServletException, IOException {
+    UserInterface user = new Admin("fferrucci@unisa.it", "Luigi", "Melchionno", 'M', "password", 2);
+    request.getSession().setAttribute("user", user);
+    request.addParameter("flag", "60");
+    servlet.doGet(request, response);
     assertEquals("json", response.getContentType());
+  }
+  
+  @Test
+  public void testGenerateExcelFail2() throws ServletException, IOException {
+    UserInterface user = new Admin("fferrucci@unisa.it", "Luigi", "Melchionno", 'M', "password", 0);
+    request.getSession().setAttribute("user", user);
+    request.addParameter("flag", "5");
+    servlet.doGet(request, response);
+    assertNull(null, response.getContentType());
   }
 
   @Test

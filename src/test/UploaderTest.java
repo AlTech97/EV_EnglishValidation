@@ -39,4 +39,20 @@ public class UploaderTest extends Mockito {
     request = new MockHttpServletRequest();
     response = new MockHttpServletResponse();
   }
+  
+  @Test
+  public void testDoPost() throws ServletException, IOException {
+    request.addParameter("idRequest", "2");
+    request.getSession().setAttribute("idRequest", 2);
+    servlet.doPost(request, response);
+    assertEquals("text/html", response.getContentType());
+  }
+  
+  @Test
+  public void testDoPostFail() throws ServletException, IOException {
+    request.addParameter("idRequest", "3");
+    request.getSession().setAttribute("idRequest", 3);
+    servlet.doPost(request, response);
+    assertEquals("text/html", response.getContentType());
+  }
 }
