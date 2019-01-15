@@ -9,8 +9,8 @@
 			<div class="auto-container">
 				<div class="row clearfix">
 					<div class="col-md-12 col-sm-12 col-xs-12">
-						<div class="copyright">&copy; Dipartimento di Informatica -
-							Universit&agrave; degli Studi di Salerno. All rights reserved.</div>
+						<!-- <div class="copyright">&copy; Dipartimento di Informatica -
+							Universit&agrave; degli Studi di Salerno. All rights reserved.</div> -->
 					</div>
 				</div>
 			</div>
