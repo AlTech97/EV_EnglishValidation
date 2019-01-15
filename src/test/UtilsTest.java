@@ -24,12 +24,12 @@ class UtilsTest {
   void testGetRequestState() {
     Utils ut = new Utils();
     UserInterface ui = new Student();
-    GregorianCalendar rd = new GregorianCalendar(2001, 00, 01);
-    GregorianCalendar ed = new GregorianCalendar(2001, 8, 01);
-    Request req = new Request(60, 6, "A1", rd, ed, 0, 
-        512106597, Year.of(0), new ArrayList<Attached>(),
-        new State(6, "Accepted"), new Ente(12, "", "Ascentis", ""), ui);
-    assertEquals("0", ut.getRequestState(60));
+    GregorianCalendar rd = new GregorianCalendar(2017, 05, 25);
+    GregorianCalendar ed = new GregorianCalendar(2018, 05, 25);
+    Request req = new Request(1, 3, "A1", rd, ed, 6, 
+        512103579, Year.of(0), new ArrayList<Attached>(),
+        new State(3, ""), new Ente(1, "", "", ""), ui);
+    assertEquals(Integer.valueOf(3), ut.getRequestState(1));
   }
 
 }
