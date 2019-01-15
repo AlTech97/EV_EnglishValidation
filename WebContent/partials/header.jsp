@@ -29,6 +29,8 @@
           + "/viewRequest.jsp\">Richieste</a></li>";
       menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
           + "/firstForm.jsp\">Compila Richiesta</a></li>";
+      menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
+          + "/uploadAttached.jsp\">Carica Allegato</a></li>";
       menu +=
           "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
     }
@@ -37,6 +39,8 @@
           + "/firstForm.jsp\">Compila Richiesta</a></li>";
       menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
           + "/viewRequest.jsp\">Richieste</a></li>";
+      menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
+          + "/uploadAttached.jsp\">Carica Allegato</a></li>";
       menu +=
           "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
     }

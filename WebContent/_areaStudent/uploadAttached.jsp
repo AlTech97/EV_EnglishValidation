@@ -15,8 +15,12 @@
 	String requestAllowedExtensionUpload = new SystemAttribute().getValueByKey("request-allowed-extension-upload");
 	Integer requestState = new Utils().getRequestState(idRequest);
 	Integer shouldState = Integer.parseInt(new SystemAttribute().getValueByKey("request-partially-completed"));
-	if(!ck.isAllowed() || idRequest == 0 || requestState != shouldState){
+	if(!ck.isAllowed()) {
 	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
+	}
+	else if( idRequest == 0 || requestState != shouldState){
+		response.sendRedirect(request.getContextPath()+"/_areaStudent/viewRequest.jsp");
+		
 	}
 	
   	String name = "";

@@ -165,7 +165,8 @@ public class ServletStudent extends HttpServlet {
         String graduation = request.getParameter("graduation");
         */
         int serial = Integer.parseInt(request.getParameter("serial"));
-        if (serial > 999999999) {
+        int length = (int)(Math.log10(serial)+1);						//calcola la lunghezza della matricola
+        if (length >= 10 || length < 9) {
           throw new IllegalArgumentException("Valore non corretto");
         }
         int idEnte = Integer.parseInt(request.getParameter("idEnte"));
