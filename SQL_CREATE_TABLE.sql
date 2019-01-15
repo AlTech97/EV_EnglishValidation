@@ -14,7 +14,7 @@ primary key (EMAIL)
 
 CREATE TABLE SYSTEM_ATTRIBUTE (
 SLUG varchar(50) not null, 
-VALUE varchar(50) not null, 
+VALUE varchar(100) not null, 
 FK_USER varchar(50) not null,
 primary key (SLUG),
 foreign key (FK_USER) references USER(EMAIL)
