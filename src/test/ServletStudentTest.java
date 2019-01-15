@@ -178,6 +178,19 @@ public class ServletStudentTest extends Mockito {
   }
   
   @Test
+  public void addNewStudentFailEmailEmpty() throws ServletException, IOException  {
+    request.addParameter("name", "Giuseppe");
+    request.addParameter("surname", "Cirino");
+    request.addParameter("email", "");
+    request.addParameter("sex", "M");
+    request.addParameter("password", "password");
+    request.addParameter("flag", "1");
+    assertThrows(IllegalArgumentException.class, () -> {
+      servlet.doPost(request, response);
+    });
+  }
+  
+  @Test
   public void addNewStudentFailSex() throws ServletException, IOException  {
     request.addParameter("name", "Giuseppe");
     request.addParameter("surname", "Cirino");
@@ -268,7 +281,7 @@ public class ServletStudentTest extends Mockito {
   @Test
   public void testFirstFormSerialFail() throws ServletException, IOException {  
     request.addParameter("year", "2018");
-    request.addParameter("serial", "1000000000");
+    request.addParameter("serial", "1000000000"); //10 cifre test fallito
     request.addParameter("releaseDate", "2015-02-14");
     request.addParameter("expiryDate", "2020-02-14");
     request.addParameter("certificateSerial", "A00000001");
@@ -283,6 +296,41 @@ public class ServletStudentTest extends Mockito {
     });
   }
   
+  @Test
+  public void testFirstFormSerialFail2() throws ServletException, IOException {  
+    request.addParameter("year", "2018");
+    request.addParameter("serial", "1000000"); //serial <9
+    request.addParameter("releaseDate", "2015-02-14");
+    request.addParameter("expiryDate", "2020-02-14");
+    request.addParameter("certificateSerial", "A00000001");
+    request.addParameter("level", "A2");
+    request.addParameter("requestedCfu", "6");
+    request.addParameter("idEnte", "1");
+    request.addParameter("flag", "2");
+    UserInterface user = new Student("b.b@studenti.unisa.it", "fdg", "surname", 'M', "password", 0);
+    request.getSession().setAttribute("user", user);
+    assertThrows(IllegalArgumentException.class, () -> {
+      servlet.doPost(request, response);
+    });
+  }
+  
+  @Test
+  public void testFirstFormSerialFail3() throws ServletException, IOException {  
+    request.addParameter("year", "2018");
+    request.addParameter("serial", "100000000000"); //serial >10
+    request.addParameter("releaseDate", "2015-02-14");
+    request.addParameter("expiryDate", "2020-02-14");
+    request.addParameter("certificateSerial", "A00000001");
+    request.addParameter("level", "A2");
+    request.addParameter("requestedCfu", "6");
+    request.addParameter("idEnte", "1");
+    request.addParameter("flag", "2");
+    UserInterface user = new Student("b.b@studenti.unisa.it", "fdg", "surname", 'M', "password", 0);
+    request.getSession().setAttribute("user", user);
+    assertThrows(IllegalArgumentException.class, () -> {
+      servlet.doPost(request, response);
+    });
+  }
   @Test
   public void testFirstFormIdEnteFail() throws ServletException, IOException {  
     request.addParameter("year", "2018");
@@ -511,9 +559,9 @@ public class ServletStudentTest extends Mockito {
     file[0] = "richiesta.pdf";
     file[1] = "certificato.pdf";
     request.addParameter("filenames[]", file);
-    request.addParameter("idRequest", "7");
-    request.getSession().setAttribute("idRequest", 7);
-    UserInterface user = new Student("ogyqnsfof2.@studenti.unisa.it", "Giuseppe", 
+    request.addParameter("idRequest", "8");
+    request.getSession().setAttribute("idRequest", 8);
+    UserInterface user = new Student("a.prova@studenti.unisa.it", "Giuseppe", 
         "Cirino", 'M', "password", 0);
     request.getSession().setAttribute("user", user);
     request.addParameter("flag", "3");
@@ -527,9 +575,9 @@ public class ServletStudentTest extends Mockito {
     file[0] = "richiesta.pdf";
     file[1] = "certificato.pdf";
     request.addParameter("filenames[]", file);
-    request.addParameter("idRequest", "1");
-    request.getSession().setAttribute("idRequest", 1);
-    UserInterface user = new Student("cjuottot67.@studenti.unisa.it", "Giuseppe", 
+    request.addParameter("idRequest", "10");
+    request.getSession().setAttribute("idRequest", 10);
+    UserInterface user = new Student("g.cirinella2@studenti.unisa.it", "Giuseppe", 
         "Cirino", 'M', "password", 0);
     request.getSession().setAttribute("user", user);
     request.addParameter("flag", "3");

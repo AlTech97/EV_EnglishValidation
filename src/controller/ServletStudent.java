@@ -91,7 +91,10 @@ public class ServletStudent extends HttpServlet {
          * se non è presente nel DB e se rispetta il formato
          * se finisce con @studenti.unisa.it
         */
-        String prefix = email.substring(0, email.indexOf("@"));
+        String prefix = "";
+        if (email.length() > 0) {
+          prefix = email.substring(0, email.indexOf("@"));
+        }
         if (email.length() == 0 
             || !email.endsWith("@studenti.unisa.it") 
             || prefix.length() < 3 || prefix.indexOf(".") == -1) {
@@ -341,7 +344,7 @@ public class ServletStudent extends HttpServlet {
                   int idRequest = r.getInt("id_request");
                   if (classe.equals("odd")) {
                     classe = "even";
-                  } else if (classe.equals("even")) {
+                  } else {
                     classe = "odd";
                   }
                   content += "<tr class='" + classe + "' role='row'>";

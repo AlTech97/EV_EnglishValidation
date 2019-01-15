@@ -50,8 +50,8 @@ public class UploaderTest extends Mockito {
   
   @Test
   public void testDoPostFail() throws ServletException, IOException {
-    request.addParameter("idRequest", "3");
-    request.getSession().setAttribute("idRequest", 3);
+    request.addParameter("idRequest", "389");
+    request.getSession().setAttribute("idRequest", 389);
     servlet.doPost(request, response);
     assertEquals("text/html", response.getContentType());
   }

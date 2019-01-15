@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import controller.CheckSession;
 import controller.Utils;
 
 import interfacce.UserInterface;
@@ -10,6 +11,8 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import javax.servlet.http.HttpSession;
+
 import model.Attached;
 import model.Ente;
 import model.Request;
@@ -17,6 +20,7 @@ import model.State;
 import model.Student;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
 
 class UtilsTest {
 
@@ -32,4 +36,21 @@ class UtilsTest {
     assertEquals(Integer.valueOf(3), ut.getRequestState(1));
   }
 
+  @Test
+  void testGetLastUserRequestPartiallyCompleted() {
+    Utils ut = new Utils();
+    MockHttpServletRequest request = new MockHttpServletRequest();
+    HttpSession session = request.getSession();
+    UserInterface user = new Student("x.x@studenti.unisa.it", "fdg", "surname", 'M', "password", 0);
+    request.getSession().setAttribute("user", user);
+    assertEquals(Integer.valueOf(11), ut.getLastUserRequestPartiallyCompleted(session));
+  }
+  
+  @Test
+  void testGetLastUserRequestPartiallyCompletedFail() {
+    Utils ut = new Utils();
+    MockHttpServletRequest request = new MockHttpServletRequest();
+    HttpSession session = request.getSession();
+    assertEquals(Integer.valueOf(0), ut.getLastUserRequestPartiallyCompleted(session));
+  }
 }

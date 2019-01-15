@@ -91,7 +91,7 @@ public class ServletSecretary extends HttpServlet {
               while (r.next()) {
                 if (classe.equals("odd")) {
                   classe = "even";
-                } else if (classe.equals("even")) {
+                } else {
                   classe = "odd";
                 }
 

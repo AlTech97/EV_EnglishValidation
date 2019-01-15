@@ -95,6 +95,9 @@ public class ServletCommon extends HttpServlet {
                 redirect = request.getContextPath() + "/_areaAdmin/viewRequest.jsp";
                 user = new Admin(email, name, surname, sex, password, userType);
               }
+              else {
+                throw new NumberFormatException("utente non valido");
+              }
 
               request.getSession().setAttribute("user", user);
 
