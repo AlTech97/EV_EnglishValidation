@@ -379,8 +379,12 @@ public class ServletStudent extends HttpServlet {
                   content += "</tr>";
                 }              
               } else {
-                content += "<tr><td colspan='5' class=\"text-center\""
-                    + ">Nessuna Richiesta Presente</td></tr>";
+                content += "<tr>"
+                		+ "<td class=\"text-center\"" + "></td>"
+                		+ "<td class=\"text-center\"" + "></td>"
+                		+ "<td class=\"text-center\"" + ">Nessuna Richiesta Presente</td>"
+                		+ "<td class=\"text-center\"" + "></td>"
+                		+ "</tr>";
               }
             }
           } catch (Exception e) {

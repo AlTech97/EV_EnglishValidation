@@ -36,7 +36,7 @@
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content ">
 							<div class="news-block-seven">
-								<table id="adminTable">
+								<table id="adminTable" class="display data-results table table-striped table-hover table-bordered">
 									<thead>
 										<tr>
 											<th class="text-center">ID</th>

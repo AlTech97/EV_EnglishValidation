@@ -164,8 +164,16 @@ public class ServletSecretary extends HttpServlet {
                 content += "</td>";
               }              
             } else {
-              content += "<tr><td colspan='8' class=\"text-center\""
-                  + ">Nessuna Richiesta Presente</td></tr>";
+              content += "<tr>"
+              		+ "<td class=\"text-center\"" + "></td>"
+            		+ "<td class=\"text-center\"" + "></td>"
+            		+ "<td class=\"text-center\"" + "></td>"
+            		+ "<td class=\"text-center\"" + "></td>"
+              		+ "<td class=\"text-center\"" + "> Nessuna Richiesta Presente</td>"
+              		+ "<td class=\"text-center\"" + "></td>"
+            		+ "<td class=\"text-center\"" + "></td>"
+              		+ "<td class=\"text-center\"" + "></td>"
+              		+ "</tr>";
             }
           }
         } catch (Exception e) {
